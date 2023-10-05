@@ -1,19 +1,16 @@
 /* Common Imports */
 
 import * as React from "react";
+import { styled } from "@mui/system";
 
 /* Component Imports */
 
 import {
-  CssBaseline,
-  AppBar,
   Box,
-  Container,
-  Toolbar,
   Paper,
   Stepper,
   Step,
-  StepLabel,
+  StepButton,
   Button,
   Link,
   Typography,
@@ -26,6 +23,26 @@ import {
   FormControl,
   FormLabel,
 } from "@mui/material";
+
+/* Styled Components */
+
+const RootDiv = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  width: "100%",
+}));
+
+const CustomPaper = styled(Paper)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+}));
+
+/* Copyright */
 
 function Copyright() {
   return (
@@ -50,35 +67,79 @@ const steps = [
 
 export default function Form() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [completed, setCompleted] = React.useState({});
+
   const [location, setLocation] = React.useState("");
   const [diamondType, setDiamondType] = React.useState("");
 
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    const newActiveStep =
+      isLastStep() && !allStepsCompleted()
+        ? // It's the last step, but not all steps have been completed,
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
+        : activeStep + 1;
+    setActiveStep(newActiveStep);
   };
 
   const handleBack = () => {
-    setActiveStep(activeStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const handleStep = (step) => () => {
+    setActiveStep(step);
+  };
+
+  const handleComplete = () => {
+    const newCompleted = completed;
+    newCompleted[activeStep] = true;
+    setCompleted(newCompleted);
+    handleNext();
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+    setCompleted({});
+  };
   return (
     <React.Fragment>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper
+      <RootDiv>
+        {/* Stepper */}
+
+        <Stepper
+          nonLinear
+          activeStep={activeStep}
+          sx={{ pt: 3, pb: 5 }}
+          orientation="vertical"
+        >
+          {steps.map((label, index) => (
+            <Step key={label} completed={completed[index]}>
+              <StepButton color="inherit" onClick={handleStep(index)}>
+                {label}
+              </StepButton>
+            </Step>
+          ))}
+        </Stepper>
+        <CustomPaper
           variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
-          <Typography component="h1" variant="h4" align="center">
-            Mahala Almas
-          </Typography>
-          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel />
-              </Step>
-            ))}
-          </Stepper>
-
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
@@ -92,17 +153,9 @@ export default function Form() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {/* Step 1: Welcome */}
+              {/* Step 1: Enter Location */}
 
               {activeStep === 0 && (
-                <Typography variant="h6" gutterBottom>
-                  Welcome to Mahala Almas
-                </Typography>
-              )}
-
-              {/* Step 2: Select Location */}
-
-              {activeStep === 1 && (
                 <FormControl>
                   <FormLabel id="select-location">
                     Select your location
@@ -143,9 +196,9 @@ export default function Form() {
                 </FormControl>
               )}
 
-              {/* Step 3: Diamond Type */}
+              {/* Step 2: Diamond Type */}
 
-              {activeStep === 2 && (
+              {activeStep === 1 && (
                 <FormControl>
                   <FormLabel id="select-diamond-type">
                     So, what type of diamond are you looking for?
@@ -171,9 +224,9 @@ export default function Form() {
                 </FormControl>
               )}
 
-              {/* Step 4 */}
+              {/* Step 3:  */}
 
-              {activeStep === 4 && (
+              {activeStep === 2 && (
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={6}>
                     <TextField
@@ -294,9 +347,9 @@ export default function Form() {
               </Box>
             </React.Fragment>
           )}
-        </Paper>
-        <Copyright />
-      </Container>
+        </CustomPaper>
+      </RootDiv>
+      <Copyright />
     </React.Fragment>
   );
 }
