@@ -24,6 +24,24 @@ import {
   Fade,
 } from "@mui/material";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyD6U-tKGo2Ei8XdfKZU8pHe37TJsu6surc",
+  authDomain: "mahala-almas.firebaseapp.com",
+  projectId: "mahala-almas",
+  storageBucket: "mahala-almas.appspot.com",
+  messagingSenderId: "739340258369",
+  appId: "1:739340258369:web:9898bb8b9b5e65420e0ac0",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
 /* Styled Components */
 
 const RootDiv = styled("div")(({ theme }) => ({
