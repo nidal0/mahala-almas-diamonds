@@ -22,6 +22,7 @@ import {
   RadioGroup,
   FormControl,
   Fade,
+  Slider,
 } from "@mui/material";
 
 // Import the functions you need from the SDKs you need
@@ -68,6 +69,13 @@ const Column = styled("div")(({ theme }) => ({
   alignItems: "center",
 }));
 
+const Row = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
 const CustomPaper = styled(Paper)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
@@ -110,6 +118,13 @@ const DiamondTypeButton = styled(Button)(({ theme }) => ({
     background: "#5B7BB6",
     color: "#FFFFFF",
     border: "2px solid #5B7BB6",
+  },
+}));
+
+const CustomRangeSlider = styled(Slider)(({ theme }) => ({
+  "&.MuiSlider-markLabel": {
+    background: "#ffffff",
+    color: "#5B7BB6",
   },
 }));
 
@@ -167,12 +182,141 @@ export default function Form() {
   const [diamondMaxCut, setDiamondMaxCut] = React.useState(4);
   const [diamondCertification, setDiamondCertification] = React.useState([]);
   const [additionalNotes, setAdditionalNotes] = React.useState("");
-  const [diamondMinBudget, setDiamondMinBudget] = React.useState(0);
-  const [diamondMaxBudget, setDiamondMaxBudget] = React.useState(1000000);
+  const [diamondMinBudget, setDiamondMinBudget] = React.useState(1);
+  const [diamondMaxBudget, setDiamondMaxBudget] = React.useState(999999999);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [agree, setAgree] = React.useState(false);
+
+  /* Carat Slider Marks */
+
+  const carat_slider_marks = [
+    {
+      value: 0.1,
+      label: "0.1",
+    },
+    {
+      value: 10,
+      label: "10",
+    },
+    {
+      value: 20,
+      label: "20",
+    },
+    {
+      value: 30,
+      label: "30",
+    },
+  ];
+
+  /* Color Slider Marks */
+
+  const color_slider_marks = [
+    {
+      value: 0,
+      label: "K",
+    },
+    {
+      value: 1,
+      label: "J",
+    },
+    {
+      value: 2,
+      label: "I",
+    },
+    {
+      value: 3,
+      label: "H",
+    },
+    {
+      value: 4,
+      label: "G",
+    },
+    {
+      value: 5,
+      label: "F",
+    },
+    {
+      value: 6,
+      label: "E",
+    },
+    {
+      value: 7,
+      label: "D",
+    },
+  ];
+
+  /* Clarity Slider Marks */
+
+  const clarity_slider_marks = [
+    {
+      value: 0,
+      label: "SI2",
+    },
+    {
+      value: 1,
+      label: "SI1",
+    },
+    {
+      value: 2,
+      label: "VS2",
+    },
+    {
+      value: 3,
+      label: "VS1",
+    },
+    {
+      value: 4,
+      label: "VVS2",
+    },
+    {
+      value: 5,
+      label: "VVS1",
+    },
+    {
+      value: 6,
+      label: "IF",
+    },
+    {
+      value: 7,
+      label: "FL",
+    },
+  ];
+
+  /* Cut Slider Marks */
+
+  const cut_slider_marks = [
+    {
+      value: 0,
+      label: "Good",
+    },
+    {
+      value: 1,
+      label: "Very good",
+    },
+    {
+      value: 2,
+      label: "Ideal",
+    },
+    {
+      value: 3,
+      label: "Astor ideal",
+    },
+  ];
+
+  /* Budget Slider Marks */
+
+  const budget_slider_marks = [
+    {
+      value: 1,
+      label: "1",
+    },
+    {
+      value: 999999999,
+      label: "999999999",
+    },
+  ];
 
   /* Stepper Functions */
 
@@ -426,25 +570,240 @@ export default function Form() {
                 </Container>
               )}
 
+              {/* Step 4: Carat */}
+
+              {activeStep === 3 && (
+                <Container>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                  >
+                    Diamond carat?
+                  </Typography>
+
+                  <Row sx={{ width: "50%", margin: "0rem 0rem 2rem 0rem" }}>
+                    <TextField
+                      sx={{ width: "30%" }}
+                      id="minCarat"
+                      name="minCarat"
+                      label="Min Carat"
+                      variant="outlined"
+                      type="number"
+                      InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                      value={diamondMinCarat}
+                      onChange={(e) => setDiamondMinCarat(e.target.value)}
+                    />
+                    <TextField
+                      sx={{ width: "30%" }}
+                      id="maxCarat"
+                      name="maxCarat"
+                      label="Max Carat"
+                      variant="outlined"
+                      type="number"
+                      InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                      value={diamondMaxCarat}
+                      onChange={(e) => setDiamondMaxCarat(e.target.value)}
+                    />
+                  </Row>
+                  <CustomRangeSlider
+                    sx={{ width: "50%" }}
+                    min={0.1}
+                    max={30.0}
+                    precision={0.1}
+                    value={[diamondMinCarat, diamondMaxCarat]}
+                    valueLabelDisplay="auto"
+                    step={0.1}
+                    marks={carat_slider_marks}
+                    onChange={(event, newValue) => {
+                      setDiamondMinCarat(newValue[0]);
+                      setDiamondMaxCarat(newValue[1]);
+                    }}
+                  />
+                </Container>
+              )}
+
+              {/* Step 5: Color */}
+
+              {activeStep === 4 && (
+                <Container>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                  >
+                    Select a color range
+                  </Typography>
+                  <CustomRangeSlider
+                    sx={{ width: "75%" }}
+                    min={0}
+                    max={7}
+                    value={[diamondMinColor, diamondMaxColor]}
+                    valueLabelDisplay="off"
+                    // valueLabelFormat={(value) => {
+                    //   switch (value) {
+                    //     case 0:
+                    //       return "K";
+                    //     case 1:
+                    //       return "J";
+                    //     case 2:
+                    //       return "I";
+                    //     case 3:
+                    //       return "H";
+                    //     case 4:
+                    //       return "G";
+                    //     case 5:
+                    //       return "F";
+                    //     case 6:
+                    //       return "E";
+                    //     case 7:
+                    //       return "D";
+                    //     case 8:
+                    //       return "D";
+                    //     default:
+                    //       return "";
+                    //   }
+                    // }}
+                    step={1}
+                    marks={color_slider_marks}
+                    onChange={(event, newValue) => {
+                      setDiamondMinColor(newValue[0]);
+                      setDiamondMaxColor(newValue[1]);
+                    }}
+                  />
+                </Container>
+              )}
+
+              {/* Step 6: Clarity */}
+
+              {activeStep === 5 && (
+                <Container>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                  >
+                    Select your diamond clarity range
+                  </Typography>
+                  <CustomRangeSlider
+                    sx={{ width: "75%" }}
+                    min={0}
+                    max={7}
+                    value={[diamondMinClarity, diamondMaxClarity]}
+                    valueLabelDisplay="off"
+                    step={1}
+                    marks={clarity_slider_marks}
+                    onChange={(event, newValue) => {
+                      setDiamondMinClarity(newValue[0]);
+                      setDiamondMaxClarity(newValue[1]);
+                    }}
+                  />
+                </Container>
+              )}
+
+              {/* Step 7: Cut */}
+
+              {activeStep === 6 && (
+                <Container>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                  >
+                    Select a range for the cut
+                  </Typography>
+                  <CustomRangeSlider
+                    sx={{ width: "50%" }}
+                    min={0}
+                    max={3}
+                    value={[diamondMinCut, diamondMaxCut]}
+                    valueLabelDisplay="off"
+                    step={1}
+                    marks={cut_slider_marks}
+                    onChange={(event, newValue) => {
+                      setDiamondMinCut(newValue[0]);
+                      setDiamondMaxCut(newValue[1]);
+                    }}
+                  />
+                </Container>
+              )}
+
               {/* Step 9: Additional Notes */}
 
               {activeStep === 8 && (
                 <Container>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="notes"
-                        name="notes"
-                        label="Additional Notes"
-                        variant="outlined"
-                        multiline
-                        rows={6}
-                        value={additionalNotes}
-                        onChange={(e) => setAdditionalNotes(e.target.value)}
-                      />
-                    </Grid>
-                  </Grid>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                  >
+                    Do you have any additional notes for us?
+                  </Typography>
+
+                  <TextField
+                    sx={{ width: "75%" }}
+                    id="notes"
+                    name="notes"
+                    label="Additional Notes"
+                    variant="outlined"
+                    multiline
+                    rows={6}
+                    value={additionalNotes}
+                    onChange={(e) => setAdditionalNotes(e.target.value)}
+                  />
+                </Container>
+              )}
+
+              {/* Step 10: Budget */}
+
+              {activeStep === 9 && (
+                <Container>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                  >
+                    What is your budget?
+                  </Typography>
+
+                  <Row sx={{ width: "50%", margin: "0rem 0rem 2rem 0rem" }}>
+                    <TextField
+                      sx={{ width: "30%" }}
+                      id="minBudget"
+                      name="minBudget"
+                      label="Min Budget"
+                      variant="outlined"
+                      type="number"
+                      InputProps={{ inputProps: { min: 1 } }}
+                      value={diamondMinBudget}
+                      onChange={(e) => setDiamondMinBudget(e.target.value)}
+                    />
+                    <TextField
+                      sx={{ width: "30%" }}
+                      id="maxBudget"
+                      name="maxBudget"
+                      label="Max Budget"
+                      variant="outlined"
+                      type="number"
+                      InputProps={{ inputProps: { min: 1 } }}
+                      value={diamondMaxBudget}
+                      onChange={(e) => setDiamondMaxBudget(e.target.value)}
+                    />
+                  </Row>
+                  <CustomRangeSlider
+                    sx={{ width: "50%" }}
+                    min={1}
+                    max={999999999}
+                    precision={1}
+                    value={[diamondMinBudget, diamondMaxBudget]}
+                    valueLabelDisplay="auto"
+                    step={1}
+                    marks={budget_slider_marks}
+                    onChange={(event, newValue) => {
+                      setDiamondMinBudget(newValue[0]);
+                      setDiamondMaxBudget(newValue[1]);
+                    }}
+                  />
                 </Container>
               )}
 
@@ -452,6 +811,9 @@ export default function Form() {
 
               {activeStep === 10 && (
                 <Container sx={{ gap: "2rem" }}>
+                  <Typography variant="h3" gutterBottom>
+                    How can we reach you?
+                  </Typography>
                   <ContactTextField
                     required
                     id="name"
