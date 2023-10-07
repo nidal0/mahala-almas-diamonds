@@ -14,7 +14,6 @@ import {
   Button,
   Link,
   Typography,
-  Grid,
   TextField,
   FormControlLabel,
   Checkbox,
@@ -81,8 +80,8 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-
   width: "80%",
+  // minHeight: "90vh",
   height: "90vh",
 }));
 
@@ -132,6 +131,53 @@ const ContactTextField = styled(TextField)(({ theme }) => ({
   width: "40%",
 }));
 
+const DiamondShapesContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "85%",
+  rowGap: "1.5rem",
+  columnGap: "2rem",
+  flexWrap: "wrap",
+}));
+
+const StyledDiamondShape = styled("div", {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  border: selected ? "2px solid #5B7BB6" : "2px solid #CCDCF3",
+  borderRadius: "0.25rem",
+  padding: "0.5rem",
+}));
+
+const CertificationsContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "85%",
+  rowGap: "1.5rem",
+  columnGap: "2rem",
+  flexWrap: "wrap",
+}));
+
+const StyledCertification = styled("div", {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  border: selected ? "2px solid #5B7BB6" : "2px solid #CCDCF3",
+  borderRadius: "0.25rem",
+  padding: "0.5rem 1rem",
+  cursor: "pointer",
+}));
+
 /* Copyright */
 
 function Copyright() {
@@ -147,10 +193,12 @@ function Copyright() {
   );
 }
 
+/* Stepper step labels */
+
 const steps = [
   "Location",
   "Diamond Type",
-  "Shape",
+  "Shapes",
   "Carat",
   "Color",
   "Clarity",
@@ -166,10 +214,12 @@ export default function Form() {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [submitted, setSubmitted] = React.useState(false);
 
   /* Input States */
 
   const [location, setLocation] = React.useState("");
+  const [otherLocation, setOtherLocation] = React.useState("");
   const [diamondType, setDiamondType] = React.useState("");
   const [diamondShapes, setDiamondShapes] = React.useState([]);
   const [diamondMinCarat, setDiamondMinCarat] = React.useState(0.1);
@@ -180,7 +230,7 @@ export default function Form() {
   const [diamondMaxClarity, setDiamondMaxClarity] = React.useState(8);
   const [diamondMinCut, setDiamondMinCut] = React.useState(0);
   const [diamondMaxCut, setDiamondMaxCut] = React.useState(4);
-  const [diamondCertification, setDiamondCertification] = React.useState([]);
+  const [diamondCertifications, setDiamondCertification] = React.useState([]);
   const [additionalNotes, setAdditionalNotes] = React.useState("");
   const [diamondMinBudget, setDiamondMinBudget] = React.useState(1);
   const [diamondMaxBudget, setDiamondMaxBudget] = React.useState(999999999);
@@ -188,6 +238,92 @@ export default function Form() {
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [agree, setAgree] = React.useState(false);
+
+  /* Shapes Data */
+
+  const diamond_shapes = [
+    {
+      img_url: "/images/diamond-shapes/round.png",
+      img_alt: "Round",
+      label: "Round",
+    },
+    {
+      img_url: "/images/diamond-shapes/princess.png",
+      img_alt: "Princess",
+      label: "Princess",
+    },
+    {
+      img_url: "/images/diamond-shapes/emerald.png",
+      img_alt: "Emerald",
+      label: "Emerald",
+    },
+    {
+      img_url: "/images/diamond-shapes/asscher.png",
+      img_alt: "Asscher",
+      label: "Asscher",
+    },
+    {
+      img_url: "/images/diamond-shapes/radiant.png",
+      img_alt: "Radiant",
+      label: "Radiant",
+    },
+    {
+      img_url: "/images/diamond-shapes/oval.png",
+      img_alt: "Oval",
+      label: "Oval",
+    },
+    {
+      img_url: "/images/diamond-shapes/pear.png",
+      img_alt: "Pear",
+      label: "Pear",
+    },
+    {
+      img_url: "/images/diamond-shapes/marquise.png",
+      img_alt: "Marquise",
+      label: "Marquise",
+    },
+    {
+      img_url: "/images/diamond-shapes/cushion.png",
+      img_alt: "Cushion",
+      label: "Cushion",
+    },
+    {
+      img_url: "/images/diamond-shapes/heart.png",
+      img_alt: "Heart",
+      label: "Heart",
+    },
+    {
+      img_url: "/images/diamond-shapes/fancy.png",
+      img_alt: "Fancy",
+      label: "Fancy",
+    },
+  ];
+
+  /* Certification Data */
+
+  const diamond_certifications = [
+    {
+      label: "GIA",
+    },
+    {
+      label: "AGS",
+    },
+    {
+      label: "EGL",
+    },
+    {
+      label: "IGI",
+    },
+    {
+      label: "HRD",
+    },
+    {
+      label: "Other Labs",
+    },
+    {
+      label: "Non Certified",
+    },
+  ];
 
   /* Carat Slider Marks */
 
@@ -336,6 +472,13 @@ export default function Form() {
     return completedSteps() === totalSteps();
   };
 
+  const handleComplete = () => {
+    const newCompleted = completed;
+    newCompleted[activeStep] = true;
+    setCompleted(newCompleted);
+    // handleNext();
+  };
+
   const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
@@ -344,6 +487,7 @@ export default function Form() {
           steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
+    handleComplete();
   };
 
   const handleBack = () => {
@@ -354,25 +498,40 @@ export default function Form() {
     setActiveStep(step);
   };
 
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
+  /* Function to handle the click event for the diamond shape  */
+
+  const onClickDiamondShape = (diamond_shape) => {
+    /* Extract the latest list of selected diamond shape from the event object. */
+
+    const selectedDiamondShapesClean = diamondShapes.includes(diamond_shape)
+      ? diamondShapes.filter((_ds) => _ds !== diamond_shape)
+      : [...diamondShapes, diamond_shape];
+
+    /* Update the local state to hold the selected diamond shapes. */
+
+    setDiamondShapes(selectedDiamondShapesClean);
+  };
+
+  /* Function to handle the click event for the certification  */
+
+  const onClickCertification = (certification) => {
+    /* Extract the latest list of selected certification from the event object. */
+
+    const selectedCertificationsClean = diamondCertifications.includes(
+      certification
+    )
+      ? diamondCertifications.filter((_crt) => _crt !== certification)
+      : [...diamondCertifications, certification];
+
+    /* Update the local state to hold the selected certifications. */
+
+    setDiamondCertification(selectedCertificationsClean);
+  };
+
+  const handleSubmit = () => {
+    setSubmitted(true);
     handleNext();
   };
-
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
-
-  /* Diamond Type useEffect */
-
-  React.useEffect(() => {
-    if (diamondType === "natural_grown" || diamondType === "lab_created") {
-      handleNext();
-    }
-  }, [diamondType]);
 
   return (
     <React.Fragment>
@@ -387,7 +546,11 @@ export default function Form() {
         >
           {steps.map((label, index) => (
             <Step key={label} completed={completed[index]}>
-              <StepButton color="inherit" onClick={handleStep(index)}>
+              <StepButton
+                color="inherit"
+                onClick={handleStep(index)}
+                disabled={submitted}
+              >
                 {label}
               </StepButton>
             </Step>
@@ -513,60 +676,94 @@ export default function Form() {
                         name="location"
                         label="Enter location"
                         variant="standard"
-                        onChange={(e) => setLocation(e.target.value)}
+                        value={otherLocation}
+                        onChange={(e) => setOtherLocation(e.target.value)}
                       />
                     </Fade>
                   </CustomFormControl>
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
-                    {"Next"}
-                  </Button>
                 </Container>
               )}
 
               {/* Step 2: Diamond Type */}
 
               {activeStep === 1 && (
+                <Fade in={activeStep === 1} out={diamondType !== ""}>
+                  <Container>
+                    <Typography
+                      variant="h3"
+                      gutterBottom
+                      sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                    >
+                      So, what type of diamond are you looking for?
+                    </Typography>
+                    <DiamondTypeButtonRow>
+                      <DiamondTypeButton
+                        disableElevation
+                        variant={
+                          diamondType === "natural_grown"
+                            ? "contained"
+                            : "outlined"
+                        }
+                        onClick={() => {
+                          setDiamondType("natural_grown");
+                          // handleNext();
+                        }}
+                      >
+                        Natural Grown
+                      </DiamondTypeButton>
+
+                      <DiamondTypeButton
+                        disableElevation
+                        variant={
+                          diamondType === "lab_created"
+                            ? "contained"
+                            : "outlined"
+                        }
+                        onClick={() => {
+                          setDiamondType("lab_created");
+                          // handleNext();
+                        }}
+                      >
+                        Lab Created
+                      </DiamondTypeButton>
+                    </DiamondTypeButtonRow>
+                  </Container>
+                </Fade>
+              )}
+
+              {/* Step 3: Diamond Shapes */}
+
+              {activeStep === 2 && (
                 <Container>
                   <Typography
                     variant="h3"
                     gutterBottom
                     sx={{ margin: "0rem 0rem 3rem 0rem" }}
                   >
-                    So, what type of diamond are you looking for?
+                    What shapes would you prefer?
                   </Typography>
-                  <DiamondTypeButtonRow>
-                    <DiamondTypeButton
-                      disableElevation
-                      variant={
-                        diamondType === "natural_grown"
-                          ? "contained"
-                          : "outlined"
-                      }
-                      onClick={() => {
-                        setDiamondType("natural_grown");
-                        handleNext();
-                      }}
-                    >
-                      Natural Grown
-                    </DiamondTypeButton>
-
-                    <DiamondTypeButton
-                      disableElevation
-                      variant={
-                        diamondType === "lab_created" ? "contained" : "outlined"
-                      }
-                      onClick={() => {
-                        setDiamondType("lab_created");
-                        handleNext();
-                      }}
-                    >
-                      Lab Created
-                    </DiamondTypeButton>
-                  </DiamondTypeButtonRow>
+                  <DiamondShapesContainer>
+                    {diamond_shapes.map((diamond_shape, key) => (
+                      <StyledDiamondShape
+                        key={key}
+                        onClick={() => onClickDiamondShape(diamond_shape.label)}
+                        selected={diamondShapes.includes(diamond_shape.label)}
+                      >
+                        <img
+                          src={diamond_shape.img_url}
+                          height={100}
+                          width={100}
+                          alt={diamond_shape.img_alt}
+                        />
+                        <Typography
+                          variant="h6"
+                          sx={{ margin: "1rem 0rem 0rem 0rem" }}
+                        >
+                          {diamond_shape.label}
+                        </Typography>
+                      </StyledDiamondShape>
+                    ))}
+                  </DiamondShapesContainer>
                 </Container>
               )}
 
@@ -728,6 +925,37 @@ export default function Form() {
                 </Container>
               )}
 
+              {/* Step 8: Certification */}
+
+              {activeStep === 7 && (
+                <Container>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
+                  >
+                    Preferred certifications?
+                  </Typography>
+                  <CertificationsContainer>
+                    {diamond_certifications.map((certification, key) => (
+                      <StyledCertification
+                        key={key}
+                        onClick={() =>
+                          onClickCertification(certification.label)
+                        }
+                        selected={diamondCertifications.includes(
+                          certification.label
+                        )}
+                      >
+                        <Typography variant="h6" sx={{ cursor: "pointer" }}>
+                          {certification.label}
+                        </Typography>
+                      </StyledCertification>
+                    ))}
+                  </CertificationsContainer>
+                </Container>
+              )}
+
               {/* Step 9: Additional Notes */}
 
               {activeStep === 8 && (
@@ -869,8 +1097,21 @@ export default function Form() {
 
                 <Button
                   variant="contained"
-                  onClick={handleNext}
+                  // onClick={handleNext}
+                  onClick={
+                    activeStep === steps.length - 1 ? handleSubmit : handleNext
+                  }
                   sx={{ mt: 3, ml: 1 }}
+                  disabled={
+                    activeStep === 0
+                      ? location === "" ||
+                        (location === "other" && otherLocation === "")
+                      : activeStep === 1
+                      ? diamondType === ""
+                      : activeStep === 10
+                      ? name === "" || !agree
+                      : false
+                  }
                 >
                   {activeStep === steps.length - 1 ? "Submit" : "Next"}
                 </Button>
