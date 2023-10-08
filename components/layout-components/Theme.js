@@ -9,12 +9,12 @@ const Styles = {
     primary: {
       main: "#5B7BB6",
       light: "#CCDCF3",
-      dark: "#be3b03",
+      dark: "#5B7BB6",
     },
     secondary: {
       main: "#FFFFFF",
       light: "#FFFFFF",
-      dark: "#CCCCCC",
+      dark: "#FFFFFF",
     },
     error: {
       main: "#F44336",
@@ -60,7 +60,7 @@ const GetDesignTokens = (mode) => ({
     ...(mode === "dark" ? Styles.dark : Styles.light),
   },
   typography: {
-    fontFamily: ', "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   },
   breakpoints: {
     values: {
@@ -87,6 +87,16 @@ const GetDesignTokens = (mode) => ({
       styleOverrides: {
         asterisk: {
           display: "none",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+        },
+        "&.MuiButton-containedPrimary:hover": {
+          backgroundColor: Styles.light.primary.dark,
         },
       },
     },

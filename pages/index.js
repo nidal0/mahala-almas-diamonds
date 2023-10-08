@@ -1,9 +1,12 @@
-import Form from "../components/page-sections/form/Form";
+/* Component Imports */
+
+import Layout from "/components/layout-components/Layout";
+import Welcome from "../components/page-sections/index/Welcome";
 
 export default function Home() {
   return (
-    <>
-      <Form />
-    </>
+    <Layout>
+      <Welcome />
+    </Layout>
   );
 }
