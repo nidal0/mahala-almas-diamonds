@@ -8,13 +8,11 @@ import { useRouter } from "next/router";
 
 import {
   Button,
-  Link,
   Typography,
   Fade,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   IconButton,
 } from "@mui/material";
@@ -51,7 +49,7 @@ const ButtonContainer = styled("div")(({ theme }) => ({
   alignItems: "center",
   width: "100%",
   gap: "1rem",
-  [theme.breakpoints.only("sm")]: {
+  [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
   },
 }));

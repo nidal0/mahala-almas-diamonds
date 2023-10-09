@@ -6,9 +6,11 @@ import { styled } from "@mui/system";
 /* Component Imports */
 
 import {
+  useTheme,
   Box,
   Paper,
   Stepper,
+  MobileStepper,
   Step,
   StepButton,
   Button,
@@ -23,6 +25,7 @@ import {
   Fade,
   Slider,
   Snackbar,
+  InputAdornment,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
@@ -39,6 +42,31 @@ const RootDiv = styled("div")(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "flex-start",
   width: "100%",
+  height: "45rem",
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}));
+
+const CustomPaper = styled(Paper)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  margin: "2rem 2rem 0rem 2rem",
+  padding: "2rem 2rem 2rem 2rem",
+  width: "80%",
+  height: "100%",
+  boxShadow: "none",
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    margin: "2rem 0rem 2rem 0rem",
+    padding: "2rem 0.5rem 2rem 0.5rem",
+  },
 }));
 
 const Container = styled("div")(({ theme }) => ({
@@ -48,27 +76,20 @@ const Container = styled("div")(({ theme }) => ({
   alignItems: "center",
   width: "100%",
   height: "100%",
+  [theme.breakpoints.down("sm")]: {
+    gap: "1rem",
+  },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
-}));
-
-const Row = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-}));
-
-const CustomPaper = styled(Paper)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "80%",
-  // minHeight: "90vh",
-  height: "95vh",
+  fontWeight: "400",
+  textAlign: "center",
+  fontSize: "3rem",
+  margin: "0rem 0rem 2rem 0rem",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "2rem",
+  },
 }));
 
 const CustomFormControl = styled(FormControl)(({ theme }) => ({
@@ -77,12 +98,32 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   width: "100%",
+  [theme.breakpoints.down("sm")]: {
+    gap: "0.5rem",
+  },
+}));
+
+const CustomImg = styled("img")(({ theme }) => ({
+  height: "100px",
+  width: "100px",
+  [theme.breakpoints.down("sm")]: {
+    height: "70px",
+    width: "70px",
+  },
 }));
 
 const SelectedImg = styled("img")(({ theme }) => ({
   border: "4px solid #43A047",
   borderRadius: "50%",
   padding: "0.2rem",
+  height: "100px",
+  width: "100px",
+  [theme.breakpoints.down("sm")]: {
+    border: "3px solid #43A047",
+    padding: "0.15rem",
+    height: "70px",
+    width: "70px",
+  },
 }));
 
 const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
@@ -91,6 +132,10 @@ const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   gap: "1rem",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    gap: "1.5em",
+  },
 }));
 
 const DiamondTypeButton = styled(Button)(({ theme }) => ({
@@ -104,6 +149,31 @@ const DiamondTypeButton = styled(Button)(({ theme }) => ({
     color: "#FFFFFF",
     border: "2px solid #5B7BB6",
   },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
+}));
+
+const SliderTextfieldsRow = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "50%",
+  margin: "0rem 0rem 2rem 0rem",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    width: "100%",
+    gap: "2rem",
+    margin: "0rem 0rem 1rem 0rem",
+  },
+}));
+
+const CaratTextField = styled(TextField)(({ theme }) => ({
+  width: "40%",
+  [theme.breakpoints.down("sm")]: {
+    width: "90%",
+  },
 }));
 
 const CustomRangeSlider = styled(Slider)(({ theme }) => ({
@@ -111,10 +181,10 @@ const CustomRangeSlider = styled(Slider)(({ theme }) => ({
     background: "#ffffff",
     color: "#5B7BB6",
   },
-}));
-
-const ContactTextField = styled(TextField)(({ theme }) => ({
-  width: "50%",
+  width: "30%",
+  [theme.breakpoints.down("sm")]: {
+    width: "80%",
+  },
 }));
 
 const DiamondShapesContainer = styled("div")(({ theme }) => ({
@@ -126,6 +196,18 @@ const DiamondShapesContainer = styled("div")(({ theme }) => ({
   rowGap: "1.5rem",
   columnGap: "2rem",
   flexWrap: "wrap",
+}));
+
+const CustomDiamondShapeImg = styled("img")(({ theme }) => ({
+  height: "50px",
+  width: "50px",
+}));
+
+const DiamondShapeLabel = styled(Typography)(({ theme }) => ({
+  margin: "0.5rem 0rem 0rem 0rem",
+  fontWeight: "400",
+  textAlign: "center",
+  fontSize: "1rem",
 }));
 
 const StyledDiamondShape = styled("div", {
@@ -164,6 +246,13 @@ const StyledCertification = styled("div", {
   cursor: "pointer",
 }));
 
+const ContactTextField = styled(TextField)(({ theme }) => ({
+  width: "50%",
+  [theme.breakpoints.down("sm")]: {
+    width: "85%",
+  },
+}));
+
 /* Copyright */
 
 // function Copyright() {
@@ -195,6 +284,20 @@ const steps = [
   "Contact Details",
 ];
 
+const phone_steps = [
+  { label: "Location" },
+  { label: "Diamond Type" },
+  { label: "Shapes" },
+  { label: "Carat" },
+  { label: "Color" },
+  { label: "Clarity" },
+  { label: "Cut" },
+  { label: "Certification" },
+  { label: "Additional Notes" },
+  { label: "Budget" },
+  { label: "Contact Details" },
+];
+
 export default function Form() {
   /* Stepper States */
 
@@ -219,8 +322,7 @@ export default function Form() {
   const [diamondMaxCut, setDiamondMaxCut] = React.useState(3);
   const [diamondCertifications, setDiamondCertification] = React.useState([]);
   const [additionalNotes, setAdditionalNotes] = React.useState("");
-  const [diamondMinBudget, setDiamondMinBudget] = React.useState(1);
-  const [diamondMaxBudget, setDiamondMaxBudget] = React.useState(999999999);
+  const [diamondBudget, setDiamondBudget] = React.useState();
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
@@ -428,19 +530,6 @@ export default function Form() {
     },
   ];
 
-  /* Budget Slider Marks */
-
-  const budget_slider_marks = [
-    {
-      value: 1,
-      label: "1",
-    },
-    {
-      value: 999999999,
-      label: "999999999",
-    },
-  ];
-
   /* Stepper Functions */
 
   const totalSteps = () => {
@@ -560,10 +649,7 @@ export default function Form() {
           },
           diamondCertifications: diamondCertifications,
           additionalNotes: additionalNotes,
-          diamond_budget: {
-            min: diamondMinBudget,
-            max: diamondMaxBudget,
-          },
+          diamond_budget: diamondBudget,
         }
       );
       setSubmitted(true);
@@ -574,10 +660,12 @@ export default function Form() {
     }
   };
 
+  const theme = useTheme();
+
   return (
     <React.Fragment>
       {/* Snackbar */}
-      
+
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={snackbarOpen}
@@ -589,22 +677,41 @@ export default function Form() {
         </Alert>
       </Snackbar>
       <RootDiv>
-        {/* Stepper */}
+        {/* <Paper
+          square
+          elevation={0}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            height: 50,
+            pl: 2,
+            width: "100%",
+            // bgcolor: "#000000",
+          }}
+        >
+          <Typography>{phone_steps[activeStep].label}</Typography>
+        </Paper> */}
+        {/* Desktop Stepper */}
 
         <Stepper
           nonLinear
           activeStep={activeStep}
-          sx={{ pt: 3, pb: 5 }}
           orientation="vertical"
+          sx={{
+            padding: "2rem 0rem 0rem 0rem",
+            [theme.breakpoints.down("sm")]: {
+              display: "none",
+            },
+          }}
         >
-          {steps.map((label, index) => (
-            <Step key={label} completed={completed[index]}>
+          {steps.map((step, index) => (
+            <Step key={index} completed={completed[index]}>
               <StepButton
                 color="inherit"
                 onClick={handleStep(index)}
                 disabled={submitted}
               >
-                {label}
+                {step}
               </StepButton>
             </Step>
           ))}
@@ -612,16 +719,11 @@ export default function Form() {
 
         {/* Form Paper */}
 
-        <CustomPaper
-          variant="outlined"
-          sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}
-        >
+        <CustomPaper>
           {activeStep === steps.length ? (
             <React.Fragment>
               <Container>
-                <Title variant="h3" sx={{ margin: "0rem 0rem 1rem 0rem" }}>
-                  Thank You for your time
-                </Title>
+                <Title variant="h3">Thank You for your time</Title>
                 <Typography variant="subtitle1">
                   Now just sit back and relax while we find your perfect
                   diamond.
@@ -634,13 +736,7 @@ export default function Form() {
 
               {activeStep === 0 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    Select your location
-                  </Title>
+                  <Title variant="h3">Select your location</Title>
                   <CustomFormControl>
                     <RadioGroup
                       row
@@ -662,7 +758,7 @@ export default function Form() {
                               alt="India"
                             />
                           ) : (
-                            <img
+                            <CustomImg
                               src="/images/location/india.png"
                               height={100}
                               width={100}
@@ -684,7 +780,7 @@ export default function Form() {
                               alt="UAE"
                             />
                           ) : (
-                            <img
+                            <CustomImg
                               src="/images/location/uae.png"
                               height={100}
                               width={100}
@@ -706,7 +802,7 @@ export default function Form() {
                               alt="Other"
                             />
                           ) : (
-                            <img
+                            <CustomImg
                               src="/images/location/world.png"
                               height={100}
                               width={100}
@@ -724,6 +820,9 @@ export default function Form() {
                           margin: "1rem 0rem 0rem 0rem",
                           visibility:
                             location === "other" ? "visible" : "hidden",
+                          [theme.breakpoints.down("sm")]: {
+                            width: "80%",
+                          },
                         }}
                         required
                         id="location"
@@ -743,11 +842,7 @@ export default function Form() {
               {activeStep === 1 && (
                 <Fade in={activeStep === 1} out={diamondType !== ""}>
                   <Container>
-                    <Title
-                      variant="h3"
-                      gutterBottom
-                      sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                    >
+                    <Title variant="h3">
                       So, what type of diamond are you looking for?
                     </Title>
                     <DiamondTypeButtonRow>
@@ -795,13 +890,7 @@ export default function Form() {
 
               {activeStep === 2 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    What shapes would you prefer?
-                  </Title>
+                  <Title variant="h3">What shapes would you prefer?</Title>
                   <DiamondShapesContainer>
                     {diamond_shapes.map((diamond_shape, key) => (
                       <StyledDiamondShape
@@ -809,18 +898,15 @@ export default function Form() {
                         onClick={() => onClickDiamondShape(diamond_shape.label)}
                         selected={diamondShapes.includes(diamond_shape.label)}
                       >
-                        <img
+                        <CustomDiamondShapeImg
                           src={diamond_shape.img_url}
                           height={100}
                           width={100}
                           alt={diamond_shape.img_alt}
                         />
-                        <Typography
-                          variant="h6"
-                          sx={{ margin: "1rem 0rem 0rem 0rem" }}
-                        >
+                        <DiamondShapeLabel variant="h6">
                           {diamond_shape.label}
-                        </Typography>
+                        </DiamondShapeLabel>
                       </StyledDiamondShape>
                     ))}
                   </DiamondShapesContainer>
@@ -831,17 +917,10 @@ export default function Form() {
 
               {activeStep === 3 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    Diamond carat?
-                  </Title>
+                  <Title variant="h3">Diamond carat?</Title>
 
-                  <Row sx={{ width: "50%", margin: "0rem 0rem 2rem 0rem" }}>
-                    <TextField
-                      sx={{ width: "30%" }}
+                  <SliderTextfieldsRow>
+                    <CaratTextField
                       id="minCarat"
                       name="minCarat"
                       label="Min Carat"
@@ -851,8 +930,7 @@ export default function Form() {
                       value={diamondMinCarat}
                       onChange={(e) => setDiamondMinCarat(e.target.value)}
                     />
-                    <TextField
-                      sx={{ width: "30%" }}
+                    <CaratTextField
                       id="maxCarat"
                       name="maxCarat"
                       label="Max Carat"
@@ -862,7 +940,7 @@ export default function Form() {
                       value={diamondMaxCarat}
                       onChange={(e) => setDiamondMaxCarat(e.target.value)}
                     />
-                  </Row>
+                  </SliderTextfieldsRow>
                   <CustomRangeSlider
                     sx={{ width: "50%" }}
                     min={0.1}
@@ -884,43 +962,13 @@ export default function Form() {
 
               {activeStep === 4 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    Select a color range
-                  </Title>
+                  <Title variant="h3">Select a color range</Title>
                   <CustomRangeSlider
                     sx={{ width: "75%" }}
                     min={0}
                     max={7}
                     value={[diamondMinColor, diamondMaxColor]}
                     valueLabelDisplay="off"
-                    // valueLabelFormat={(value) => {
-                    //   switch (value) {
-                    //     case 0:
-                    //       return "K";
-                    //     case 1:
-                    //       return "J";
-                    //     case 2:
-                    //       return "I";
-                    //     case 3:
-                    //       return "H";
-                    //     case 4:
-                    //       return "G";
-                    //     case 5:
-                    //       return "F";
-                    //     case 6:
-                    //       return "E";
-                    //     case 7:
-                    //       return "D";
-                    //     case 8:
-                    //       return "D";
-                    //     default:
-                    //       return "";
-                    //   }
-                    // }}
                     step={1}
                     marks={color_slider_marks}
                     onChange={(event, newValue) => {
@@ -935,13 +983,7 @@ export default function Form() {
 
               {activeStep === 5 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    Select your diamond clarity range
-                  </Title>
+                  <Title variant="h3">Select your diamond clarity range</Title>
                   <CustomRangeSlider
                     sx={{ width: "75%" }}
                     min={0}
@@ -962,13 +1004,7 @@ export default function Form() {
 
               {activeStep === 6 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    Select a range for the cut
-                  </Title>
+                  <Title variant="h3">Select a range for the cut</Title>
                   <CustomRangeSlider
                     sx={{ width: "50%" }}
                     min={0}
@@ -989,13 +1025,7 @@ export default function Form() {
 
               {activeStep === 7 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    Preferred certifications?
-                  </Title>
+                  <Title variant="h3">Preferred certifications?</Title>
                   <CertificationsContainer>
                     {diamond_certifications.map((certification, key) => (
                       <StyledCertification
@@ -1020,16 +1050,17 @@ export default function Form() {
 
               {activeStep === 8 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
+                  <Title variant="h3">
                     Do you have any additional notes for us?
                   </Title>
 
                   <TextField
-                    sx={{ width: "75%" }}
+                    sx={{
+                      width: "75%",
+                      [theme.breakpoints.down("sm")]: {
+                        width: "90%",
+                      },
+                    }}
                     id="notes"
                     name="notes"
                     label="Additional Notes"
@@ -1046,51 +1077,23 @@ export default function Form() {
 
               {activeStep === 9 && (
                 <Container>
-                  <Title
-                    variant="h3"
-                    gutterBottom
-                    sx={{ margin: "0rem 0rem 3rem 0rem" }}
-                  >
-                    What is your budget?
-                  </Title>
+                  <Title variant="h3">What is your budget?</Title>
 
-                  <Row sx={{ width: "50%", margin: "0rem 0rem 2rem 0rem" }}>
-                    <TextField
-                      sx={{ width: "30%" }}
-                      id="minBudget"
-                      name="minBudget"
-                      label="Min Budget"
-                      variant="outlined"
-                      type="number"
-                      InputProps={{ inputProps: { min: 1 } }}
-                      value={diamondMinBudget}
-                      onChange={(e) => setDiamondMinBudget(e.target.value)}
-                    />
-                    <TextField
-                      sx={{ width: "30%" }}
-                      id="maxBudget"
-                      name="maxBudget"
-                      label="Max Budget"
-                      variant="outlined"
-                      type="number"
-                      InputProps={{ inputProps: { min: 1 } }}
-                      value={diamondMaxBudget}
-                      onChange={(e) => setDiamondMaxBudget(e.target.value)}
-                    />
-                  </Row>
-                  <CustomRangeSlider
-                    sx={{ width: "50%" }}
-                    min={1}
-                    max={999999999}
-                    precision={1}
-                    value={[diamondMinBudget, diamondMaxBudget]}
-                    valueLabelDisplay="auto"
-                    step={1}
-                    marks={budget_slider_marks}
-                    onChange={(event, newValue) => {
-                      setDiamondMinBudget(newValue[0]);
-                      setDiamondMaxBudget(newValue[1]);
+                  <TextField
+                    sx={{ width: "100%" }}
+                    id="budget"
+                    name="budget"
+                    label="Budget"
+                    variant="outlined"
+                    type="number"
+                    InputProps={{
+                      inputProps: { min: 1 },
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
                     }}
+                    value={diamondBudget}
+                    onChange={(e) => setDiamondBudget(e.target.value)}
                   />
                 </Container>
               )}
@@ -1129,7 +1132,12 @@ export default function Form() {
                   />
 
                   <FormControlLabel
-                    sx={{ width: "50%" }}
+                    sx={{
+                      width: "50%",
+                      [theme.breakpoints.down("sm")]: {
+                        width: "85%",
+                      },
+                    }}
                     control={
                       <Checkbox
                         name="agree"
@@ -1146,7 +1154,16 @@ export default function Form() {
 
               {/* Buttons */}
 
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  margin: "0rem 0rem 2rem 0rem",
+                  [theme.breakpoints.down("sm")]: {
+                    display: "none",
+                  },
+                }}
+              >
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                     Back
@@ -1187,6 +1204,65 @@ export default function Form() {
               </Box>
             </React.Fragment>
           )}
+
+          {/* Phone Stepper */}
+
+          <MobileStepper
+            variant="text"
+            steps={phone_steps.length}
+            sx={{
+              [theme.breakpoints.up("md")]: {
+                display: "none",
+              },
+            }}
+            position="bottom"
+            activeStep={activeStep}
+            nextButton={
+              activeStep === phone_steps.length - 1 ? (
+                <Button
+                  variant="contained"
+                  onClick={handleSubmit}
+                  sx={{ mr: 1 }}
+                  disabled={
+                    name === "" ||
+                    !agree ||
+                    submitted ||
+                    allStepsCompleted() === false
+                  }
+                >
+                  {"Submit"}
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                  sx={{ mr: 1 }}
+                  disabled={
+                    activeStep === 0
+                      ? location === "" ||
+                        (location === "other" && otherLocation === "")
+                      : activeStep === 1
+                      ? diamondType === ""
+                      : false
+                  }
+                >
+                  {"Next"}
+                </Button>
+              )
+            }
+            backButton={
+              <Button
+                variant="outlined"
+                onClick={handleBack}
+                sx={{
+                  ml: 1,
+                  visibility: activeStep !== 0 ? "visible" : "hidden",
+                }}
+              >
+                Back
+              </Button>
+            }
+          />
         </CustomPaper>
       </RootDiv>
       {/* <Copyright /> */}
