@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
+  useTheme,
 } from "@mui/material";
 
 /* Icon Imports */
@@ -51,11 +52,16 @@ const ButtonContainer = styled("div")(({ theme }) => ({
   gap: "1rem",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
+    gap: "1.5rem",
   },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "3rem",
+    padding: "0rem 0.5rem 0rem 0.5rem",
+  },
 }));
 
 /* Copyright */
@@ -74,6 +80,8 @@ const Title = styled(Typography)(({ theme }) => ({
 // }
 
 export default function Welcome() {
+  const theme = useTheme();
+
   /* Modal States */
 
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -146,6 +154,11 @@ export default function Welcome() {
               variant="outlined"
               color="primary"
               onClick={handleClickModalOpen}
+              sx={{
+                [theme.breakpoints.down("sm")]: {
+                  width: "80%",
+                },
+              }}
             >
               How it works?
             </Button>
@@ -157,6 +170,11 @@ export default function Welcome() {
               color="primary"
               onClick={(event) => {
                 Router.push("/form");
+              }}
+              sx={{
+                [theme.breakpoints.down("sm")]: {
+                  width: "80%",
+                },
               }}
             >
               Enter to find your perfect diamond

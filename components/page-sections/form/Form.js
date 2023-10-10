@@ -42,7 +42,7 @@ const RootDiv = styled("div")(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "flex-start",
   width: "100%",
-  height: "45rem",
+  height: "auto",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     height: "100%",
@@ -50,22 +50,107 @@ const RootDiv = styled("div")(({ theme }) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  // /* XXS breakpoint */
+  // [theme.breakpoints.up("xxs")]: {},
+  // /* iphone 5 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {},
+  // /*galaxy S8+ - 360*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {},
+  // /*iphone se - 375*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {},
+  // /* iphone 12 pro and pixel - 390 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {},
+  // /*iphone XR - 414*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {},
+  // [theme.breakpoints.up("xsPlus")]: {},
+  // [theme.breakpoints.up("sm")]: {},
+  // /*ipad Mini */
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {},
+  // /* ipad Air*/
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {},
+  // [theme.breakpoints.up("md")]: {},
+  // /* MDLG Breakpoint iPadPro*/
+  // [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {},
+  // /*720p and 768p breakpoint */
+  // [theme.breakpoints.up("lg")]: {},
+  // /* 1080p 125% breakpoint*/
+  // [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {},
+  // /* 1080p breakpoint*/
+  // [theme.breakpoints.up("xl")]: {},
+  // /* XXL breakpoint  2560p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {},
+  // /*4k breakpoint 3840p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {},
 }));
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  margin: "2rem 2rem 0rem 2rem",
+  margin: "1rem 2rem 0rem 2rem",
   padding: "2rem 2rem 2rem 2rem",
   width: "80%",
-  height: "100%",
-  boxShadow: "none",
+  minHeight: "93vh",
+  gap: "4rem",
+  // boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     margin: "2rem 0rem 2rem 0rem",
     padding: "2rem 0.5rem 2rem 0.5rem",
+  },
+  // /* XXS breakpoint */
+  // [theme.breakpoints.up("xxs")]: { width: "100%" },
+  // /* iphone 5 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+  //   minHeight: "10rem",
+  // },
+  // /*galaxy S8+ - 360*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+  //   minHeight: "65rem",
+  // },
+  // /*iphone se - 375*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+  //   minHeight: "10rem",
+  // },
+  // /* iphone 12 pro and pixel - 390 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+  //   minHeight: "5rem",
+  // },
+  // /*iphone XR - 414*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+  //   minHeight: "65rem",
+  // },
+  // [theme.breakpoints.up("xsPlus")]: { minHeight: "65rem" },
+  // [theme.breakpoints.up("sm")]: { minHeight: "65rem" },
+  // /*ipad Mini */
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+  //   minHeight: "59rem",
+  // },
+  // /* ipad Air*/
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+    minHeight: "93vh",
+  },
+  [theme.breakpoints.up("md")]: { minHeight: "93vh" },
+  /* MDLG Breakpoint iPadPro*/
+  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    minHeight: "93vh",
+  },
+  /*720p and 768p breakpoint */
+  [theme.breakpoints.up("lg")]: { width: "80%" },
+  /* 1080p 125% breakpoint*/
+  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+    minHeight: "93vh",
+  },
+  /* 1080p breakpoint*/
+  [theme.breakpoints.up("xl")]: { minHeight: "93vh" },
+  /* XXL breakpoint  2560p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+    minHeight: "85rem",
+  },
+  /*4k breakpoint 3840p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+    minHeight: "50vh",
   },
 }));
 
@@ -698,8 +783,12 @@ export default function Form() {
           activeStep={activeStep}
           orientation="vertical"
           sx={{
-            padding: "2rem 0rem 0rem 0rem",
-            [theme.breakpoints.down("sm")]: {
+            padding: "1rem 0rem 0rem 0rem",
+            minHeight: "95vh",
+            [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+              minHeight: "50vh",
+            },
+            [theme.breakpoints.down("md")]: {
               display: "none",
             },
           }}
@@ -1159,7 +1248,7 @@ export default function Form() {
                   display: "flex",
                   justifyContent: "flex-end",
                   margin: "0rem 0rem 2rem 0rem",
-                  [theme.breakpoints.down("sm")]: {
+                  [theme.breakpoints.down("md")]: {
                     display: "none",
                   },
                 }}
