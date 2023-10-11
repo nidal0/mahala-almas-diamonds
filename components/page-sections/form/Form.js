@@ -23,6 +23,7 @@ import {
   RadioGroup,
   FormControl,
   Fade,
+  Grow,
   Slider,
   Snackbar,
   InputAdornment,
@@ -825,7 +826,12 @@ export default function Form() {
 
               {activeStep === 0 && (
                 <Container>
-                  <Title variant="h3">Select your location</Title>
+                  <Fade
+                    in={activeStep === 0}
+                    {...(activeStep === 0 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">Select your location</Title>
+                  </Fade>
                   <CustomFormControl>
                     <RadioGroup
                       row
@@ -834,72 +840,90 @@ export default function Form() {
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
                     >
-                      <FormControlLabel
-                        value="india"
-                        labelPlacement="top"
-                        control={<Radio sx={{ display: "none" }} />}
-                        label={
-                          location === "india" ? (
-                            <SelectedImg
-                              src="/images/location/india.png"
-                              height={100}
-                              width={100}
-                              alt="India"
-                            />
-                          ) : (
-                            <CustomImg
-                              src="/images/location/india.png"
-                              height={100}
-                              width={100}
-                              alt="India"
-                            />
-                          )
-                        }
-                      />
-                      <FormControlLabel
-                        value="uae"
-                        labelPlacement="top"
-                        control={<Radio sx={{ display: "none" }} />}
-                        label={
-                          location === "uae" ? (
-                            <SelectedImg
-                              src="/images/location/uae.png"
-                              height={100}
-                              width={100}
-                              alt="UAE"
-                            />
-                          ) : (
-                            <CustomImg
-                              src="/images/location/uae.png"
-                              height={100}
-                              width={100}
-                              alt="UAE"
-                            />
-                          )
-                        }
-                      />
-                      <FormControlLabel
-                        value="other"
-                        labelPlacement="top"
-                        control={<Radio sx={{ display: "none" }} />}
-                        label={
-                          location === "other" ? (
-                            <SelectedImg
-                              src="/images/location/world.png"
-                              height={100}
-                              width={100}
-                              alt="Other"
-                            />
-                          ) : (
-                            <CustomImg
-                              src="/images/location/world.png"
-                              height={100}
-                              width={100}
-                              alt="Other"
-                            />
-                          )
-                        }
-                      />
+                      <Grow
+                        in={activeStep === 0}
+                        style={{ transformOrigin: "0 0 0" }}
+                        {...(activeStep === 0 ? { timeout: 300 } : {})}
+                      >
+                        <FormControlLabel
+                          value="india"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            location === "india" ? (
+                              <SelectedImg
+                                src="/images/location/india.png"
+                                height={100}
+                                width={100}
+                                alt="India"
+                              />
+                            ) : (
+                              <CustomImg
+                                src="/images/location/india.png"
+                                height={100}
+                                width={100}
+                                alt="India"
+                              />
+                            )
+                          }
+                        />
+                      </Grow>
+                      <Grow
+                        in={activeStep === 0}
+                        style={{ transformOrigin: "0 0 0" }}
+                        {...(activeStep === 0 ? { timeout: 600 } : {})}
+                      >
+                        <FormControlLabel
+                          value="uae"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            location === "uae" ? (
+                              <SelectedImg
+                                src="/images/location/uae.png"
+                                height={100}
+                                width={100}
+                                alt="UAE"
+                              />
+                            ) : (
+                              <CustomImg
+                                src="/images/location/uae.png"
+                                height={100}
+                                width={100}
+                                alt="UAE"
+                              />
+                            )
+                          }
+                        />
+                      </Grow>
+                      <Grow
+                        in={activeStep === 0}
+                        style={{ transformOrigin: "0 0 0" }}
+                        {...(activeStep === 0 ? { timeout: 900 } : {})}
+                      >
+                        <FormControlLabel
+                          value="other"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            location === "other" ? (
+                              <SelectedImg
+                                src="/images/location/world.png"
+                                height={100}
+                                width={100}
+                                alt="Other"
+                              />
+                            ) : (
+                              <CustomImg
+                                src="/images/location/world.png"
+                                height={100}
+                                width={100}
+                                alt="Other"
+                              />
+                            )
+                          }
+                        />
+                      </Grow>
                     </RadioGroup>
 
                     <Fade in={location === "other"}>
@@ -929,12 +953,22 @@ export default function Form() {
               {/* Step 2: Diamond Type */}
 
               {activeStep === 1 && (
-                <Fade in={activeStep === 1} out={diamondType !== ""}>
-                  <Container>
+                <Container>
+                  <Fade
+                    in={activeStep === 1}
+                    {...(activeStep === 1 ? { timeout: 600 } : {})}
+                  >
                     <Title variant="h3">
                       So, what type of diamond are you looking for?
                     </Title>
-                    <DiamondTypeButtonRow>
+                  </Fade>
+
+                  <DiamondTypeButtonRow>
+                    <Grow
+                      in={activeStep === 1}
+                      style={{ transformOrigin: "0 0 0" }}
+                      {...(activeStep === 1 ? { timeout: 400 } : {})}
+                    >
                       <DiamondTypeButton
                         disableElevation
                         disableFocusRipple
@@ -952,7 +986,12 @@ export default function Form() {
                       >
                         Natural Grown
                       </DiamondTypeButton>
-
+                    </Grow>
+                    <Grow
+                      in={activeStep === 1}
+                      style={{ transformOrigin: "0 0 0" }}
+                      {...(activeStep === 1 ? { timeout: 800 } : {})}
+                    >
                       <DiamondTypeButton
                         disableElevation
                         disableFocusRipple
@@ -970,33 +1009,46 @@ export default function Form() {
                       >
                         Lab Created
                       </DiamondTypeButton>
-                    </DiamondTypeButtonRow>
-                  </Container>
-                </Fade>
+                    </Grow>
+                  </DiamondTypeButtonRow>
+                </Container>
               )}
 
               {/* Step 3: Diamond Shapes */}
 
               {activeStep === 2 && (
                 <Container>
-                  <Title variant="h3">What shapes would you prefer?</Title>
+                  <Fade
+                    in={activeStep === 2}
+                    {...(activeStep === 2 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">What shapes would you prefer?</Title>
+                  </Fade>
                   <DiamondShapesContainer>
                     {diamond_shapes.map((diamond_shape, key) => (
-                      <StyledDiamondShape
+                      <Grow
                         key={key}
-                        onClick={() => onClickDiamondShape(diamond_shape.label)}
-                        selected={diamondShapes.includes(diamond_shape.label)}
+                        in={activeStep === 2}
+                        style={{ transformOrigin: "0 0 0" }}
+                        {...(activeStep === 2 ? { timeout: 600 } : {})}
                       >
-                        <CustomDiamondShapeImg
-                          src={diamond_shape.img_url}
-                          height={100}
-                          width={100}
-                          alt={diamond_shape.img_alt}
-                        />
-                        <DiamondShapeLabel variant="h6">
-                          {diamond_shape.label}
-                        </DiamondShapeLabel>
-                      </StyledDiamondShape>
+                        <StyledDiamondShape
+                          onClick={() =>
+                            onClickDiamondShape(diamond_shape.label)
+                          }
+                          selected={diamondShapes.includes(diamond_shape.label)}
+                        >
+                          <CustomDiamondShapeImg
+                            src={diamond_shape.img_url}
+                            height={100}
+                            width={100}
+                            alt={diamond_shape.img_alt}
+                          />
+                          <DiamondShapeLabel variant="h6">
+                            {diamond_shape.label}
+                          </DiamondShapeLabel>
+                        </StyledDiamondShape>
+                      </Grow>
                     ))}
                   </DiamondShapesContainer>
                 </Container>
@@ -1006,7 +1058,12 @@ export default function Form() {
 
               {activeStep === 3 && (
                 <Container>
-                  <Title variant="h3">Diamond carat?</Title>
+                  <Fade
+                    in={activeStep === 3}
+                    {...(activeStep === 3 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">Diamond carat?</Title>
+                  </Fade>
 
                   <SliderTextfieldsRow>
                     <CaratTextField
@@ -1051,7 +1108,12 @@ export default function Form() {
 
               {activeStep === 4 && (
                 <Container>
-                  <Title variant="h3">Select a color range</Title>
+                  <Fade
+                    in={activeStep === 4}
+                    {...(activeStep === 4 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">Select a color range</Title>
+                  </Fade>
                   <CustomRangeSlider
                     sx={{ width: "75%" }}
                     min={0}
@@ -1072,7 +1134,14 @@ export default function Form() {
 
               {activeStep === 5 && (
                 <Container>
-                  <Title variant="h3">Select your diamond clarity range</Title>
+                  <Fade
+                    in={activeStep === 5}
+                    {...(activeStep === 5 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">
+                      Select your diamond clarity range
+                    </Title>
+                  </Fade>
                   <CustomRangeSlider
                     sx={{ width: "75%" }}
                     min={0}
@@ -1093,7 +1162,12 @@ export default function Form() {
 
               {activeStep === 6 && (
                 <Container>
-                  <Title variant="h3">Select a range for the cut</Title>
+                  <Fade
+                    in={activeStep === 6}
+                    {...(activeStep === 6 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">Select a range for the cut</Title>
+                  </Fade>
                   <CustomRangeSlider
                     sx={{ width: "50%" }}
                     min={0}
@@ -1114,22 +1188,33 @@ export default function Form() {
 
               {activeStep === 7 && (
                 <Container>
-                  <Title variant="h3">Preferred certifications?</Title>
+                  <Fade
+                    in={activeStep == 7}
+                    {...(activeStep === 7 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">Preferred certifications?</Title>
+                  </Fade>
                   <CertificationsContainer>
                     {diamond_certifications.map((certification, key) => (
-                      <StyledCertification
+                      <Grow
                         key={key}
-                        onClick={() =>
-                          onClickCertification(certification.label)
-                        }
-                        selected={diamondCertifications.includes(
-                          certification.label
-                        )}
+                        in={activeStep === 7}
+                        style={{ transformOrigin: "0 0 0" }}
+                        {...(activeStep === 7 ? { timeout: 600 } : {})}
                       >
-                        <Typography variant="h6" sx={{ cursor: "pointer" }}>
-                          {certification.label}
-                        </Typography>
-                      </StyledCertification>
+                        <StyledCertification
+                          onClick={() =>
+                            onClickCertification(certification.label)
+                          }
+                          selected={diamondCertifications.includes(
+                            certification.label
+                          )}
+                        >
+                          <Typography variant="h6" sx={{ cursor: "pointer" }}>
+                            {certification.label}
+                          </Typography>
+                        </StyledCertification>
+                      </Grow>
                     ))}
                   </CertificationsContainer>
                 </Container>
@@ -1139,26 +1224,37 @@ export default function Form() {
 
               {activeStep === 8 && (
                 <Container>
-                  <Title variant="h3">
-                    Do you have any additional notes for us?
-                  </Title>
+                  <Fade
+                    in={activeStep === 8}
+                    {...(activeStep === 8 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">
+                      Do you have any additional notes for us?
+                    </Title>
+                  </Fade>
 
-                  <TextField
-                    sx={{
-                      width: "75%",
-                      [theme.breakpoints.down("sm")]: {
-                        width: "90%",
-                      },
-                    }}
-                    id="notes"
-                    name="notes"
-                    label="Additional Notes"
-                    variant="outlined"
-                    multiline
-                    rows={6}
-                    value={additionalNotes}
-                    onChange={(e) => setAdditionalNotes(e.target.value)}
-                  />
+                  <Grow
+                    in={activeStep === 8}
+                    style={{ transformOrigin: "0 0 0" }}
+                    {...(activeStep === 8 ? { timeout: 600 } : {})}
+                  >
+                    <TextField
+                      sx={{
+                        width: "75%",
+                        [theme.breakpoints.down("sm")]: {
+                          width: "90%",
+                        },
+                      }}
+                      id="notes"
+                      name="notes"
+                      label="Additional Notes"
+                      variant="outlined"
+                      multiline
+                      rows={6}
+                      value={additionalNotes}
+                      onChange={(e) => setAdditionalNotes(e.target.value)}
+                    />
+                  </Grow>
                 </Container>
               )}
 
@@ -1166,24 +1262,38 @@ export default function Form() {
 
               {activeStep === 9 && (
                 <Container>
-                  <Title variant="h3">What is your budget?</Title>
+                  <Fade
+                    in={activeStep === 9}
+                    {...(activeStep === 9 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">What is your budget?</Title>
+                  </Fade>
 
-                  <TextField
-                    sx={{ width: "100%" }}
-                    id="budget"
-                    name="budget"
-                    label="Budget"
-                    variant="outlined"
-                    type="number"
-                    InputProps={{
-                      inputProps: { min: 1 },
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                    }}
-                    value={diamondBudget}
-                    onChange={(e) => setDiamondBudget(e.target.value)}
-                  />
+                  <Grow
+                    in={activeStep === 9}
+                    style={{ transformOrigin: "0 0 0" }}
+                    {...(activeStep === 9 ? { timeout: 300 } : {})}
+                  >
+                    <TextField
+                      sx={{
+                        width: "40%",
+                        [theme.breakpoints.down("sm")]: { width: "90%" },
+                      }}
+                      id="budget"
+                      name="budget"
+                      label="Budget"
+                      variant="outlined"
+                      type="number"
+                      InputProps={{
+                        inputProps: { min: 1 },
+                        startAdornment: (
+                          <InputAdornment position="start">$</InputAdornment>
+                        ),
+                      }}
+                      value={diamondBudget}
+                      onChange={(e) => setDiamondBudget(e.target.value)}
+                    />
+                  </Grow>
                 </Container>
               )}
 
@@ -1191,53 +1301,83 @@ export default function Form() {
 
               {activeStep === 10 && (
                 <Container sx={{ gap: "2rem" }}>
-                  <Title variant="h3">How can we reach you?</Title>
-                  <ContactTextField
-                    required
-                    id="name"
-                    name="name"
-                    label="Name*"
-                    variant="standard"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
+                  <Fade
+                    in={activeStep === 10}
+                    {...(activeStep === 10 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">How can we reach you?</Title>
+                  </Fade>
 
-                  <ContactTextField
-                    id="email"
-                    name="email"
-                    label="Email"
-                    variant="standard"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                  <Grow
+                    in={activeStep === 10}
+                    style={{ transformOrigin: "0 0 0" }}
+                    {...(activeStep === 10 ? { timeout: 400 } : {})}
+                  >
+                    <ContactTextField
+                      required
+                      id="name"
+                      name="name"
+                      label="Name*"
+                      variant="standard"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </Grow>
 
-                  <ContactTextField
-                    id="phone"
-                    name="phone"
-                    label="Phone"
-                    variant="standard"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
+                  <Grow
+                    in={activeStep === 10}
+                    style={{ transformOrigin: "0 0 0" }}
+                    {...(activeStep === 10 ? { timeout: 600 } : {})}
+                  >
+                    <ContactTextField
+                      id="email"
+                      name="email"
+                      label="Email"
+                      variant="standard"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Grow>
 
-                  <FormControlLabel
-                    sx={{
-                      width: "50%",
-                      [theme.breakpoints.down("sm")]: {
-                        width: "85%",
-                      },
-                    }}
-                    control={
-                      <Checkbox
-                        name="agree"
-                        checked={agree}
-                        onChange={() => {
-                          setAgree(!agree);
-                        }}
-                      />
-                    }
-                    label="I agree to share my details with Mahala Almas."
-                  />
+                  <Grow
+                    in={activeStep === 10}
+                    style={{ transformOrigin: "0 0 0" }}
+                    {...(activeStep === 10 ? { timeout: 800 } : {})}
+                  >
+                    <ContactTextField
+                      id="phone"
+                      name="phone"
+                      label="Phone"
+                      variant="standard"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </Grow>
+
+                  <Grow
+                    in={activeStep === 10}
+                    style={{ transformOrigin: "0 0 0" }}
+                    {...(activeStep === 10 ? { timeout: 1000 } : {})}
+                  >
+                    <FormControlLabel
+                      sx={{
+                        width: "50%",
+                        [theme.breakpoints.down("sm")]: {
+                          width: "85%",
+                        },
+                      }}
+                      control={
+                        <Checkbox
+                          name="agree"
+                          checked={agree}
+                          onChange={() => {
+                            setAgree(!agree);
+                          }}
+                        />
+                      }
+                      label="I agree to share my details with Mahala Almas."
+                    />
+                  </Grow>
                 </Container>
               )}
 
