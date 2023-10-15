@@ -1028,6 +1028,11 @@ export default function Form() {
                           alt="Natural Grown"
                         />
                         <DiamondShapeLabel
+                          sx={{
+                            [theme.breakpoints.down("sm")]: {
+                              fontSize: "0.875rem",
+                            },
+                          }}
                           variant="h6"
                           selected={diamondType === "natural_grown"}
                         >
@@ -1303,8 +1308,8 @@ export default function Form() {
                             height: "140px",
                             width: "140px",
                             [theme.breakpoints.down("sm")]: {
-                              height: "120px",
-                              width: "120px",
+                              height: "130px",
+                              width: "110px",
                             },
                           }}
                         >
@@ -1329,7 +1334,7 @@ export default function Form() {
                             )}
                             sx={{
                               [theme.breakpoints.down("sm")]: {
-                                fontSize: "0.875rem",
+                                fontSize: "0.85rem",
                               },
                             }}
                           >
