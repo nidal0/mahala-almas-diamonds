@@ -29,7 +29,6 @@ import {
   InputAdornment,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-import { VerifiedUser } from "@mui/icons-material";
 
 /* Firebase Imports */
 
@@ -95,8 +94,9 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   width: "80%",
   minHeight: "93vh",
   gap: "4rem",
-  background: "#121212" /* fallback for old browsers */,
-
+  // backdropFilter: "blur(6px)",
+  // backgroundColor: "rgba(0,0,30,0.3)",
+  background: "#121212",
   // boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
@@ -287,7 +287,7 @@ const StyledDiamondType = styled("div", {
   border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
   borderRadius: "0.25rem",
   padding: "1rem",
-  height: "140px",
+  height: "150px",
   width: "140px",
   cursor: "pointer",
   background: selected ? "#0D1C2A" : "#121212",
@@ -883,7 +883,15 @@ export default function Form() {
                       aria-labelledby="select-location"
                       name="select-location"
                       value={location}
-                      onChange={(e) => setLocation(e.target.value)}
+                      onChange={(e) => {
+                        setLocation(e.target.value);
+                        event.target.value === "india" ||
+                        event.target.value === "uae"
+                          ? setTimeout(() => {
+                              handleNext();
+                            }, 200)
+                          : null;
+                      }}
                     >
                       <Grow
                         in={activeStep === 0}
@@ -1017,7 +1025,9 @@ export default function Form() {
                       <StyledDiamondType
                         onClick={() => {
                           setDiamondType("natural_grown");
-                          // handleNext();
+                          setTimeout(() => {
+                            handleNext();
+                          }, 200);
                         }}
                         selected={diamondType === "natural_grown"}
                       >
@@ -1065,7 +1075,9 @@ export default function Form() {
                       <StyledDiamondType
                         onClick={() => {
                           setDiamondType("lab_created");
-                          // handleNext();
+                          setTimeout(() => {
+                            handleNext();
+                          }, 200);
                         }}
                         selected={diamondType === "lab_created"}
                       >
@@ -1076,6 +1088,11 @@ export default function Form() {
                           alt="Lab Created"
                         />
                         <DiamondShapeLabel
+                          sx={{
+                            [theme.breakpoints.down("sm")]: {
+                              fontSize: "0.875rem",
+                            },
+                          }}
                           variant="h6"
                           selected={diamondType === "lab_created"}
                         >
@@ -1556,7 +1573,18 @@ export default function Form() {
                   <Button
                     variant="outlined"
                     onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
+                    sx={{
+                      mt: 3,
+                      ml: 1,
+                      visibility:
+                        activeStep === 1 ||
+                        (activeStep === 0 &&
+                          (location === "india" ||
+                            location === "uae" ||
+                            location === ""))
+                          ? "hidden"
+                          : "visible",
+                    }}
                     disabled={
                       activeStep === 0
                         ? location === "" ||
@@ -1604,7 +1632,17 @@ export default function Form() {
                 <Button
                   variant="outlined"
                   onClick={handleNext}
-                  sx={{ mr: 1 }}
+                  sx={{
+                    mr: 1,
+                    visibility:
+                      activeStep === 1 ||
+                      (activeStep === 0 &&
+                        (location === "india" ||
+                          location === "uae" ||
+                          location === ""))
+                        ? "hidden"
+                        : "visible",
+                  }}
                   disabled={
                     activeStep === 0
                       ? location === "" ||
