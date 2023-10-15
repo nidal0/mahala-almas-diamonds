@@ -129,7 +129,7 @@ export default function Welcome() {
           </DialogContent>
           <DialogActions>
             <Button
-              variant="contained"
+              variant="outlined"
               color="primary"
               onClick={(event) => {
                 Router.push("/form");
@@ -166,7 +166,7 @@ export default function Welcome() {
               disableElevation
               disableFocusRipple
               disableRipple
-              variant="contained"
+              variant="outlined"
               color="primary"
               onClick={(event) => {
                 Router.push("/form");

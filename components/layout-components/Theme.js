@@ -31,8 +31,8 @@ const Styles = {
   dark: {
     // palette values for dark mode
     primary: {
-      main: "#f76c35",
-      light: "#ff9d62",
+      main: "#18FFFF",
+      light: "#FFFFFF",
       dark: "#be3b03",
     },
     secondary: {
@@ -46,7 +46,7 @@ const Styles = {
       dark: "#BA000D",
     },
     background: {
-      default: "#161C24",
+      default: "#121212",
     },
     text: {
       primary: "#FFFFFF",
@@ -96,7 +96,7 @@ const GetDesignTokens = (mode) => ({
           textTransform: "none",
         },
         "&.MuiButton-containedPrimary:hover": {
-          backgroundColor: Styles.light.primary.dark,
+          background: "#1A1F25",
         },
       },
     },

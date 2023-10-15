@@ -29,6 +29,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
+import { VerifiedUser } from "@mui/icons-material";
 
 /* Firebase Imports */
 
@@ -94,6 +95,8 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   width: "80%",
   minHeight: "93vh",
   gap: "4rem",
+  background: "#121212" /* fallback for old browsers */,
+
   // boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
@@ -174,7 +177,8 @@ const Title = styled(Typography)(({ theme }) => ({
   fontSize: "3rem",
   margin: "0rem 0rem 2rem 0rem",
   [theme.breakpoints.down("sm")]: {
-    fontSize: "2rem",
+    fontWeight: "300",
+    fontSize: "1.5rem",
   },
 }));
 
@@ -199,13 +203,13 @@ const CustomImg = styled("img")(({ theme }) => ({
 }));
 
 const SelectedImg = styled("img")(({ theme }) => ({
-  border: "4px solid #43A047",
+  border: "3px solid #18FFFF",
   borderRadius: "50%",
   padding: "0.2rem",
   height: "100px",
   width: "100px",
   [theme.breakpoints.down("sm")]: {
-    border: "3px solid #43A047",
+    border: "3px solid #18FFFF",
     padding: "0.15rem",
     height: "70px",
     width: "70px",
@@ -217,9 +221,9 @@ const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  gap: "1rem",
+  gap: "2rem",
   [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
+    flexDirection: "row",
     gap: "1.5em",
   },
 }));
@@ -273,6 +277,31 @@ const CustomRangeSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
+const StyledDiamondType = styled("div", {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
+  borderRadius: "0.25rem",
+  padding: "1rem",
+  height: "140px",
+  width: "140px",
+  cursor: "pointer",
+  background: selected ? "#0D1C2A" : "#121212",
+  "&:hover": {
+    background: "#1A1F25",
+  },
+}));
+
+const CustomDiamondTypeImg = styled("img")(({ theme }) => ({
+  height: "70px",
+  width: "70px",
+  filter: "invert(100%)",
+}));
+
 const DiamondShapesContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
@@ -284,18 +313,6 @@ const DiamondShapesContainer = styled("div")(({ theme }) => ({
   flexWrap: "wrap",
 }));
 
-const CustomDiamondShapeImg = styled("img")(({ theme }) => ({
-  height: "50px",
-  width: "50px",
-}));
-
-const DiamondShapeLabel = styled(Typography)(({ theme }) => ({
-  margin: "0.5rem 0rem 0rem 0rem",
-  fontWeight: "400",
-  textAlign: "center",
-  fontSize: "1rem",
-}));
-
 const StyledDiamondShape = styled("div", {
   shouldForwardProp: (prop) => prop !== "selected",
 })(({ theme, selected }) => ({
@@ -303,9 +320,32 @@ const StyledDiamondShape = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  border: selected ? "2px solid #5B7BB6" : "2px solid #CCDCF3",
+  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
   borderRadius: "0.25rem",
-  padding: "0.5rem",
+  padding: "1rem",
+  height: "110px",
+  width: "110px",
+  cursor: "pointer",
+  background: selected ? "#0D1C2A" : "#121212",
+  "&:hover": {
+    background: "#1A1F25",
+  },
+}));
+
+const CustomDiamondShapeImg = styled("img")(({ theme }) => ({
+  height: "50px",
+  width: "50px",
+  filter: "invert(100%)",
+}));
+
+const DiamondShapeLabel = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  margin: "0.5rem 0rem 0rem 0rem",
+  fontWeight: "400",
+  textAlign: "center",
+  fontSize: "1rem",
+  color: "#FAFAFA",
 }));
 
 const CertificationsContainer = styled("div")(({ theme }) => ({
@@ -326,10 +366,15 @@ const StyledCertification = styled("div", {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  border: selected ? "2px solid #5B7BB6" : "2px solid #CCDCF3",
+  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
   borderRadius: "0.25rem",
   padding: "0.5rem 1rem",
+  width: "10rem",
   cursor: "pointer",
+  background: selected ? "#0D1C2A" : "#121212",
+  "&:hover": {
+    background: "#1A1F25",
+  },
 }));
 
 const ContactTextField = styled(TextField)(({ theme }) => ({
@@ -408,7 +453,7 @@ export default function Form() {
   const [diamondMaxCut, setDiamondMaxCut] = React.useState(3);
   const [diamondCertifications, setDiamondCertification] = React.useState([]);
   const [additionalNotes, setAdditionalNotes] = React.useState("");
-  const [diamondBudget, setDiamondBudget] = React.useState();
+  const [diamondBudget, setDiamondBudget] = React.useState(1);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
@@ -969,7 +1014,27 @@ export default function Form() {
                       style={{ transformOrigin: "0 0 0" }}
                       {...(activeStep === 1 ? { timeout: 400 } : {})}
                     >
-                      <DiamondTypeButton
+                      <StyledDiamondType
+                        onClick={() => {
+                          setDiamondType("natural_grown");
+                          // handleNext();
+                        }}
+                        selected={diamondType === "natural_grown"}
+                      >
+                        <CustomDiamondTypeImg
+                          src="/images/diamond-types/natural_grown.png"
+                          height={100}
+                          width={100}
+                          alt="Natural Grown"
+                        />
+                        <DiamondShapeLabel
+                          variant="h6"
+                          selected={diamondType === "natural_grown"}
+                        >
+                          Natural Grown
+                        </DiamondShapeLabel>
+                      </StyledDiamondType>
+                      {/* <DiamondTypeButton
                         disableElevation
                         disableFocusRipple
                         disableRipple
@@ -985,14 +1050,34 @@ export default function Form() {
                         }}
                       >
                         Natural Grown
-                      </DiamondTypeButton>
+                      </DiamondTypeButton> */}
                     </Grow>
                     <Grow
                       in={activeStep === 1}
                       style={{ transformOrigin: "0 0 0" }}
                       {...(activeStep === 1 ? { timeout: 800 } : {})}
                     >
-                      <DiamondTypeButton
+                      <StyledDiamondType
+                        onClick={() => {
+                          setDiamondType("lab_created");
+                          // handleNext();
+                        }}
+                        selected={diamondType === "lab_created"}
+                      >
+                        <CustomDiamondTypeImg
+                          src="/images/diamond-types/lab_created.png"
+                          height={100}
+                          width={100}
+                          alt="Lab Created"
+                        />
+                        <DiamondShapeLabel
+                          variant="h6"
+                          selected={diamondType === "lab_created"}
+                        >
+                          Lab Created
+                        </DiamondShapeLabel>
+                      </StyledDiamondType>
+                      {/* <DiamondTypeButton
                         disableElevation
                         disableFocusRipple
                         disableRipple
@@ -1008,7 +1093,7 @@ export default function Form() {
                         }}
                       >
                         Lab Created
-                      </DiamondTypeButton>
+                      </DiamondTypeButton> */}
                     </Grow>
                   </DiamondTypeButtonRow>
                 </Container>
@@ -1044,7 +1129,12 @@ export default function Form() {
                             width={100}
                             alt={diamond_shape.img_alt}
                           />
-                          <DiamondShapeLabel variant="h6">
+                          <DiamondShapeLabel
+                            variant="h6"
+                            selected={diamondShapes.includes(
+                              diamond_shape.label
+                            )}
+                          >
                             {diamond_shape.label}
                           </DiamondShapeLabel>
                         </StyledDiamondShape>
@@ -1202,7 +1292,51 @@ export default function Form() {
                         style={{ transformOrigin: "0 0 0" }}
                         {...(activeStep === 7 ? { timeout: 600 } : {})}
                       >
-                        <StyledCertification
+                        <StyledDiamondShape
+                          onClick={() =>
+                            onClickCertification(certification.label)
+                          }
+                          selected={diamondCertifications.includes(
+                            certification.label
+                          )}
+                          sx={{
+                            height: "140px",
+                            width: "140px",
+                            [theme.breakpoints.down("sm")]: {
+                              height: "120px",
+                              width: "120px",
+                            },
+                          }}
+                        >
+                          <CustomDiamondShapeImg
+                            src="/images/diamond-types/certified.png"
+                            height={50}
+                            width={50}
+                            alt={certification.label}
+                            sx={{
+                              height: "70px",
+                              width: "70px",
+                              [theme.breakpoints.down("sm")]: {
+                                height: "50px",
+                                width: "50px",
+                              },
+                            }}
+                          />
+                          <DiamondShapeLabel
+                            variant="h6"
+                            selected={diamondCertifications.includes(
+                              certification.label
+                            )}
+                            sx={{
+                              [theme.breakpoints.down("sm")]: {
+                                fontSize: "0.875rem",
+                              },
+                            }}
+                          >
+                            {certification.label}
+                          </DiamondShapeLabel>
+                        </StyledDiamondShape>
+                        {/* <StyledCertification
                           onClick={() =>
                             onClickCertification(certification.label)
                           }
@@ -1213,7 +1347,7 @@ export default function Form() {
                           <Typography variant="h6" sx={{ cursor: "pointer" }}>
                             {certification.label}
                           </Typography>
-                        </StyledCertification>
+                        </StyledCertification> */}
                       </Grow>
                     ))}
                   </CertificationsContainer>
@@ -1401,7 +1535,7 @@ export default function Form() {
 
                 {activeStep === steps.length - 1 ? (
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     onClick={handleSubmit}
                     sx={{ mt: 3, ml: 1 }}
                     disabled={
@@ -1415,7 +1549,7 @@ export default function Form() {
                   </Button>
                 ) : (
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
                     disabled={
@@ -1447,9 +1581,9 @@ export default function Form() {
             position="bottom"
             activeStep={activeStep}
             nextButton={
-              activeStep === phone_steps.length - 1 ? (
+              activeStep === phone_steps.length - 1 || submitted ? (
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={handleSubmit}
                   sx={{ mr: 1 }}
                   disabled={
@@ -1463,7 +1597,7 @@ export default function Form() {
                 </Button>
               ) : (
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={handleNext}
                   sx={{ mr: 1 }}
                   disabled={
@@ -1481,7 +1615,7 @@ export default function Form() {
             }
             backButton={
               <Button
-                variant="outlined"
+                variant="text"
                 onClick={handleBack}
                 sx={{
                   ml: 1,
