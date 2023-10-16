@@ -131,7 +131,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
     width: "100%",
     minHeight: "93vh",
-    margin: "1rem 0rem 5rem 0rem",
+    margin: "1rem 0rem 2rem 0rem",
   },
   // /* ipad Air*/
   [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
