@@ -14,7 +14,6 @@ import {
   Step,
   StepButton,
   Button,
-  // Link,
   Typography,
   TextField,
   FormControlLabel,
@@ -127,17 +126,19 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   // },
   // [theme.breakpoints.up("xsPlus")]: { minHeight: "65rem" },
   // [theme.breakpoints.up("sm")]: { minHeight: "65rem" },
-  // /*ipad Mini */
-  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
-  //   minHeight: "59rem",
-  // },
+  /*ipad Mini */
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+    width: "100%",
+    minHeight: "93vh",
+  },
   // /* ipad Air*/
   [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
     minHeight: "93vh",
   },
-  [theme.breakpoints.up("md")]: { minHeight: "93vh" },
+  [theme.breakpoints.up("md")]: { width: "100%", minHeight: "93vh" },
   /* MDLG Breakpoint iPadPro*/
   [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    width: "70%",
     minHeight: "93vh",
   },
   /*720p and 768p breakpoint */
@@ -193,6 +194,23 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
   },
 }));
 
+const StyledLocationContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100px",
+  gap: "1rem",
+  [theme.breakpoints.down("sm")]: {
+    width: "70px",
+  },
+}));
+
+const LocationLabel = styled(Typography)(({ theme }) => ({
+  textAlign: "center",
+  lineHeight: "1.2rem",
+}));
+
 const CustomImg = styled("img")(({ theme }) => ({
   height: "100px",
   width: "100px",
@@ -204,7 +222,7 @@ const CustomImg = styled("img")(({ theme }) => ({
 
 const SelectedImg = styled("img")(({ theme }) => ({
   border: "3px solid #18FFFF",
-  borderRadius: "50%",
+  borderRadius: "5px",
   padding: "0.2rem",
   height: "100px",
   width: "100px",
@@ -249,21 +267,46 @@ const SliderTextfieldsRow = styled("div")(({ theme }) => ({
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
-  width: "50%",
-  margin: "0rem 0rem 2rem 0rem",
+  width: "60%",
+  margin: "2rem 0rem 0rem 0rem",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     width: "100%",
-    gap: "2rem",
-    margin: "0rem 0rem 1rem 0rem",
+    gap: "1.5rem",
+    margin: "2rem 0rem 0rem 0rem",
+  },
+}));
+
+const SliderLabelColumn = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  gap: "1rem",
+  width: "auto",
+  [theme.breakpoints.down("sm")]: {
+    alignItems: "center",
+    width: "100%",
+  },
+}));
+
+const CaratLabel = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontWeight: "400",
+  textAlign: "center",
+  fontSize: "1rem",
+  [theme.breakpoints.down("sm")]: {
+    fontWeight: "300",
+    fontSize: "1.1rem",
   },
 }));
 
 const CaratTextField = styled(TextField)(({ theme }) => ({
-  width: "40%",
+  width: "10rem",
   [theme.breakpoints.down("sm")]: {
     width: "90%",
   },
+  [theme.breakpoints.up("lg")]: { width: "12rem" },
 }));
 
 const CustomRangeSlider = styled(Slider)(({ theme }) => ({
@@ -348,15 +391,168 @@ const DiamondShapeLabel = styled(Typography, {
   color: "#FAFAFA",
 }));
 
+const ClarityContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  width: "80%",
+  rowGap: "2.5rem",
+  columnGap: "2.5rem",
+  flexWrap: "wrap",
+  /* XXS breakpoint */
+  [theme.breakpoints.up("xxs")]: { width: "100%", rowGap: "1.5rem" },
+  /* iphone 5 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+    columnGap: "2.5rem",
+    rowGap: "2.5rem",
+  },
+  /*galaxy S8+ - 360*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+    columnGap: "2rem",
+  },
+  /*iphone se - 375*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+    columnGap: "2.5rem",
+  },
+  /* iphone 12 pro and pixel - 390 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+    columnGap: "3.5rem",
+  },
+  /*iphone XR - 414*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+    width: "90%",
+    columnGap: "3rem",
+  },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "3rem" },
+  [theme.breakpoints.up("sm")]: { columnGap: "3rem" },
+  /*ipad Mini */
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+    width: "100%",
+    columnGap: "3.5rem",
+    rowGap: "2.5rem",
+  },
+  /* ipad Air*/
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+    columnGap: "5.5rem",
+    rowGap: "2.5rem",
+  },
+  [theme.breakpoints.up("md")]: { columnGap: "2.5rem" },
+  /* MDLG Breakpoint iPadPro*/
+  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    columnGap: "4.3rem",
+  },
+  /*720p and 768p breakpoint */
+  [theme.breakpoints.up("lg")]: {
+    width: "80%",
+    columnGap: "2rem",
+  },
+  /* 1080p 125% breakpoint*/
+  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+    columnGap: "2.5rem",
+  },
+  /* 1080p breakpoint*/
+  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  /* XXL breakpoint  2560p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+    columnGap: "2rem",
+  },
+  /*4k breakpoint 3840p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+    columnGap: "3rem",
+  },
+}));
+
+const StyledClarity = styled("div", {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
+  borderRadius: "0.25rem",
+  padding: "0.5rem 1rem",
+  // height: "90px",
+  width: "140px",
+  cursor: "pointer",
+  background: selected ? "#0D1C2A" : "#121212",
+  "&:hover": {
+    background: "#1A1F25",
+  },
+  [theme.breakpoints.only("xxs")]: { width: "100%" },
+}));
+
 const CertificationsContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "center",
+  justifyContent: "flex-start",
   alignItems: "center",
-  width: "85%",
-  rowGap: "1.5rem",
-  columnGap: "2rem",
+  width: "80%",
+  rowGap: "2.5rem",
+  columnGap: "2.5rem",
   flexWrap: "wrap",
+  /* XXS breakpoint */
+  [theme.breakpoints.up("xxs")]: { width: "100%", rowGap: "1.5rem" },
+  /* iphone 5 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+    columnGap: "2.5rem",
+    rowGap: "2.5rem",
+  },
+  /*galaxy S8+ - 360*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+    columnGap: "2rem",
+  },
+  /*iphone se - 375*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+    columnGap: "2.5rem",
+  },
+  /* iphone 12 pro and pixel - 390 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+    columnGap: "3.5rem",
+  },
+  /*iphone XR - 414*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+    width: "90%",
+    columnGap: "3rem",
+  },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "3rem" },
+  [theme.breakpoints.up("sm")]: { columnGap: "3rem" },
+  /*ipad Mini */
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+    width: "100%",
+    columnGap: "3.5rem",
+    rowGap: "2.5rem",
+  },
+  /* ipad Air*/
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+    columnGap: "5.5rem",
+    rowGap: "2.5rem",
+  },
+  [theme.breakpoints.up("md")]: { columnGap: "2.5rem" },
+  /* MDLG Breakpoint iPadPro*/
+  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    columnGap: "4.3rem",
+  },
+  /*720p and 768p breakpoint */
+  [theme.breakpoints.up("lg")]: {
+    width: "80%",
+    columnGap: "2rem",
+  },
+  /* 1080p 125% breakpoint*/
+  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+    columnGap: "2.5rem",
+  },
+  /* 1080p breakpoint*/
+  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  /* XXL breakpoint  2560p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+    columnGap: "2rem",
+  },
+  /*4k breakpoint 3840p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+    columnGap: "3rem",
+  },
 }));
 
 const StyledCertification = styled("div", {
@@ -369,12 +565,13 @@ const StyledCertification = styled("div", {
   border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
   borderRadius: "0.25rem",
   padding: "0.5rem 1rem",
-  width: "10rem",
+  width: "140px",
   cursor: "pointer",
   background: selected ? "#0D1C2A" : "#121212",
   "&:hover": {
     background: "#1A1F25",
   },
+  [theme.breakpoints.only("xxs")]: { width: "100%" },
 }));
 
 const ContactTextField = styled(TextField)(({ theme }) => ({
@@ -409,9 +606,9 @@ const steps = [
   "Color",
   "Clarity",
   "Cut",
+  "Fluorescence",
   "Certification",
-  "Additional Notes",
-  "Budget",
+  "Any more requests?",
   "Contact Details",
 ];
 
@@ -423,9 +620,9 @@ const phone_steps = [
   { label: "Color" },
   { label: "Clarity" },
   { label: "Cut" },
+  { label: "Fluorescence" },
   { label: "Certification" },
-  { label: "Additional Notes" },
-  { label: "Budget" },
+  { label: "Any more requests?" },
   { label: "Contact Details" },
 ];
 
@@ -447,13 +644,13 @@ export default function Form() {
   const [diamondMaxCarat, setDiamondMaxCarat] = React.useState(30);
   const [diamondMinColor, setDiamondMinColor] = React.useState(0);
   const [diamondMaxColor, setDiamondMaxColor] = React.useState(7);
-  const [diamondMinClarity, setDiamondMinClarity] = React.useState(0);
-  const [diamondMaxClarity, setDiamondMaxClarity] = React.useState(7);
+  const [diamondClarities, setDiamondClarities] = React.useState([]);
   const [diamondMinCut, setDiamondMinCut] = React.useState(0);
   const [diamondMaxCut, setDiamondMaxCut] = React.useState(3);
+  const [diamondMinFluorescence, setDiamondMinFluorescence] = React.useState(0);
+  const [diamondMaxFluorescence, setDiamondMaxFluorescence] = React.useState(4);
   const [diamondCertifications, setDiamondCertification] = React.useState([]);
   const [additionalNotes, setAdditionalNotes] = React.useState("");
-  const [diamondBudget, setDiamondBudget] = React.useState(1);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
@@ -603,9 +800,9 @@ export default function Form() {
     },
   ];
 
-  /* Clarity Slider Marks */
+  /* Clarity*/
 
-  const clarity_slider_marks = [
+  const clarity_types = [
     {
       value: 0,
       label: "SI2",
@@ -658,6 +855,31 @@ export default function Form() {
     {
       value: 3,
       label: "Astor ideal",
+    },
+  ];
+
+  /* Fluorescence Slider Marks */
+
+  const fluorescence_slider_marks = [
+    {
+      value: 0,
+      label: "None",
+    },
+    {
+      value: 1,
+      label: "Faint",
+    },
+    {
+      value: 2,
+      label: "Medium",
+    },
+    {
+      value: 3,
+      label: "Strong",
+    },
+    {
+      value: 4,
+      label: "Very Strong",
     },
   ];
 
@@ -719,6 +941,20 @@ export default function Form() {
     setDiamondShapes(selectedDiamondShapesClean);
   };
 
+  /* Function to handle the click event for the clarity  */
+
+  const onClickClarity = (clarity) => {
+    /* Extract the latest list of selected clarity from the event object. */
+
+    const selectedClaritiesClean = diamondClarities.includes(clarity)
+      ? diamondClarities.filter((_clr) => _clr !== clarity)
+      : [...diamondClarities, clarity];
+
+    /* Update the local state to hold the selected certifications. */
+
+    setDiamondClarities(selectedClaritiesClean);
+  };
+
   /* Function to handle the click event for the certification  */
 
   const onClickCertification = (certification) => {
@@ -770,17 +1006,17 @@ export default function Form() {
             min: color_slider_marks[diamondMinColor].label,
             max: color_slider_marks[diamondMaxColor].label,
           },
-          diamond_clarity: {
-            min: clarity_slider_marks[diamondMinClarity].label,
-            max: clarity_slider_marks[diamondMaxClarity].label,
-          },
+          diamond_clarity: diamondClarities,
           diamond_cut: {
             min: cut_slider_marks[diamondMinCut].label,
             max: cut_slider_marks[diamondMaxCut].label,
           },
+          diamond_fluorescence: {
+            min: fluorescence_slider_marks[diamondMinFluorescence].label,
+            max: fluorescence_slider_marks[diamondMaxFluorescence].label,
+          },
           diamondCertifications: diamondCertifications,
           additionalNotes: additionalNotes,
-          diamond_budget: diamondBudget,
         }
       );
       setSubmitted(true);
@@ -880,13 +1116,20 @@ export default function Form() {
                   <CustomFormControl>
                     <RadioGroup
                       row
+                      sx={{
+                        gap: "2rem",
+                        justifyContent: "center",
+                        alignItems: "flex-start",
+                        [theme.breakpoints.down("sm")]: {
+                          gap: "0rem",
+                        },
+                      }}
                       aria-labelledby="select-location"
                       name="select-location"
                       value={location}
                       onChange={(e) => {
                         setLocation(e.target.value);
-                        event.target.value === "india" ||
-                        event.target.value === "uae"
+                        e.target.value === "india" || e.target.value === "uae"
                           ? setTimeout(() => {
                               handleNext();
                             }, 200)
@@ -904,19 +1147,29 @@ export default function Form() {
                           control={<Radio sx={{ display: "none" }} />}
                           label={
                             location === "india" ? (
-                              <SelectedImg
-                                src="/images/location/india.png"
-                                height={100}
-                                width={100}
-                                alt="India"
-                              />
+                              <StyledLocationContainer>
+                                <SelectedImg
+                                  src="/images/location/india.png"
+                                  height={100}
+                                  width={100}
+                                  alt="India"
+                                />
+                                <LocationLabel variant="body1">
+                                  India
+                                </LocationLabel>
+                              </StyledLocationContainer>
                             ) : (
-                              <CustomImg
-                                src="/images/location/india.png"
-                                height={100}
-                                width={100}
-                                alt="India"
-                              />
+                              <StyledLocationContainer>
+                                <CustomImg
+                                  src="/images/location/india.png"
+                                  height={100}
+                                  width={100}
+                                  alt="India"
+                                />
+                                <LocationLabel variant="body1">
+                                  India
+                                </LocationLabel>
+                              </StyledLocationContainer>
                             )
                           }
                         />
@@ -932,19 +1185,29 @@ export default function Form() {
                           control={<Radio sx={{ display: "none" }} />}
                           label={
                             location === "uae" ? (
-                              <SelectedImg
-                                src="/images/location/uae.png"
-                                height={100}
-                                width={100}
-                                alt="UAE"
-                              />
+                              <StyledLocationContainer>
+                                <SelectedImg
+                                  src="/images/location/uae.png"
+                                  height={100}
+                                  width={100}
+                                  alt="UAE"
+                                />
+                                <LocationLabel variant="body1">
+                                  UAE
+                                </LocationLabel>
+                              </StyledLocationContainer>
                             ) : (
-                              <CustomImg
-                                src="/images/location/uae.png"
-                                height={100}
-                                width={100}
-                                alt="UAE"
-                              />
+                              <StyledLocationContainer>
+                                <CustomImg
+                                  src="/images/location/uae.png"
+                                  height={100}
+                                  width={100}
+                                  alt="UAE"
+                                />
+                                <LocationLabel variant="body1">
+                                  UAE
+                                </LocationLabel>
+                              </StyledLocationContainer>
                             )
                           }
                         />
@@ -960,19 +1223,29 @@ export default function Form() {
                           control={<Radio sx={{ display: "none" }} />}
                           label={
                             location === "other" ? (
-                              <SelectedImg
-                                src="/images/location/world.png"
-                                height={100}
-                                width={100}
-                                alt="Other"
-                              />
+                              <StyledLocationContainer>
+                                <SelectedImg
+                                  src="/images/location/world.png"
+                                  height={100}
+                                  width={100}
+                                  alt="Other"
+                                />
+                                <LocationLabel variant="body1">
+                                  Rest of the world
+                                </LocationLabel>
+                              </StyledLocationContainer>
                             ) : (
-                              <CustomImg
-                                src="/images/location/world.png"
-                                height={100}
-                                width={100}
-                                alt="Other"
-                              />
+                              <StyledLocationContainer>
+                                <CustomImg
+                                  src="/images/location/world.png"
+                                  height={100}
+                                  width={100}
+                                  alt="Other"
+                                />
+                                <LocationLabel variant="body1">
+                                  Rest of the world
+                                </LocationLabel>
+                              </StyledLocationContainer>
                             )
                           }
                         />
@@ -982,7 +1255,7 @@ export default function Form() {
                     <Fade in={location === "other"}>
                       <TextField
                         sx={{
-                          width: "30%",
+                          width: "50%",
                           margin: "1rem 0rem 0rem 0rem",
                           visibility:
                             location === "other" ? "visible" : "hidden",
@@ -1024,18 +1297,18 @@ export default function Form() {
                     >
                       <StyledDiamondType
                         onClick={() => {
-                          setDiamondType("natural_grown");
+                          setDiamondType("natural");
                           setTimeout(() => {
                             handleNext();
                           }, 200);
                         }}
-                        selected={diamondType === "natural_grown"}
+                        selected={diamondType === "natural"}
                       >
                         <CustomDiamondTypeImg
-                          src="/images/diamond-types/natural_grown.png"
+                          src="/images/diamond-types/natural.png"
                           height={100}
                           width={100}
-                          alt="Natural Grown"
+                          alt="Natural"
                         />
                         <DiamondShapeLabel
                           sx={{
@@ -1044,9 +1317,9 @@ export default function Form() {
                             },
                           }}
                           variant="h6"
-                          selected={diamondType === "natural_grown"}
+                          selected={diamondType === "natural"}
                         >
-                          Natural Grown
+                          Natural
                         </DiamondShapeLabel>
                       </StyledDiamondType>
                       {/* <DiamondTypeButton
@@ -1055,16 +1328,16 @@ export default function Form() {
                         disableRipple
                         size="large"
                         variant={
-                          diamondType === "natural_grown"
+                          diamondType === "natural"
                             ? "contained"
                             : "outlined"
                         }
                         onClick={() => {
-                          setDiamondType("natural_grown");
+                          setDiamondType("natural");
                           // handleNext();
                         }}
                       >
-                        Natural Grown
+                        Natural
                       </DiamondTypeButton> */}
                     </Grow>
                     <Grow
@@ -1079,13 +1352,13 @@ export default function Form() {
                             handleNext();
                           }, 200);
                         }}
-                        selected={diamondType === "lab_created"}
+                        selected={diamondType === "lab_grown"}
                       >
                         <CustomDiamondTypeImg
-                          src="/images/diamond-types/lab_created.png"
+                          src="/images/diamond-types/lab_grown.png"
                           height={100}
                           width={100}
-                          alt="Lab Created"
+                          alt="Lab Grown"
                         />
                         <DiamondShapeLabel
                           sx={{
@@ -1094,9 +1367,9 @@ export default function Form() {
                             },
                           }}
                           variant="h6"
-                          selected={diamondType === "lab_created"}
+                          selected={diamondType === "lab_grown"}
                         >
-                          Lab Created
+                          Lab Grown
                         </DiamondShapeLabel>
                       </StyledDiamondType>
                       {/* <DiamondTypeButton
@@ -1105,16 +1378,16 @@ export default function Form() {
                         disableRipple
                         size="large"
                         variant={
-                          diamondType === "lab_created"
+                          diamondType === "lab_grown"
                             ? "contained"
                             : "outlined"
                         }
                         onClick={() => {
-                          setDiamondType("lab_created");
+                          setDiamondType("lab_grown");
                           // handleNext();
                         }}
                       >
-                        Lab Created
+                        Lab Grown
                       </DiamondTypeButton> */}
                     </Grow>
                   </DiamondTypeButtonRow>
@@ -1177,30 +1450,8 @@ export default function Form() {
                     <Title variant="h3">Diamond carat?</Title>
                   </Fade>
 
-                  <SliderTextfieldsRow>
-                    <CaratTextField
-                      id="minCarat"
-                      name="minCarat"
-                      label="Min Carat"
-                      variant="outlined"
-                      type="number"
-                      InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
-                      value={diamondMinCarat}
-                      onChange={(e) => setDiamondMinCarat(e.target.value)}
-                    />
-                    <CaratTextField
-                      id="maxCarat"
-                      name="maxCarat"
-                      label="Max Carat"
-                      variant="outlined"
-                      type="number"
-                      InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
-                      value={diamondMaxCarat}
-                      onChange={(e) => setDiamondMaxCarat(e.target.value)}
-                    />
-                  </SliderTextfieldsRow>
                   <CustomRangeSlider
-                    sx={{ width: "50%" }}
+                    sx={{ width: "60%" }}
                     min={0.1}
                     max={30.0}
                     precision={0.1}
@@ -1213,6 +1464,35 @@ export default function Form() {
                       setDiamondMaxCarat(newValue[1]);
                     }}
                   />
+
+                  <SliderTextfieldsRow>
+                    <SliderLabelColumn>
+                      <CaratLabel variant="h6">From</CaratLabel>
+                      <CaratTextField
+                        id="minCarat"
+                        name="minCarat"
+                        label="Minimum"
+                        variant="outlined"
+                        type="number"
+                        InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                        value={diamondMinCarat}
+                        onChange={(e) => setDiamondMinCarat(e.target.value)}
+                      />
+                    </SliderLabelColumn>
+                    <SliderLabelColumn>
+                      <CaratLabel variant="h6">To</CaratLabel>
+                      <CaratTextField
+                        id="maxCarat"
+                        name="maxCarat"
+                        label="Maximum"
+                        variant="outlined"
+                        type="number"
+                        InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                        value={diamondMaxCarat}
+                        onChange={(e) => setDiamondMaxCarat(e.target.value)}
+                      />
+                    </SliderLabelColumn>
+                  </SliderTextfieldsRow>
                 </Container>
               )}
 
@@ -1250,11 +1530,31 @@ export default function Form() {
                     in={activeStep === 5}
                     {...(activeStep === 5 ? { timeout: 600 } : {})}
                   >
-                    <Title variant="h3">
-                      Select your diamond clarity range
-                    </Title>
+                    <Title variant="h3">Select your diamond clarity</Title>
                   </Fade>
-                  <CustomRangeSlider
+                  <ClarityContainer>
+                    {clarity_types.map((clarity, key) => (
+                      <Grow
+                        key={key}
+                        in={activeStep === 5}
+                        style={{ transformOrigin: "0 0 0" }}
+                        {...(activeStep === 5 ? { timeout: 600 } : {})}
+                      >
+                        <StyledClarity
+                          onClick={() => onClickClarity(clarity.label)}
+                          selected={diamondClarities.includes(clarity.label)}
+                        >
+                          <Typography
+                            variant="body1"
+                            sx={{ textAlign: "center" }}
+                          >
+                            {clarity.label}
+                          </Typography>
+                        </StyledClarity>
+                      </Grow>
+                    ))}
+                  </ClarityContainer>
+                  {/* <CustomRangeSlider
                     sx={{ width: "75%" }}
                     min={0}
                     max={7}
@@ -1266,7 +1566,7 @@ export default function Form() {
                       setDiamondMinClarity(newValue[0]);
                       setDiamondMaxClarity(newValue[1]);
                     }}
-                  />
+                  /> */}
                 </Container>
               )}
 
@@ -1280,6 +1580,7 @@ export default function Form() {
                   >
                     <Title variant="h3">Select a range for the cut</Title>
                   </Fade>
+
                   <CustomRangeSlider
                     sx={{ width: "50%" }}
                     min={0}
@@ -1296,13 +1597,40 @@ export default function Form() {
                 </Container>
               )}
 
-              {/* Step 8: Certification */}
+              {/* Step 8: Fluorescence */}
 
               {activeStep === 7 && (
                 <Container>
                   <Fade
-                    in={activeStep == 7}
+                    in={activeStep === 7}
                     {...(activeStep === 7 ? { timeout: 600 } : {})}
+                  >
+                    <Title variant="h3">Fluorescence</Title>
+                  </Fade>
+
+                  <CustomRangeSlider
+                    sx={{ width: "50%" }}
+                    min={0}
+                    max={4}
+                    value={[diamondMinFluorescence, diamondMaxFluorescence]}
+                    valueLabelDisplay="off"
+                    step={1}
+                    marks={fluorescence_slider_marks}
+                    onChange={(event, newValue) => {
+                      setDiamondMinFluorescence(newValue[0]);
+                      setDiamondMaxFluorescence(newValue[1]);
+                    }}
+                  />
+                </Container>
+              )}
+
+              {/* Step 9: Certification */}
+
+              {activeStep === 8 && (
+                <Container>
+                  <Fade
+                    in={activeStep == 8}
+                    {...(activeStep === 8 ? { timeout: 600 } : {})}
                   >
                     <Title variant="h3">Preferred certifications?</Title>
                   </Fade>
@@ -1310,89 +1638,48 @@ export default function Form() {
                     {diamond_certifications.map((certification, key) => (
                       <Grow
                         key={key}
-                        in={activeStep === 7}
+                        in={activeStep === 8}
                         style={{ transformOrigin: "0 0 0" }}
-                        {...(activeStep === 7 ? { timeout: 600 } : {})}
+                        {...(activeStep === 8 ? { timeout: 600 } : {})}
                       >
-                        <StyledDiamondShape
+                        <StyledCertification
                           onClick={() =>
                             onClickCertification(certification.label)
                           }
                           selected={diamondCertifications.includes(
                             certification.label
                           )}
-                          sx={{
-                            height: "140px",
-                            width: "140px",
-                            [theme.breakpoints.down("sm")]: {
-                              height: "130px",
-                              width: "110px",
-                            },
-                          }}
                         >
-                          <CustomDiamondShapeImg
-                            src="/images/diamond-types/certified.png"
-                            height={50}
-                            width={50}
-                            alt={certification.label}
-                            sx={{
-                              height: "70px",
-                              width: "70px",
-                              [theme.breakpoints.down("sm")]: {
-                                height: "50px",
-                                width: "50px",
-                              },
-                            }}
-                          />
-                          <DiamondShapeLabel
-                            variant="h6"
-                            selected={diamondCertifications.includes(
-                              certification.label
-                            )}
-                            sx={{
-                              [theme.breakpoints.down("sm")]: {
-                                fontSize: "0.85rem",
-                              },
-                            }}
+                          <Typography
+                            variant="body1"
+                            sx={{ textAlign: "center" }}
                           >
                             {certification.label}
-                          </DiamondShapeLabel>
-                        </StyledDiamondShape>
-                        {/* <StyledCertification
-                          onClick={() =>
-                            onClickCertification(certification.label)
-                          }
-                          selected={diamondCertifications.includes(
-                            certification.label
-                          )}
-                        >
-                          <Typography variant="h6" sx={{ cursor: "pointer" }}>
-                            {certification.label}
                           </Typography>
-                        </StyledCertification> */}
+                        </StyledCertification>
                       </Grow>
                     ))}
                   </CertificationsContainer>
                 </Container>
               )}
 
-              {/* Step 9: Additional Notes */}
+              {/* Step 10: "Any more requests?" */}
 
-              {activeStep === 8 && (
+              {activeStep === 9 && (
                 <Container>
                   <Fade
-                    in={activeStep === 8}
-                    {...(activeStep === 8 ? { timeout: 600 } : {})}
+                    in={activeStep === 9}
+                    {...(activeStep === 9 ? { timeout: 600 } : {})}
                   >
                     <Title variant="h3">
-                      Do you have any additional notes for us?
+                      Do you have any more requests for us?
                     </Title>
                   </Fade>
 
                   <Grow
-                    in={activeStep === 8}
+                    in={activeStep === 9}
                     style={{ transformOrigin: "0 0 0" }}
-                    {...(activeStep === 8 ? { timeout: 600 } : {})}
+                    {...(activeStep === 9 ? { timeout: 600 } : {})}
                   >
                     <TextField
                       sx={{
@@ -1409,45 +1696,6 @@ export default function Form() {
                       rows={6}
                       value={additionalNotes}
                       onChange={(e) => setAdditionalNotes(e.target.value)}
-                    />
-                  </Grow>
-                </Container>
-              )}
-
-              {/* Step 10: Budget */}
-
-              {activeStep === 9 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 9}
-                    {...(activeStep === 9 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">What is your budget?</Title>
-                  </Fade>
-
-                  <Grow
-                    in={activeStep === 9}
-                    style={{ transformOrigin: "0 0 0" }}
-                    {...(activeStep === 9 ? { timeout: 300 } : {})}
-                  >
-                    <TextField
-                      sx={{
-                        width: "40%",
-                        [theme.breakpoints.down("sm")]: { width: "90%" },
-                      }}
-                      id="budget"
-                      name="budget"
-                      label="Budget"
-                      variant="outlined"
-                      type="number"
-                      InputProps={{
-                        inputProps: { min: 1 },
-                        startAdornment: (
-                          <InputAdornment position="start">$</InputAdornment>
-                        ),
-                      }}
-                      value={diamondBudget}
-                      onChange={(e) => setDiamondBudget(e.target.value)}
                     />
                   </Grow>
                 </Container>
