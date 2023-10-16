@@ -13,7 +13,7 @@ import { createTheme, CssBaseline } from "@mui/material";
 import GetDesignTokens from "../components/layout-components/Theme";
 
 export default function App({ Component, pageProps }) {
-  const mode = "dark";
+  const mode = "light";
 
   const theme = React.useMemo(() => createTheme(GetDesignTokens(mode)), [mode]);
 

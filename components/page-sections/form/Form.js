@@ -88,19 +88,20 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  margin: "1rem 2rem 0rem 2rem",
+  margin: "1rem 2rem 2rem 2rem",
   padding: "2rem 2rem 2rem 2rem",
   width: "80%",
   minHeight: "93vh",
   gap: "4rem",
   // backdropFilter: "blur(6px)",
   // backgroundColor: "rgba(0,0,30,0.3)",
-  background: "#121212",
+  background: "#FAFAFA",
   // boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
-    margin: "2rem 0rem 2rem 0rem",
-    padding: "2rem 0.5rem 2rem 0.5rem",
+    minHeight: "91vh",
+    margin: "1rem 0rem 4rem 0rem",
+    padding: "2rem 1.1rem 2rem 1.1rem",
   },
   // /* XXS breakpoint */
   // [theme.breakpoints.up("xxs")]: { width: "100%" },
@@ -130,6 +131,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
     width: "100%",
     minHeight: "93vh",
+    margin: "1rem 0rem 5rem 0rem",
   },
   // /* ipad Air*/
   [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
@@ -142,7 +144,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
     minHeight: "93vh",
   },
   /*720p and 768p breakpoint */
-  [theme.breakpoints.up("lg")]: { width: "80%" },
+  [theme.breakpoints.up("lg")]: { width: "80%", margin: "1rem 2rem 2rem 2rem" },
   /* 1080p 125% breakpoint*/
   [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
     minHeight: "93vh",
@@ -178,6 +180,7 @@ const Title = styled(Typography)(({ theme }) => ({
   fontSize: "3rem",
   margin: "0rem 0rem 2rem 0rem",
   [theme.breakpoints.down("sm")]: {
+    margin: "0rem 0rem 1rem 0rem",
     fontWeight: "300",
     fontSize: "1.5rem",
   },
@@ -212,10 +215,10 @@ const LocationLabel = styled(Typography)(({ theme }) => ({
 }));
 
 const CustomImg = styled("img")(({ theme }) => ({
-  height: "100px",
+  height: "70px",
   width: "100px",
   [theme.breakpoints.down("sm")]: {
-    height: "70px",
+    height: "50px",
     width: "70px",
   },
 }));
@@ -224,12 +227,12 @@ const SelectedImg = styled("img")(({ theme }) => ({
   border: "3px solid #18FFFF",
   borderRadius: "5px",
   padding: "0.2rem",
-  height: "100px",
+  height: "70px",
   width: "100px",
   [theme.breakpoints.down("sm")]: {
     border: "3px solid #18FFFF",
     padding: "0.15rem",
-    height: "70px",
+    height: "50px",
     width: "70px",
   },
 }));
@@ -310,13 +313,17 @@ const CaratTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const CustomRangeSlider = styled(Slider)(({ theme }) => ({
-  "&.MuiSlider-markLabel": {
-    background: "#ffffff",
-    color: "#5B7BB6",
-  },
   width: "30%",
+  "& .MuiSlider-markLabel": {
+    background: "#ffffff",
+    color: "#283593",
+  },
+
   [theme.breakpoints.down("sm")]: {
     width: "80%",
+    "& .MuiSlider-markLabel": {
+      fontSize: "0.65rem",
+    },
   },
 }));
 
@@ -327,22 +334,22 @@ const StyledDiamondType = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
+  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
   borderRadius: "0.25rem",
   padding: "1rem",
   height: "150px",
   width: "140px",
   cursor: "pointer",
-  background: selected ? "#0D1C2A" : "#121212",
+  background: selected ? "#F3F6F9" : "#FAFAFA",
   "&:hover": {
-    background: "#1A1F25",
+    background: "#F5F6FB",
   },
 }));
 
 const CustomDiamondTypeImg = styled("img")(({ theme }) => ({
   height: "70px",
   width: "70px",
-  filter: "invert(100%)",
+  // filter: "invert(100%)",
 }));
 
 const DiamondShapesContainer = styled("div")(({ theme }) => ({
@@ -363,22 +370,22 @@ const StyledDiamondShape = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
+  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
   borderRadius: "0.25rem",
   padding: "1rem",
   height: "110px",
   width: "110px",
   cursor: "pointer",
-  background: selected ? "#0D1C2A" : "#121212",
+  background: selected ? "#F3F6F9" : "#FAFAFA",
   "&:hover": {
-    background: "#1A1F25",
+    background: "#F5F6FB",
   },
 }));
 
 const CustomDiamondShapeImg = styled("img")(({ theme }) => ({
   height: "50px",
   width: "50px",
-  filter: "invert(100%)",
+  // filter: "invert(100%)",
 }));
 
 const DiamondShapeLabel = styled(Typography, {
@@ -388,7 +395,7 @@ const DiamondShapeLabel = styled(Typography, {
   fontWeight: "400",
   textAlign: "center",
   fontSize: "1rem",
-  color: "#FAFAFA",
+  color: "#030303",
 }));
 
 const ClarityContainer = styled("div")(({ theme }) => ({
@@ -404,40 +411,40 @@ const ClarityContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("xxs")]: { width: "100%", rowGap: "1.5rem" },
   /* iphone 5 */
   [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
-    columnGap: "2.5rem",
+    columnGap: "0.5rem",
     rowGap: "2.5rem",
   },
   /*galaxy S8+ - 360*/
   [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
-    columnGap: "2rem",
+    columnGap: "0.6rem",
   },
   /*iphone se - 375*/
   [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
-    columnGap: "2.5rem",
+    columnGap: "1.5rem",
   },
   /* iphone 12 pro and pixel - 390 */
   [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
-    columnGap: "3.5rem",
+    columnGap: "2rem",
   },
   /*iphone XR - 414*/
   [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
     width: "90%",
-    columnGap: "3rem",
+    columnGap: "1.8rem",
   },
-  [theme.breakpoints.up("xsPlus")]: { columnGap: "3rem" },
-  [theme.breakpoints.up("sm")]: { columnGap: "3rem" },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
+  [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
   /*ipad Mini */
   [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
     width: "100%",
-    columnGap: "3.5rem",
+    columnGap: "5.5rem",
     rowGap: "2.5rem",
   },
   /* ipad Air*/
   [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
-    columnGap: "5.5rem",
+    columnGap: "2rem",
     rowGap: "2.5rem",
   },
-  [theme.breakpoints.up("md")]: { columnGap: "2.5rem" },
+  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
   /* MDLG Breakpoint iPadPro*/
   [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
     columnGap: "4.3rem",
@@ -449,7 +456,7 @@ const ClarityContainer = styled("div")(({ theme }) => ({
   },
   /* 1080p 125% breakpoint*/
   [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
-    columnGap: "2.5rem",
+    columnGap: "4.5rem",
   },
   /* 1080p breakpoint*/
   [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
@@ -470,15 +477,14 @@ const StyledClarity = styled("div", {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
   borderRadius: "0.25rem",
   padding: "0.5rem 1rem",
-  // height: "90px",
   width: "140px",
   cursor: "pointer",
-  background: selected ? "#0D1C2A" : "#121212",
+  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
+  background: selected ? "#F3F6F9" : "#FAFAFA",
   "&:hover": {
-    background: "#1A1F25",
+    background: "#F5F6FB",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
 }));
@@ -496,40 +502,40 @@ const CertificationsContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("xxs")]: { width: "100%", rowGap: "1.5rem" },
   /* iphone 5 */
   [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
-    columnGap: "2.5rem",
+    columnGap: "0.5rem",
     rowGap: "2.5rem",
   },
   /*galaxy S8+ - 360*/
   [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
-    columnGap: "2rem",
+    columnGap: "0.6rem",
   },
   /*iphone se - 375*/
   [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
-    columnGap: "2.5rem",
+    columnGap: "1.5rem",
   },
   /* iphone 12 pro and pixel - 390 */
   [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
-    columnGap: "3.5rem",
+    columnGap: "2rem",
   },
   /*iphone XR - 414*/
   [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
     width: "90%",
-    columnGap: "3rem",
+    columnGap: "1.8rem",
   },
-  [theme.breakpoints.up("xsPlus")]: { columnGap: "3rem" },
-  [theme.breakpoints.up("sm")]: { columnGap: "3rem" },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
+  [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
   /*ipad Mini */
   [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
     width: "100%",
-    columnGap: "3.5rem",
+    columnGap: "5.5rem",
     rowGap: "2.5rem",
   },
   /* ipad Air*/
   [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
-    columnGap: "5.5rem",
+    columnGap: "2rem",
     rowGap: "2.5rem",
   },
-  [theme.breakpoints.up("md")]: { columnGap: "2.5rem" },
+  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
   /* MDLG Breakpoint iPadPro*/
   [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
     columnGap: "4.3rem",
@@ -541,7 +547,7 @@ const CertificationsContainer = styled("div")(({ theme }) => ({
   },
   /* 1080p 125% breakpoint*/
   [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
-    columnGap: "2.5rem",
+    columnGap: "4.5rem",
   },
   /* 1080p breakpoint*/
   [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
@@ -562,14 +568,14 @@ const StyledCertification = styled("div", {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  border: selected ? "2px solid #18FFFF" : "2px solid #FAFAFA",
   borderRadius: "0.25rem",
   padding: "0.5rem 1rem",
   width: "140px",
   cursor: "pointer",
-  background: selected ? "#0D1C2A" : "#121212",
+  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
+  background: selected ? "#F3F6F9" : "#FAFAFA",
   "&:hover": {
-    background: "#1A1F25",
+    background: "#F5F6FB",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
 }));
@@ -1090,7 +1096,7 @@ export default function Form() {
 
         {/* Form Paper */}
 
-        <CustomPaper>
+        <CustomPaper elevation={4}>
           {activeStep === steps.length ? (
             <React.Fragment>
               <Container>
@@ -1121,7 +1127,8 @@ export default function Form() {
                         justifyContent: "center",
                         alignItems: "flex-start",
                         [theme.breakpoints.down("sm")]: {
-                          gap: "0rem",
+                          rowGap: "2rem",
+                          columnGap: "0rem",
                         },
                       }}
                       aria-labelledby="select-location"
@@ -1229,6 +1236,7 @@ export default function Form() {
                                   height={100}
                                   width={100}
                                   alt="Other"
+                                  sx={{ height: "65px" }}
                                 />
                                 <LocationLabel variant="body1">
                                   Rest of the world
@@ -1241,6 +1249,12 @@ export default function Form() {
                                   height={100}
                                   width={100}
                                   alt="Other"
+                                  sx={{
+                                    height: "68px",
+                                    [theme.breakpoints.down("sm")]: {
+                                      height: "47px",
+                                    },
+                                  }}
                                 />
                                 <LocationLabel variant="body1">
                                   Rest of the world
@@ -1347,7 +1361,7 @@ export default function Form() {
                     >
                       <StyledDiamondType
                         onClick={() => {
-                          setDiamondType("lab_created");
+                          setDiamondType("lab_grown");
                           setTimeout(() => {
                             handleNext();
                           }, 200);
@@ -1582,7 +1596,7 @@ export default function Form() {
                   </Fade>
 
                   <CustomRangeSlider
-                    sx={{ width: "50%" }}
+                    sx={{ width: "75%" }}
                     min={0}
                     max={3}
                     value={[diamondMinCut, diamondMaxCut]}
@@ -1609,7 +1623,7 @@ export default function Form() {
                   </Fade>
 
                   <CustomRangeSlider
-                    sx={{ width: "50%" }}
+                    sx={{ width: "75%" }}
                     min={0}
                     max={4}
                     value={[diamondMinFluorescence, diamondMaxFluorescence]}
@@ -1798,13 +1812,22 @@ export default function Form() {
                 }}
               >
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                  <Button
+                    disableElevation
+                    disableFocusRipple
+                    disableRipple
+                    onClick={handleBack}
+                    sx={{ mt: 3, ml: 1 }}
+                  >
                     Back
                   </Button>
                 )}
 
                 {activeStep === steps.length - 1 ? (
                   <Button
+                    disableElevation
+                    disableFocusRipple
+                    disableRipple
                     variant="outlined"
                     onClick={handleSubmit}
                     sx={{ mt: 3, ml: 1 }}
@@ -1819,6 +1842,9 @@ export default function Form() {
                   </Button>
                 ) : (
                   <Button
+                    disableElevation
+                    disableFocusRipple
+                    disableRipple
                     variant="outlined"
                     onClick={handleNext}
                     sx={{
@@ -1852,6 +1878,9 @@ export default function Form() {
           {/* Phone Stepper */}
 
           <MobileStepper
+            disableElevation
+            disableFocusRipple
+            disableRipple
             variant="text"
             steps={phone_steps.length}
             sx={{
@@ -1878,6 +1907,9 @@ export default function Form() {
                 </Button>
               ) : (
                 <Button
+                  disableElevation
+                  disableFocusRipple
+                  disableRipple
                   variant="outlined"
                   onClick={handleNext}
                   sx={{
@@ -1906,6 +1938,9 @@ export default function Form() {
             }
             backButton={
               <Button
+                disableElevation
+                disableFocusRipple
+                disableRipple
                 variant="text"
                 onClick={handleBack}
                 sx={{

@@ -7,7 +7,7 @@ const Styles = {
   light: {
     // palette values for light mode
     primary: {
-      main: "#5B7BB6",
+      main: "#283593",
       light: "#CCDCF3",
       dark: "#5B7BB6",
     },
@@ -22,7 +22,7 @@ const Styles = {
       dark: "#BA000d",
     },
     background: {
-      default: "#F5F6FB",
+      default: "#F5F5F5",
     },
     text: {
       primary: "#000000",

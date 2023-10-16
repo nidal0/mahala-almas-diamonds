@@ -147,7 +147,7 @@ export default function Welcome() {
             Welcome to Mahala Almas
           </Title>
           <ButtonContainer>
-            <Button
+            {/* <Button
               disableElevation
               disableFocusRipple
               disableRipple
@@ -161,7 +161,7 @@ export default function Welcome() {
               }}
             >
               How it works?
-            </Button>
+            </Button> */}
             <Button
               disableElevation
               disableFocusRipple
@@ -177,7 +177,7 @@ export default function Welcome() {
                 },
               }}
             >
-              Enter to find your perfect diamond
+              Find your perfect diamond
             </Button>
           </ButtonContainer>
         </Container>
