@@ -181,7 +181,7 @@ const Title = styled(Typography)(({ theme }) => ({
   margin: "0rem 0rem 2rem 0rem",
   [theme.breakpoints.down("sm")]: {
     margin: "0rem 0rem 1rem 0rem",
-    fontWeight: "300",
+    fontWeight: "400",
     fontSize: "1.5rem",
   },
 }));
@@ -299,7 +299,7 @@ const CaratLabel = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   fontSize: "1rem",
   [theme.breakpoints.down("sm")]: {
-    fontWeight: "300",
+    fontWeight: "400",
     fontSize: "1.1rem",
   },
 }));

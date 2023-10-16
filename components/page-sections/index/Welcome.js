@@ -144,7 +144,7 @@ export default function Welcome() {
 
         <Container>
           <Title variant="h1" align="center">
-            Welcome to Mahala Almas
+            Mahala Almas
           </Title>
           <ButtonContainer>
             {/* <Button
