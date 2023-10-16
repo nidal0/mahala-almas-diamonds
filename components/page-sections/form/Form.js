@@ -315,7 +315,7 @@ const CaratTextField = styled(TextField)(({ theme }) => ({
 const CustomRangeSlider = styled(Slider)(({ theme }) => ({
   width: "30%",
   "& .MuiSlider-markLabel": {
-    background: "#ffffff",
+    background: "#FAFAFA",
     color: "#283593",
   },
 
@@ -361,6 +361,66 @@ const DiamondShapesContainer = styled("div")(({ theme }) => ({
   rowGap: "1.5rem",
   columnGap: "2rem",
   flexWrap: "wrap",
+  /* XXS breakpoint */
+  [theme.breakpoints.up("xxs")]: { width: "100%", columnGap: "0.5rem" },
+  /* iphone 5 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+    columnGap: "2rem",
+  },
+  /*galaxy S8+ - 360*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+    columnGap: "2rem",
+  },
+  /*iphone se - 375*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+    columnGap: "2.5rem",
+  },
+  /* iphone 12 pro and pixel - 390 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+    columnGap: "3rem",
+  },
+  /*iphone XR - 414*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+    width: "90%",
+    columnGap: "4rem",
+  },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "4rem" },
+  [theme.breakpoints.up("sm")]: { columnGap: "4rem" },
+  /*ipad Mini */
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+    width: "100%",
+    columnGap: "5.5rem",
+    rowGap: "2.5rem",
+  },
+  /* ipad Air*/
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+    columnGap: "2rem",
+    rowGap: "2.5rem",
+  },
+  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
+  /* MDLG Breakpoint iPadPro*/
+  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    columnGap: "4.3rem",
+  },
+  /*720p and 768p breakpoint */
+  [theme.breakpoints.up("lg")]: {
+    width: "80%",
+    columnGap: "2rem",
+  },
+  /* 1080p 125% breakpoint*/
+  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+    columnGap: "4.5rem",
+  },
+  /* 1080p breakpoint*/
+  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  /* XXL breakpoint  2560p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+    columnGap: "2rem",
+  },
+  /*4k breakpoint 3840p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+    columnGap: "3rem",
+  },
 }));
 
 const StyledDiamondShape = styled("div", {
