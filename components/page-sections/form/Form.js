@@ -345,7 +345,7 @@ const StyledDiamondType = styled("div", {
   height: "150px",
   width: "140px",
   cursor: "pointer",
-  background: selected ? "#FAFAFA" : "#FAFAFA",
+  background: "#FFFFFF",
   "&:hover": {
     background: "#F5F6FB",
   },
@@ -437,13 +437,14 @@ const StyledDiamondShape = styled("div", {
   alignItems: "center",
   WebkitTapHighlightColor: "transparent",
   border: selected ? "2px solid" : "2px solid",
-  borderColor: selected
-    ? theme.palette.primary.main
-    : theme.palette.primary.light,
+  borderColor: selected ? theme.palette.primary.main : "#ffffff",
   boxShadow: selected
     ? "none"
-    : "-6px -20px 35px #ffffff, -6px -10px 15px #ffffff, -20px 0px 30px #ffffff, 6px 20px 25px rgba(0,0,0,0.3)",
-  transition: "all 0.6s ease-in-out",
+    : " 0 4px  4px  rgba(0, 0, 0, .1), 0 1px  6px  rgba(0, 0, 0, .05), 0 8px  8px  rgba(0, 0, 0, .1),  0 16px 16px rgba(0, 0, 0, .1), 8px 32px 32px rgba(0, 0, 0, .15), 8px 64px 64px rgba(0, 0, 0, .15)",
+  transform: selected ? "scale(-1.05) translateY(-0.5rem)" : "scale(1)",
+  transition: "all 1s ease-in-out",
+  WebkitTransition: "all 1s ease-in-out",
+  "-webkit-transition": "all 1s ease-in-out",
   borderRadius: "0.25rem",
   padding: "1rem",
   height: "110px",
