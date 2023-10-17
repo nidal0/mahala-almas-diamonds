@@ -95,7 +95,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   gap: "4rem",
   // backdropFilter: "blur(6px)",
   // backgroundColor: "rgba(0,0,30,0.3)",
-  background: "#FAFAFA",
+  background: "#FFFFFF",
   // boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
@@ -202,38 +202,39 @@ const StyledLocationContainer = styled("div")(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  width: "100px",
   gap: "1rem",
   [theme.breakpoints.down("sm")]: {
-    width: "70px",
+    flexDirection: "row",
+    width: "100%",
   },
 }));
 
 const LocationLabel = styled(Typography)(({ theme }) => ({
-  textAlign: "center",
+  // textAlign: "center",
   lineHeight: "1.2rem",
+  color: theme.palette.primary.main,
+  fontSize: "1rem",
 }));
 
 const CustomImg = styled("img")(({ theme }) => ({
   height: "70px",
   width: "100px",
   [theme.breakpoints.down("sm")]: {
-    height: "50px",
-    width: "70px",
+    height: "60px",
+    width: "85px",
   },
 }));
 
 const SelectedImg = styled("img")(({ theme }) => ({
-  border: "3px solid #18FFFF",
-  borderRadius: "5px",
-  padding: "0.2rem",
+  border: "3px solid",
+  borderColor: theme.palette.primary.main,
+  borderRadius: "15px",
+  padding: "0.1rem",
   height: "70px",
   width: "100px",
   [theme.breakpoints.down("sm")]: {
-    border: "3px solid #18FFFF",
-    padding: "0.15rem",
-    height: "50px",
-    width: "70px",
+    height: "60px",
+    width: "85px",
   },
 }));
 
@@ -316,7 +317,7 @@ const CustomRangeSlider = styled(Slider)(({ theme }) => ({
   width: "30%",
   "& .MuiSlider-markLabel": {
     background: "#FAFAFA",
-    color: "#283593",
+    color: theme.palette.primary.main,
   },
 
   [theme.breakpoints.down("sm")]: {
@@ -334,13 +335,16 @@ const StyledDiamondType = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
+  border: selected ? "2px solid" : "2px solid",
+  borderColor: selected
+    ? theme.palette.primary.main
+    : theme.palette.primary.light,
   borderRadius: "0.25rem",
   padding: "1rem",
   height: "150px",
   width: "140px",
   cursor: "pointer",
-  background: selected ? "#F3F6F9" : "#FAFAFA",
+  background: selected ? "#FAFAFA" : "#FAFAFA",
   "&:hover": {
     background: "#F5F6FB",
   },
@@ -357,9 +361,9 @@ const DiamondShapesContainer = styled("div")(({ theme }) => ({
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  width: "85%",
+  width: "95%",
   rowGap: "1.5rem",
-  columnGap: "2rem",
+  columnGap: "1rem",
   flexWrap: "wrap",
   /* XXS breakpoint */
   [theme.breakpoints.up("xxs")]: { width: "100%", columnGap: "0.5rem" },
@@ -430,13 +434,20 @@ const StyledDiamondShape = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
+  border: selected ? "2px solid" : "2px solid",
+  borderColor: selected
+    ? theme.palette.primary.main
+    : theme.palette.primary.light,
+  boxShadow: selected
+    ? "none"
+    : "-6px -20px 35px #ffffff, -6px -10px 15px #ffffff, -20px 0px 30px #ffffff, 6px 20px 25px rgba(0,0,0,0.3)",
+  transition: "all 0.3s ease-in-out",
   borderRadius: "0.25rem",
   padding: "1rem",
   height: "110px",
   width: "110px",
   cursor: "pointer",
-  background: selected ? "#F3F6F9" : "#FAFAFA",
+  background: "#FFFFFF",
   "&:hover": {
     background: "#F5F6FB",
   },
@@ -461,73 +472,74 @@ const DiamondShapeLabel = styled(Typography, {
 const ClarityContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "flex-start",
+  justifyContent: "center",
   alignItems: "center",
   width: "80%",
-  rowGap: "2.5rem",
-  columnGap: "2.5rem",
+  rowGap: "1.5rem",
+  columnGap: "2rem",
   flexWrap: "wrap",
   /* XXS breakpoint */
-  [theme.breakpoints.up("xxs")]: { width: "100%", rowGap: "1.5rem" },
-  /* iphone 5 */
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
-    columnGap: "0.5rem",
-    rowGap: "2.5rem",
-  },
-  /*galaxy S8+ - 360*/
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
-    columnGap: "0.6rem",
-  },
-  /*iphone se - 375*/
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
-    columnGap: "1.5rem",
-  },
-  /* iphone 12 pro and pixel - 390 */
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
-    columnGap: "2rem",
-  },
-  /*iphone XR - 414*/
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
-    width: "90%",
-    columnGap: "1.8rem",
-  },
-  [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
-  [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
-  /*ipad Mini */
-  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
-    width: "100%",
-    columnGap: "5.5rem",
-    rowGap: "2.5rem",
-  },
-  /* ipad Air*/
-  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
-    columnGap: "2rem",
-    rowGap: "2.5rem",
-  },
-  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
-  /* MDLG Breakpoint iPadPro*/
-  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
-    columnGap: "4.3rem",
-  },
-  /*720p and 768p breakpoint */
-  [theme.breakpoints.up("lg")]: {
-    width: "80%",
-    columnGap: "2rem",
-  },
-  /* 1080p 125% breakpoint*/
-  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
-    columnGap: "4.5rem",
-  },
-  /* 1080p breakpoint*/
-  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
-  /* XXL breakpoint  2560p*/
-  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
-    columnGap: "2rem",
-  },
-  /*4k breakpoint 3840p*/
-  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
-    columnGap: "3rem",
-  },
+  [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
+  [theme.breakpoints.down("sm")]: { width: "100%", columnGap: "1.5rem" },
+  // /* iphone 5 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+  //   columnGap: "0.5rem",
+  //   rowGap: "2.5rem",
+  // },
+  // /*galaxy S8+ - 360*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+  //   columnGap: "0.6rem",
+  // },
+  // /*iphone se - 375*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+  //   columnGap: "1.5rem",
+  // },
+  // /* iphone 12 pro and pixel - 390 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+  //   columnGap: "2rem",
+  // },
+  // /*iphone XR - 414*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+  //   width: "90%",
+  //   columnGap: "1.8rem",
+  // },
+  // [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
+  // [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
+  // /*ipad Mini */
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+  //   width: "100%",
+  //   columnGap: "5.5rem",
+  //   rowGap: "2.5rem",
+  // },
+  // /* ipad Air*/
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+  //   columnGap: "2rem",
+  //   rowGap: "2.5rem",
+  // },
+  // [theme.breakpoints.up("md")]: { columnGap: "2rem" },
+  // /* MDLG Breakpoint iPadPro*/
+  // [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+  //   columnGap: "4.3rem",
+  // },
+  // /*720p and 768p breakpoint */
+  // [theme.breakpoints.up("lg")]: {
+  //   width: "80%",
+  //   columnGap: "2rem",
+  // },
+  // /* 1080p 125% breakpoint*/
+  // [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+  //   columnGap: "4.5rem",
+  // },
+  // /* 1080p breakpoint*/
+  // [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  // /* XXL breakpoint  2560p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+  //   columnGap: "2rem",
+  // },
+  // /*4k breakpoint 3840p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+  //   columnGap: "3rem",
+  // },
 }));
 
 const StyledClarity = styled("div", {
@@ -547,78 +559,80 @@ const StyledClarity = styled("div", {
     background: "#F5F6FB",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
+  [theme.breakpoints.down("sm")]: { width: "120px" },
 }));
 
 const CertificationsContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "flex-start",
+  justifyContent: "center",
   alignItems: "center",
   width: "80%",
-  rowGap: "2.5rem",
-  columnGap: "2.5rem",
+  rowGap: "1.5rem",
+  columnGap: "2rem",
   flexWrap: "wrap",
   /* XXS breakpoint */
-  [theme.breakpoints.up("xxs")]: { width: "100%", rowGap: "1.5rem" },
-  /* iphone 5 */
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
-    columnGap: "0.5rem",
-    rowGap: "2.5rem",
-  },
-  /*galaxy S8+ - 360*/
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
-    columnGap: "0.6rem",
-  },
-  /*iphone se - 375*/
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
-    columnGap: "1.5rem",
-  },
-  /* iphone 12 pro and pixel - 390 */
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
-    columnGap: "2rem",
-  },
-  /*iphone XR - 414*/
-  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
-    width: "90%",
-    columnGap: "1.8rem",
-  },
-  [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
-  [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
-  /*ipad Mini */
-  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
-    width: "100%",
-    columnGap: "5.5rem",
-    rowGap: "2.5rem",
-  },
-  /* ipad Air*/
-  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
-    columnGap: "2rem",
-    rowGap: "2.5rem",
-  },
-  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
-  /* MDLG Breakpoint iPadPro*/
-  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
-    columnGap: "4.3rem",
-  },
-  /*720p and 768p breakpoint */
-  [theme.breakpoints.up("lg")]: {
-    width: "80%",
-    columnGap: "2rem",
-  },
-  /* 1080p 125% breakpoint*/
-  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
-    columnGap: "4.5rem",
-  },
-  /* 1080p breakpoint*/
-  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
-  /* XXL breakpoint  2560p*/
-  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
-    columnGap: "2rem",
-  },
-  /*4k breakpoint 3840p*/
-  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
-    columnGap: "3rem",
-  },
+  [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
+  [theme.breakpoints.down("sm")]: { width: "100%", columnGap: "1.5rem" },
+  // /* iphone 5 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+  //   columnGap: "0.5rem",
+  //   rowGap: "2.5rem",
+  // },
+  // /*galaxy S8+ - 360*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+  //   columnGap: "0.6rem",
+  // },
+  // /*iphone se - 375*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+  //   columnGap: "1.5rem",
+  // },
+  // /* iphone 12 pro and pixel - 390 */
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+  //   columnGap: "2rem",
+  // },
+  // /*iphone XR - 414*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+  //   width: "90%",
+  //   columnGap: "1.8rem",
+  // },
+  // [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
+  // [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
+  // /*ipad Mini */
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+  //   width: "100%",
+  //   columnGap: "5.5rem",
+  //   rowGap: "2.5rem",
+  // },
+  // /* ipad Air*/
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+  //   columnGap: "2rem",
+  //   rowGap: "2.5rem",
+  // },
+  // [theme.breakpoints.up("md")]: { columnGap: "2rem" },
+  // /* MDLG Breakpoint iPadPro*/
+  // [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+  //   columnGap: "4.3rem",
+  // },
+  // /*720p and 768p breakpoint */
+  // [theme.breakpoints.up("lg")]: {
+  //   width: "80%",
+  //   columnGap: "2rem",
+  // },
+  // /* 1080p 125% breakpoint*/
+  // [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+  //   columnGap: "4.5rem",
+  // },
+  // /* 1080p breakpoint*/
+  // [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  // /* XXL breakpoint  2560p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+  //   columnGap: "2rem",
+  // },
+  // /*4k breakpoint 3840p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+  //   columnGap: "3rem",
+  // },
 }));
 
 const StyledCertification = styled("div", {
@@ -642,6 +656,9 @@ const StyledCertification = styled("div", {
 
 const ContactTextField = styled(TextField)(({ theme }) => ({
   width: "50%",
+  [theme.breakpoints.down("md")]: {
+    width: "75%",
+  },
   [theme.breakpoints.down("sm")]: {
     width: "85%",
   },
@@ -720,7 +737,7 @@ export default function Form() {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
-  const [agree, setAgree] = React.useState(false);
+  const [agree, setAgree] = React.useState(true);
 
   /* Shapes Data */
 
@@ -1187,7 +1204,11 @@ export default function Form() {
                         justifyContent: "center",
                         alignItems: "flex-start",
                         [theme.breakpoints.down("sm")]: {
-                          rowGap: "2rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          alignItems: "flex-start",
+                          rowGap: "3rem",
                           columnGap: "0rem",
                         },
                       }}
@@ -1296,7 +1317,7 @@ export default function Form() {
                                   height={100}
                                   width={100}
                                   alt="Other"
-                                  sx={{ height: "65px" }}
+                                  sx={{ height: "65px", borderRadius: "15px" }}
                                 />
                                 <LocationLabel variant="body1">
                                   Rest of the world
@@ -1311,8 +1332,9 @@ export default function Form() {
                                   alt="Other"
                                   sx={{
                                     height: "68px",
+                                    borderRadius: "15px",
                                     [theme.breakpoints.down("sm")]: {
-                                      height: "47px",
+                                      height: "58px",
                                     },
                                   }}
                                 />
@@ -1329,7 +1351,7 @@ export default function Form() {
                     <Fade in={location === "other"}>
                       <TextField
                         sx={{
-                          width: "50%",
+                          width: "45%",
                           margin: "1rem 0rem 0rem 0rem",
                           visibility:
                             location === "other" ? "visible" : "hidden",
@@ -1840,6 +1862,9 @@ export default function Form() {
                     <FormControlLabel
                       sx={{
                         width: "50%",
+                        [theme.breakpoints.down("md")]: {
+                          width: "75%",
+                        },
                         [theme.breakpoints.down("sm")]: {
                           width: "85%",
                         },
