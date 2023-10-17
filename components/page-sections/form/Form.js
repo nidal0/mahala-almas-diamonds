@@ -226,7 +226,7 @@ const CustomImg = styled("img")(({ theme }) => ({
 }));
 
 const SelectedImg = styled("img")(({ theme }) => ({
-  border: "3px solid",
+  border: "2px solid",
   borderColor: theme.palette.primary.main,
   borderRadius: "15px",
   padding: "0.1rem",
@@ -335,6 +335,7 @@ const StyledDiamondType = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
+  WebkitTapHighlightColor: "transparent",
   border: selected ? "2px solid" : "2px solid",
   borderColor: selected
     ? theme.palette.primary.main
@@ -434,6 +435,7 @@ const StyledDiamondShape = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
+  WebkitTapHighlightColor: "transparent",
   border: selected ? "2px solid" : "2px solid",
   borderColor: selected
     ? theme.palette.primary.main
@@ -441,7 +443,7 @@ const StyledDiamondShape = styled("div", {
   boxShadow: selected
     ? "none"
     : "-6px -20px 35px #ffffff, -6px -10px 15px #ffffff, -20px 0px 30px #ffffff, 6px 20px 25px rgba(0,0,0,0.3)",
-  transition: "all 0.3s ease-in-out",
+  transition: "all 0.6s ease-in-out",
   borderRadius: "0.25rem",
   padding: "1rem",
   height: "110px",
@@ -1898,7 +1900,6 @@ export default function Form() {
               >
                 {activeStep !== 0 && (
                   <Button
-                    disableElevation
                     disableFocusRipple
                     disableRipple
                     onClick={handleBack}
@@ -1910,7 +1911,6 @@ export default function Form() {
 
                 {activeStep === steps.length - 1 ? (
                   <Button
-                    disableElevation
                     disableFocusRipple
                     disableRipple
                     variant="outlined"
@@ -1927,7 +1927,6 @@ export default function Form() {
                   </Button>
                 ) : (
                   <Button
-                    disableElevation
                     disableFocusRipple
                     disableRipple
                     variant="outlined"
@@ -1963,7 +1962,6 @@ export default function Form() {
           {/* Phone Stepper */}
 
           <MobileStepper
-            disableElevation
             disableFocusRipple
             disableRipple
             variant="text"
@@ -1992,7 +1990,6 @@ export default function Form() {
                 </Button>
               ) : (
                 <Button
-                  disableElevation
                   disableFocusRipple
                   disableRipple
                   variant="outlined"
@@ -2023,7 +2020,6 @@ export default function Form() {
             }
             backButton={
               <Button
-                disableElevation
                 disableFocusRipple
                 disableRipple
                 variant="text"
