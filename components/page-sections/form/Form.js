@@ -437,14 +437,14 @@ const StyledDiamondShape = styled("div", {
   alignItems: "center",
   WebkitTapHighlightColor: "transparent",
   border: selected ? "2px solid" : "2px solid",
-  borderColor: selected ? theme.palette.primary.main : "#ffffff",
-  boxShadow: selected
-    ? "none"
-    : " 0 4px  4px  rgba(0, 0, 0, .1), 0 1px  6px  rgba(0, 0, 0, .05), 0 8px  8px  rgba(0, 0, 0, .1),  0 16px 16px rgba(0, 0, 0, .1), 8px 32px 32px rgba(0, 0, 0, .15), 8px 64px 64px rgba(0, 0, 0, .15)",
-  transform: selected ? "scale(-1.05) translateY(-0.5rem)" : "scale(1)",
-  transition: "all 1s ease-in-out",
-  WebkitTransition: "all 1s ease-in-out",
-  "-webkit-transition": "all 1s ease-in-out",
+  borderColor: selected
+    ? theme.palette.primary.main
+    : theme.palette.primary.light,
+  // boxShadow: selected
+  //   ? "none"
+  //   : " 0 4px  4px  rgba(0, 0, 0, .1), 0 1px  6px  rgba(0, 0, 0, .05), 0 8px  8px  rgba(0, 0, 0, .1),  0 16px 16px rgba(0, 0, 0, .1), 8px 32px 32px rgba(0, 0, 0, .15), 8px 64px 64px rgba(0, 0, 0, .15)",
+  // transform: selected ? "scale(-1.05) translateY(-0.5rem)" : "scale(1)",
+  // transition: "all 1s ease-in-out",
   borderRadius: "0.25rem",
   padding: "1rem",
   height: "110px",
@@ -452,7 +452,7 @@ const StyledDiamondShape = styled("div", {
   cursor: "pointer",
   background: "#FFFFFF",
   "&:hover": {
-    background: "#F5F6FB",
+    background: "#FFFFFF",
   },
 }));
 
@@ -556,10 +556,14 @@ const StyledClarity = styled("div", {
   padding: "0.5rem 1rem",
   width: "140px",
   cursor: "pointer",
-  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
-  background: selected ? "#F3F6F9" : "#FAFAFA",
+  WebkitTapHighlightColor: "transparent",
+  border: selected ? "2px solid" : "2px solid",
+  borderColor: selected
+    ? theme.palette.primary.main
+    : theme.palette.primary.light,
+  background: "#FFFFFF",
   "&:hover": {
-    background: "#F5F6FB",
+    background: "#FFFFFF",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
   [theme.breakpoints.down("sm")]: { width: "120px" },
@@ -649,10 +653,14 @@ const StyledCertification = styled("div", {
   padding: "0.5rem 1rem",
   width: "140px",
   cursor: "pointer",
-  border: selected ? "2px solid #1A237E" : "2px solid #CFD8DC",
-  background: selected ? "#F3F6F9" : "#FAFAFA",
+  WebkitTapHighlightColor: "transparent",
+  border: selected ? "2px solid" : "2px solid",
+  borderColor: selected
+    ? theme.palette.primary.main
+    : theme.palette.primary.light,
+  background: "#FFFFFF",
   "&:hover": {
-    background: "#F5F6FB",
+    background: "#FFFFFF",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
 }));
@@ -1963,8 +1971,6 @@ export default function Form() {
           {/* Phone Stepper */}
 
           <MobileStepper
-            disableFocusRipple
-            disableRipple
             variant="text"
             steps={phone_steps.length}
             sx={{
