@@ -316,7 +316,7 @@ const CaratTextField = styled(TextField)(({ theme }) => ({
 const CustomRangeSlider = styled(Slider)(({ theme }) => ({
   width: "30%",
   "& .MuiSlider-markLabel": {
-    background: "#FAFAFA",
+    background: theme.palette.background.default,
     color: theme.palette.primary.main,
   },
 
