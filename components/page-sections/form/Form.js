@@ -347,7 +347,7 @@ const StyledDiamondType = styled("div", {
   cursor: "pointer",
   background: "#FFFEF2",
   "&:hover": {
-    background: "#F5F6FB",
+    background: "#FFFEF2",
   },
 }));
 
