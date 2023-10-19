@@ -95,7 +95,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   gap: "4rem",
   // backdropFilter: "blur(6px)",
   // backgroundColor: "rgba(0,0,30,0.3)",
-  background: "#FFFFFF",
+  background: "#F8F8FF",
   // boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
@@ -252,7 +252,7 @@ const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
 
 const DiamondTypeButton = styled(Button)(({ theme }) => ({
   "&.MuiButton-outlined": {
-    background: "#FFFFFF",
+    background: "#F8F8F",
     color: "#5B7BB6",
     border: "2px solid #5B7BB6",
   },
@@ -345,7 +345,7 @@ const StyledDiamondType = styled("div", {
   height: "150px",
   width: "140px",
   cursor: "pointer",
-  background: "#FFFFFF",
+  background: "#F8F8F",
   "&:hover": {
     background: "#F5F6FB",
   },
@@ -450,9 +450,9 @@ const StyledDiamondShape = styled("div", {
   height: "110px",
   width: "110px",
   cursor: "pointer",
-  background: "#FFFFFF",
+  background: "#F8F8F",
   "&:hover": {
-    background: "#FFFFFF",
+    background: "#F8F8F",
   },
 }));
 
@@ -561,9 +561,9 @@ const StyledClarity = styled("div", {
   borderColor: selected
     ? theme.palette.primary.main
     : theme.palette.primary.light,
-  background: "#FFFFFF",
+  background: "#F8F8F",
   "&:hover": {
-    background: "#FFFFFF",
+    background: "#F8F8F",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
   [theme.breakpoints.down("sm")]: { width: "120px" },
@@ -658,9 +658,9 @@ const StyledCertification = styled("div", {
   borderColor: selected
     ? theme.palette.primary.main
     : theme.palette.primary.light,
-  background: "#FFFFFF",
+  background: "#F8F8F",
   "&:hover": {
-    background: "#FFFFFF",
+    background: "#F8F8F",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
 }));

@@ -17,12 +17,12 @@ const Styles = {
       dark: "#FFFFFF",
     },
     error: {
-      main: "#F44336",
-      light: "#FF7961",
-      dark: "#BA000d",
+      main: "#FBF7F5",
+      light: "#FBF7F5",
+      dark: "#FBF7F5",
     },
     background: {
-      default: "#F5F5F5",
+      default: "#FBF7F5",
     },
     text: {
       primary: "#000000",
@@ -41,9 +41,9 @@ const Styles = {
       dark: "#CCCCCC",
     },
     error: {
-      main: "#F44336",
-      light: "#FF7961",
-      dark: "#BA000D",
+      main: "#283593",
+      light: "#CCDCF3",
+      dark: "#5B7BB6",
     },
     background: {
       default: "#121212",
