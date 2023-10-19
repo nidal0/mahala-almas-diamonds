@@ -95,8 +95,8 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   gap: "4rem",
   // backdropFilter: "blur(6px)",
   // backgroundColor: "rgba(0,0,30,0.3)",
-  background: "#F8F8FF",
-  // boxShadow: "none",
+  background: "#FFFEF2",
+  boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     minHeight: "91vh",
@@ -252,7 +252,7 @@ const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
 
 const DiamondTypeButton = styled(Button)(({ theme }) => ({
   "&.MuiButton-outlined": {
-    background: "#F8F8F",
+    background: "#FFFEF2",
     color: "#5B7BB6",
     border: "2px solid #5B7BB6",
   },
@@ -345,7 +345,7 @@ const StyledDiamondType = styled("div", {
   height: "150px",
   width: "140px",
   cursor: "pointer",
-  background: "#F8F8F",
+  background: "#FFFEF2",
   "&:hover": {
     background: "#F5F6FB",
   },
@@ -450,9 +450,9 @@ const StyledDiamondShape = styled("div", {
   height: "110px",
   width: "110px",
   cursor: "pointer",
-  background: "#F8F8F",
+  background: "#FFFEF2",
   "&:hover": {
-    background: "#F8F8F",
+    background: "#FFFEF2",
   },
 }));
 
@@ -561,9 +561,9 @@ const StyledClarity = styled("div", {
   borderColor: selected
     ? theme.palette.primary.main
     : theme.palette.primary.light,
-  background: "#F8F8F",
+  background: "#FFFEF2",
   "&:hover": {
-    background: "#F8F8F",
+    background: "#FFFEF2",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
   [theme.breakpoints.down("sm")]: { width: "120px" },
@@ -658,9 +658,9 @@ const StyledCertification = styled("div", {
   borderColor: selected
     ? theme.palette.primary.main
     : theme.palette.primary.light,
-  background: "#F8F8F",
+  background: "#FFFEF2",
   "&:hover": {
-    background: "#F8F8F",
+    background: "#FFFEF2",
   },
   [theme.breakpoints.only("xxs")]: { width: "100%" },
 }));
@@ -1184,7 +1184,7 @@ export default function Form() {
 
         {/* Form Paper */}
 
-        <CustomPaper elevation={4}>
+        <CustomPaper>
           {activeStep === steps.length ? (
             <React.Fragment>
               <Container>

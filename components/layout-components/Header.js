@@ -54,7 +54,7 @@ const Header = (props) => {
         <meta httpEquiv="cache-control" content="Private" />
         <meta httpEquiv="Expires" content="31536000" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#FBF7F5" />
+        <meta name="theme-color" content="#FFFEF2" />
         <meta
           name="Description"
           content={

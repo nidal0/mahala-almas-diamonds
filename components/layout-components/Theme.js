@@ -22,7 +22,7 @@ const Styles = {
       dark: "#FBF7F5",
     },
     background: {
-      default: "#FBF7F5",
+      default: "#FFFEF2",
     },
     text: {
       primary: "#000000",
