@@ -18,8 +18,7 @@ export default async function handler(req, res) {
 
   const message = {
     from: process.env.NEXT_PUBLIC_GMAIL_EMAIL_ADDRESS,
-    // to: "mahalaalmas@gmail.com",
-    to: "nidalabrar@hotmail.com",
+    to: "mahalaalmas@gmail.com",
     subject: "New diamond requirement !",
     text: "New diamond requirement !",
     html: `  
