@@ -25,7 +25,7 @@ import {
   Grow,
   Slider,
   Snackbar,
-  InputAdornment,
+  CircularProgress,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
@@ -247,22 +247,6 @@ const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     flexDirection: "row",
     gap: "1.5em",
-  },
-}));
-
-const DiamondTypeButton = styled(Button)(({ theme }) => ({
-  "&.MuiButton-outlined": {
-    background: "#FFFEF2",
-    color: "#5B7BB6",
-    border: "2px solid #5B7BB6",
-  },
-  "&.MuiButton-contained": {
-    background: "#5B7BB6",
-    color: "#FFFFFF",
-    border: "2px solid #5B7BB6",
-  },
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
   },
 }));
 
@@ -725,6 +709,7 @@ export default function Form() {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [submitting, setSubmitting] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
@@ -1078,6 +1063,44 @@ export default function Form() {
   /* Function to handle the click event for the submit button  */
 
   const handleSubmit = async () => {
+    setSubmitting(true);
+
+    /* Sending ntification email */
+
+    await fetch("/api/send-email", {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        agree_to_terms: agree,
+        location: location === "other" ? otherLocation : location,
+        diamond_type: diamondType,
+        diamond_shapes: diamondShapes,
+        diamond_carat_min: diamondMinCarat,
+        diamond_carat_max: diamondMaxCarat,
+        diamond_color_min: color_slider_marks[diamondMinColor].label,
+        diamond_color_max: color_slider_marks[diamondMaxColor].label,
+        diamond_clarity: diamondClarities,
+        diamond_cut_min: cut_slider_marks[diamondMinCut].label,
+        diamond_cut_max: cut_slider_marks[diamondMaxCut].label,
+        diamond_fluorescence_min:
+          fluorescence_slider_marks[diamondMinFluorescence].label,
+        diamond_fluorescence_max:
+          fluorescence_slider_marks[diamondMaxFluorescence].label,
+        diamondCertifications: diamondCertifications,
+        additionalNotes: additionalNotes,
+      }),
+    }).then((res) => {
+      if (!res.ok) throw new Error("Failed to send message");
+      return res.json();
+    });
+
     /* Storing data in Firestore */
 
     try {
@@ -1188,8 +1211,8 @@ export default function Form() {
           {activeStep === steps.length ? (
             <React.Fragment>
               <Container>
-                <Title variant="h3">Thank You for your time</Title>
-                <Typography variant="subtitle1">
+                <Title variant="h3">Thank you for your time</Title>
+                <Typography variant="subtitle1" align="center">
                   Now just sit back and relax while we find your perfect
                   diamond.
                 </Typography>
@@ -1292,7 +1315,7 @@ export default function Form() {
                                   alt="UAE"
                                 />
                                 <LocationLabel variant="body1">
-                                  UAE
+                                  United Arab Emirates
                                 </LocationLabel>
                               </StyledLocationContainer>
                             ) : (
@@ -1304,7 +1327,7 @@ export default function Form() {
                                   alt="UAE"
                                 />
                                 <LocationLabel variant="body1">
-                                  UAE
+                                  United Arab Emirates
                                 </LocationLabel>
                               </StyledLocationContainer>
                             )
@@ -1331,7 +1354,7 @@ export default function Form() {
                                   sx={{ height: "65px", borderRadius: "15px" }}
                                 />
                                 <LocationLabel variant="body1">
-                                  Rest of the world
+                                  Rest of the World
                                 </LocationLabel>
                               </StyledLocationContainer>
                             ) : (
@@ -1350,7 +1373,7 @@ export default function Form() {
                                   }}
                                 />
                                 <LocationLabel variant="body1">
-                                  Rest of the world
+                                  Rest of the World
                                 </LocationLabel>
                               </StyledLocationContainer>
                             )
@@ -1392,7 +1415,7 @@ export default function Form() {
                     {...(activeStep === 1 ? { timeout: 600 } : {})}
                   >
                     <Title variant="h3">
-                      So, what type of diamond are you looking for?
+                      What type of diamond are you looking for?
                     </Title>
                   </Fade>
 
@@ -1554,7 +1577,7 @@ export default function Form() {
                     in={activeStep === 3}
                     {...(activeStep === 3 ? { timeout: 600 } : {})}
                   >
-                    <Title variant="h3">Diamond carat?</Title>
+                    <Title variant="h3">Please select a range of carat</Title>
                   </Fade>
 
                   <CustomRangeSlider
@@ -1611,7 +1634,7 @@ export default function Form() {
                     in={activeStep === 4}
                     {...(activeStep === 4 ? { timeout: 600 } : {})}
                   >
-                    <Title variant="h3">Select a color range</Title>
+                    <Title variant="h3">Please select a range of color</Title>
                   </Fade>
                   <CustomRangeSlider
                     sx={{ width: "75%" }}
@@ -1685,7 +1708,7 @@ export default function Form() {
                     in={activeStep === 6}
                     {...(activeStep === 6 ? { timeout: 600 } : {})}
                   >
-                    <Title variant="h3">Select a range for the cut</Title>
+                    <Title variant="h3">Please select a range of cut</Title>
                   </Fade>
 
                   <CustomRangeSlider
@@ -1712,7 +1735,9 @@ export default function Form() {
                     in={activeStep === 7}
                     {...(activeStep === 7 ? { timeout: 600 } : {})}
                   >
-                    <Title variant="h3">Fluorescence</Title>
+                    <Title variant="h3">
+                      Please select a range of fluorescence
+                    </Title>
                   </Fade>
 
                   <CustomRangeSlider
@@ -1739,7 +1764,7 @@ export default function Form() {
                     in={activeStep == 8}
                     {...(activeStep === 8 ? { timeout: 600 } : {})}
                   >
-                    <Title variant="h3">Preferred certifications?</Title>
+                    <Title variant="h3">What certifications do you want?</Title>
                   </Fade>
                   <CertificationsContainer>
                     {diamond_certifications.map((certification, key) => (
@@ -1779,7 +1804,7 @@ export default function Form() {
                     {...(activeStep === 9 ? { timeout: 600 } : {})}
                   >
                     <Title variant="h3">
-                      Do you have any more requests for us?
+                      Do mention any specific requests that you have for us
                     </Title>
                   </Fade>
 
@@ -1797,7 +1822,6 @@ export default function Form() {
                       }}
                       id="notes"
                       name="notes"
-                      label="Additional Notes"
                       variant="outlined"
                       multiline
                       rows={6}
@@ -1907,33 +1931,38 @@ export default function Form() {
                   },
                 }}
               >
-                {activeStep !== 0 && (
-                  <Button
-                    disableFocusRipple
-                    disableRipple
-                    onClick={handleBack}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
-                    Back
-                  </Button>
-                )}
+                {activeStep !== 0 &&
+                  (!submitting ? (
+                    <Button
+                      disableFocusRipple
+                      disableRipple
+                      onClick={handleBack}
+                      sx={{ mt: 3, ml: 1 }}
+                    >
+                      Back
+                    </Button>
+                  ) : null)}
 
                 {activeStep === steps.length - 1 ? (
-                  <Button
-                    disableFocusRipple
-                    disableRipple
-                    variant="outlined"
-                    onClick={handleSubmit}
-                    sx={{ mt: 3, ml: 1 }}
-                    disabled={
-                      name === "" ||
-                      !agree ||
-                      submitted ||
-                      allStepsCompleted() === false
-                    }
-                  >
-                    {"Submit"}
-                  </Button>
+                  !submitting ? (
+                    <Button
+                      disableFocusRipple
+                      disableRipple
+                      variant="outlined"
+                      onClick={handleSubmit}
+                      sx={{ mt: 3, ml: 1 }}
+                      disabled={
+                        name === "" ||
+                        !agree ||
+                        submitted ||
+                        allStepsCompleted() === false
+                      }
+                    >
+                      {"Submit"}
+                    </Button>
+                  ) : (
+                    <CircularProgress />
+                  )
                 ) : (
                   <Button
                     disableFocusRipple
@@ -1970,76 +1999,83 @@ export default function Form() {
 
           {/* Phone Stepper */}
 
-          <MobileStepper
-            variant="text"
-            steps={phone_steps.length}
-            sx={{
-              [theme.breakpoints.up("md")]: {
-                display: "none",
-              },
-            }}
-            position="bottom"
-            activeStep={activeStep}
-            nextButton={
-              activeStep === phone_steps.length - 1 || submitted ? (
-                <Button
-                  variant="outlined"
-                  onClick={handleSubmit}
-                  sx={{ mr: 1 }}
-                  disabled={
-                    name === "" ||
-                    !agree ||
-                    submitted ||
-                    allStepsCompleted() === false
-                  }
-                >
-                  {"Submit"}
-                </Button>
-              ) : (
+          {!submitted && (
+            <MobileStepper
+              variant="text"
+              steps={phone_steps.length}
+              sx={{
+                [theme.breakpoints.up("md")]: {
+                  display: "none",
+                },
+              }}
+              position="bottom"
+              activeStep={activeStep}
+              nextButton={
+                activeStep === phone_steps.length - 1 || submitted ? (
+                  !submitting ? (
+                    <Button
+                      variant="outlined"
+                      onClick={handleSubmit}
+                      sx={{ mr: 1 }}
+                      disabled={
+                        name === "" ||
+                        !agree ||
+                        submitted ||
+                        allStepsCompleted() === false
+                      }
+                    >
+                      {"Submit"}
+                    </Button>
+                  ) : (
+                    <CircularProgress />
+                  )
+                ) : (
+                  <Button
+                    disableFocusRipple
+                    disableRipple
+                    variant="outlined"
+                    onClick={handleNext}
+                    sx={{
+                      mr: 1,
+                      visibility:
+                        activeStep === 1 ||
+                        (activeStep === 0 &&
+                          (location === "india" ||
+                            location === "uae" ||
+                            location === ""))
+                          ? "hidden"
+                          : "visible",
+                    }}
+                    disabled={
+                      activeStep === 0
+                        ? location === "" ||
+                          (location === "other" && otherLocation === "")
+                        : activeStep === 1
+                        ? diamondType === ""
+                        : false
+                    }
+                  >
+                    {"Next"}
+                  </Button>
+                )
+              }
+              backButton={
                 <Button
                   disableFocusRipple
                   disableRipple
-                  variant="outlined"
-                  onClick={handleNext}
+                  variant="text"
+                  onClick={handleBack}
+                  disabled={submitting}
                   sx={{
-                    mr: 1,
-                    visibility:
-                      activeStep === 1 ||
-                      (activeStep === 0 &&
-                        (location === "india" ||
-                          location === "uae" ||
-                          location === ""))
-                        ? "hidden"
-                        : "visible",
+                    ml: 1,
+                    visibility: activeStep !== 0 ? "visible" : "hidden",
                   }}
-                  disabled={
-                    activeStep === 0
-                      ? location === "" ||
-                        (location === "other" && otherLocation === "")
-                      : activeStep === 1
-                      ? diamondType === ""
-                      : false
-                  }
                 >
-                  {"Next"}
+                  Back
                 </Button>
-              )
-            }
-            backButton={
-              <Button
-                disableFocusRipple
-                disableRipple
-                variant="text"
-                onClick={handleBack}
-                sx={{
-                  ml: 1,
-                  visibility: activeStep !== 0 ? "visible" : "hidden",
-                }}
-              >
-                Back
-              </Button>
-            }
-          />
+              }
+            />
+          )}
         </CustomPaper>
       </RootDiv>
       {/* <Copyright /> */}
