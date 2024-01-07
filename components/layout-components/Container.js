@@ -6,8 +6,6 @@ import { styled } from "@mui/system";
 /* Styled Container Component */
 
 const ContainerComponent = styled("div")(({ theme }) => ({
-  // backgroundImage: "url(/images/bg1.jpg)",
-  // backgroundSize: "cover",
   /* XXS breakpoint */
   [theme.breakpoints.only("xxs")]: {
     padding: "0rem 0.5rem 0rem 0.5rem",

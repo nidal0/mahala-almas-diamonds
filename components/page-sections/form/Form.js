@@ -23,6 +23,7 @@ import {
   FormControl,
   Fade,
   Grow,
+  Slide,
   Slider,
   Snackbar,
   CircularProgress,
@@ -43,6 +44,7 @@ const RootDiv = styled("div")(({ theme }) => ({
   alignItems: "flex-start",
   width: "100%",
   height: "auto",
+  margin: "4rem 0rem 0rem 0rem",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     height: "100%",
@@ -100,8 +102,8 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     minHeight: "91vh",
-    margin: "1rem 0rem 4rem 0rem",
-    padding: "2rem 1.1rem 2rem 1.1rem",
+    margin: "0rem 0rem 0rem 0rem",
+    padding: "1rem 1.1rem 4rem 1.1rem",
   },
   // /* XXS breakpoint */
   // [theme.breakpoints.up("xxs")]: { width: "100%" },
@@ -197,46 +199,68 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
   },
 }));
 
-const StyledLocationContainer = styled("div")(({ theme }) => ({
+const StyledLocation = styled("div", {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  gap: "1rem",
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "row",
-    width: "100%",
+  borderRadius: "0.25rem",
+  padding: "0.5rem 1rem",
+  width: "10rem",
+  cursor: "pointer",
+  WebkitTapHighlightColor: "transparent",
+  border: selected ? "2px solid" : "2px solid",
+  borderColor: selected
+    ? theme.palette.primary.main
+    : theme.palette.primary.light,
+  background: "#FFFEF2",
+  "&:hover": {
+    background: "#FFFEF2",
   },
 }));
 
-const LocationLabel = styled(Typography)(({ theme }) => ({
-  // textAlign: "center",
-  lineHeight: "1.2rem",
-  color: theme.palette.primary.main,
-  fontSize: "1rem",
-}));
+// const StyledLocationContainer = styled("div")(({ theme }) => ({
+//   display: "flex",
+//   flexDirection: "column",
+//   justifyContent: "space-between",
+//   alignItems: "center",
+//   gap: "1rem",
+//   [theme.breakpoints.down("sm")]: {
+//     flexDirection: "row",
+//     width: "100%",
+//   },
+// }));
 
-const CustomImg = styled("img")(({ theme }) => ({
-  height: "70px",
-  width: "100px",
-  [theme.breakpoints.down("sm")]: {
-    height: "60px",
-    width: "85px",
-  },
-}));
+// const LocationLabel = styled(Typography)(({ theme }) => ({
+//   // textAlign: "center",
+//   lineHeight: "1.2rem",
+//   color: theme.palette.primary.main,
+//   fontSize: "1rem",
+// }));
 
-const SelectedImg = styled("img")(({ theme }) => ({
-  border: "2px solid",
-  borderColor: theme.palette.primary.main,
-  borderRadius: "15px",
-  padding: "0.1rem",
-  height: "70px",
-  width: "100px",
-  [theme.breakpoints.down("sm")]: {
-    height: "60px",
-    width: "85px",
-  },
-}));
+// const CustomImg = styled("img")(({ theme }) => ({
+//   height: "70px",
+//   width: "100px",
+//   [theme.breakpoints.down("sm")]: {
+//     height: "60px",
+//     width: "85px",
+//   },
+// }));
+
+// const SelectedImg = styled("img")(({ theme }) => ({
+//   border: "2px solid",
+//   borderColor: theme.palette.primary.main,
+//   borderRadius: "15px",
+//   padding: "0.1rem",
+//   height: "70px",
+//   width: "100px",
+//   [theme.breakpoints.down("sm")]: {
+//     height: "60px",
+//     width: "85px",
+//   },
+// }));
 
 const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
   display: "flex",
@@ -994,6 +1018,7 @@ export default function Form() {
           // find the first step that has been completed
           steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
+
     setActiveStep(newActiveStep);
     handleComplete();
   };
@@ -1146,6 +1171,8 @@ export default function Form() {
 
   const theme = useTheme();
 
+  const containerRef = React.useRef(null);
+
   return (
     <React.Fragment>
       {/* Snackbar */}
@@ -1160,21 +1187,10 @@ export default function Form() {
           Submitted successfully!
         </Alert>
       </Snackbar>
+
+      {/* Main Component */}
+
       <RootDiv>
-        {/* <Paper
-          square
-          elevation={0}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            height: 50,
-            pl: 2,
-            width: "100%",
-            // bgcolor: "#000000",
-          }}
-        >
-          <Typography>{phone_steps[activeStep].label}</Typography>
-        </Paper> */}
         {/* Desktop Stepper */}
 
         <Stepper
@@ -1207,15 +1223,24 @@ export default function Form() {
 
         {/* Form Paper */}
 
-        <CustomPaper>
+        <CustomPaper ref={containerRef}>
           {activeStep === steps.length ? (
             <React.Fragment>
-              <Container>
-                <Title variant="h3">Thank you for your time</Title>
-                <Typography variant="subtitle1" align="center">
-                  Now just sit back and relax while we find your perfect
-                  diamond.
-                </Typography>
+              <Container ref={containerRef}>
+                <Slide
+                  direction="up"
+                  in={activeStep === steps.length}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Title variant="h3">Thank you for your time</Title>
+                  <Typography variant="subtitle1" align="center">
+                    Now just sit back and relax while we find your perfect
+                    diamond.
+                  </Typography>{" "}
+                </Slide>
               </Container>
             </React.Fragment>
           ) : (
@@ -1223,42 +1248,159 @@ export default function Form() {
               {/* Step 1: Enter Location */}
 
               {activeStep === 0 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 0}
-                    {...(activeStep === 0 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">Select your location</Title>
-                  </Fade>
-                  <CustomFormControl>
-                    <RadioGroup
-                      row
-                      sx={{
-                        gap: "2rem",
-                        justifyContent: "center",
-                        alignItems: "flex-start",
-                        [theme.breakpoints.down("sm")]: {
+                <Slide
+                  direction="up"
+                  in={activeStep === 0}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 0}
+                      {...(activeStep === 0 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">Please specify your location</Title>
+                    </Fade>
+
+                    <CustomFormControl>
+                      <RadioGroup
+                        row
+                        sx={{
                           display: "flex",
                           flexDirection: "column",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
-                          rowGap: "3rem",
-                          columnGap: "0rem",
-                        },
-                      }}
-                      aria-labelledby="select-location"
-                      name="select-location"
-                      value={location}
-                      onChange={(e) => {
-                        setLocation(e.target.value);
-                        e.target.value === "india" || e.target.value === "uae"
-                          ? setTimeout(() => {
-                              handleNext();
-                            }, 200)
-                          : null;
-                      }}
-                    >
-                      <Grow
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "1.5rem",
+                        }}
+                        aria-labelledby="select-location"
+                        name="select-location"
+                        value={location}
+                        onChange={(e) => {
+                          setLocation(e.target.value);
+                          setTimeout(() => {
+                            handleNext();
+                          }, 200);
+                        }}
+                      >
+                        <FormControlLabel
+                          value="abu_dhabi"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            <StyledLocation selected={location === "abu_dhabi"}>
+                              <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center" }}
+                              >
+                                Abu Dhabi
+                              </Typography>
+                            </StyledLocation>
+                          }
+                        />
+
+                        <FormControlLabel
+                          value="dubai"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            <StyledLocation selected={location === "dubai"}>
+                              <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center" }}
+                              >
+                                Dubai
+                              </Typography>
+                            </StyledLocation>
+                          }
+                        />
+
+                        <FormControlLabel
+                          value="sharjah"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            <StyledLocation selected={location === "sharjah"}>
+                              <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center" }}
+                              >
+                                Sharjah
+                              </Typography>
+                            </StyledLocation>
+                          }
+                        />
+
+                        <FormControlLabel
+                          value="ajman"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            <StyledLocation selected={location === "ajman"}>
+                              <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center" }}
+                              >
+                                Ajman
+                              </Typography>
+                            </StyledLocation>
+                          }
+                        />
+
+                        <FormControlLabel
+                          value="umm_al_quwain"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            <StyledLocation
+                              selected={location === "umm_al_quwain"}
+                            >
+                              <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center" }}
+                              >
+                                Umm Al Quwain
+                              </Typography>
+                            </StyledLocation>
+                          }
+                        />
+
+                        <FormControlLabel
+                          value="ras_al_khaimah"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            <StyledLocation
+                              selected={location === "ras_al_khaimah"}
+                            >
+                              <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center" }}
+                              >
+                                Ras Al Khaimah
+                              </Typography>
+                            </StyledLocation>
+                          }
+                        />
+
+                        <FormControlLabel
+                          value="fujairah"
+                          labelPlacement="top"
+                          control={<Radio sx={{ display: "none" }} />}
+                          label={
+                            <StyledLocation selected={location === "fujairah"}>
+                              <Typography
+                                variant="body1"
+                                sx={{ textAlign: "center" }}
+                              >
+                                Fujairah
+                              </Typography>
+                            </StyledLocation>
+                          }
+                        />
+
+                        {/* <Grow
                         in={activeStep === 0}
                         style={{ transformOrigin: "0 0 0" }}
                         {...(activeStep === 0 ? { timeout: 300 } : {})}
@@ -1379,52 +1521,56 @@ export default function Form() {
                             )
                           }
                         />
-                      </Grow>
-                    </RadioGroup>
+                      </Grow> */}
+                      </RadioGroup>
 
-                    <Fade in={location === "other"}>
-                      <TextField
-                        sx={{
-                          width: "45%",
-                          margin: "1rem 0rem 0rem 0rem",
-                          visibility:
-                            location === "other" ? "visible" : "hidden",
-                          [theme.breakpoints.down("sm")]: {
-                            width: "80%",
-                          },
-                        }}
-                        required
-                        id="location"
-                        name="location"
-                        label="Enter location"
-                        variant="standard"
-                        value={otherLocation}
-                        onChange={(e) => setOtherLocation(e.target.value)}
-                      />
-                    </Fade>
-                  </CustomFormControl>
-                </Container>
+                      {/* <Fade in={location === "other"}>
+                        <TextField
+                          sx={{
+                            width: "45%",
+                            margin: "1rem 0rem 0rem 0rem",
+                            visibility:
+                              location === "other" ? "visible" : "hidden",
+                            [theme.breakpoints.down("sm")]: {
+                              width: "80%",
+                            },
+                          }}
+                          required
+                          id="location"
+                          name="location"
+                          label="Enter location"
+                          variant="standard"
+                          value={otherLocation}
+                          onChange={(e) => setOtherLocation(e.target.value)}
+                        />
+                      </Fade> */}
+                    </CustomFormControl>
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 2: Diamond Type */}
 
               {activeStep === 1 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 1}
-                    {...(activeStep === 1 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">
-                      What type of diamond are you looking for?
-                    </Title>
-                  </Fade>
-
-                  <DiamondTypeButtonRow>
-                    <Grow
+                <Slide
+                  direction="up"
+                  in={activeStep === 1}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
                       in={activeStep === 1}
-                      style={{ transformOrigin: "0 0 0" }}
-                      {...(activeStep === 1 ? { timeout: 400 } : {})}
+                      {...(activeStep === 1 ? { timeout: 600 } : {})}
                     >
+                      <Title variant="h3">
+                        What type of diamond are you looking for?
+                      </Title>
+                    </Fade>
+
+                    <DiamondTypeButtonRow>
                       <StyledDiamondType
                         onClick={() => {
                           setDiamondType("natural");
@@ -1452,29 +1598,7 @@ export default function Form() {
                           Natural
                         </DiamondShapeLabel>
                       </StyledDiamondType>
-                      {/* <DiamondTypeButton
-                        disableElevation
-                        disableFocusRipple
-                        disableRipple
-                        size="large"
-                        variant={
-                          diamondType === "natural"
-                            ? "contained"
-                            : "outlined"
-                        }
-                        onClick={() => {
-                          setDiamondType("natural");
-                          // handleNext();
-                        }}
-                      >
-                        Natural
-                      </DiamondTypeButton> */}
-                    </Grow>
-                    <Grow
-                      in={activeStep === 1}
-                      style={{ transformOrigin: "0 0 0" }}
-                      {...(activeStep === 1 ? { timeout: 800 } : {})}
-                    >
+
                       <StyledDiamondType
                         onClick={() => {
                           setDiamondType("lab_grown");
@@ -1502,47 +1626,33 @@ export default function Form() {
                           Lab Grown
                         </DiamondShapeLabel>
                       </StyledDiamondType>
-                      {/* <DiamondTypeButton
-                        disableElevation
-                        disableFocusRipple
-                        disableRipple
-                        size="large"
-                        variant={
-                          diamondType === "lab_grown"
-                            ? "contained"
-                            : "outlined"
-                        }
-                        onClick={() => {
-                          setDiamondType("lab_grown");
-                          // handleNext();
-                        }}
-                      >
-                        Lab Grown
-                      </DiamondTypeButton> */}
-                    </Grow>
-                  </DiamondTypeButtonRow>
-                </Container>
+                    </DiamondTypeButtonRow>
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 3: Diamond Shapes */}
 
               {activeStep === 2 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 2}
-                    {...(activeStep === 2 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">What shapes would you prefer?</Title>
-                  </Fade>
-                  <DiamondShapesContainer>
-                    {diamond_shapes.map((diamond_shape, key) => (
-                      <Grow
-                        key={key}
-                        in={activeStep === 2}
-                        style={{ transformOrigin: "0 0 0" }}
-                        {...(activeStep === 2 ? { timeout: 600 } : {})}
-                      >
+                <Slide
+                  direction="up"
+                  in={activeStep === 2}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 2}
+                      {...(activeStep === 2 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">What shapes would you prefer?</Title>
+                    </Fade>
+                    <DiamondShapesContainer>
+                      {diamond_shapes.map((diamond_shape, index) => (
                         <StyledDiamondShape
+                          key={index}
                           onClick={() =>
                             onClickDiamondShape(diamond_shape.label)
                           }
@@ -1563,114 +1673,137 @@ export default function Form() {
                             {diamond_shape.label}
                           </DiamondShapeLabel>
                         </StyledDiamondShape>
-                      </Grow>
-                    ))}
-                  </DiamondShapesContainer>
-                </Container>
+                      ))}
+                    </DiamondShapesContainer>
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 4: Carat */}
 
               {activeStep === 3 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 3}
-                    {...(activeStep === 3 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">Please select a range of carat</Title>
-                  </Fade>
+                <Slide
+                  direction="up"
+                  in={activeStep === 3}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 3}
+                      {...(activeStep === 3 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">Please select a range of carat</Title>
+                    </Fade>
 
-                  <CustomRangeSlider
-                    sx={{ width: "60%" }}
-                    min={0.1}
-                    max={30.0}
-                    precision={0.1}
-                    value={[diamondMinCarat, diamondMaxCarat]}
-                    valueLabelDisplay="auto"
-                    step={0.1}
-                    marks={carat_slider_marks}
-                    onChange={(event, newValue) => {
-                      setDiamondMinCarat(newValue[0]);
-                      setDiamondMaxCarat(newValue[1]);
-                    }}
-                  />
+                    <CustomRangeSlider
+                      sx={{ width: "60%" }}
+                      min={0.1}
+                      max={30.0}
+                      precision={0.1}
+                      value={[diamondMinCarat, diamondMaxCarat]}
+                      valueLabelDisplay="auto"
+                      step={0.1}
+                      marks={carat_slider_marks}
+                      onChange={(event, newValue) => {
+                        setDiamondMinCarat(newValue[0]);
+                        setDiamondMaxCarat(newValue[1]);
+                      }}
+                    />
 
-                  <SliderTextfieldsRow>
-                    <SliderLabelColumn>
-                      <CaratLabel variant="h6">From</CaratLabel>
-                      <CaratTextField
-                        id="minCarat"
-                        name="minCarat"
-                        label="Minimum"
-                        variant="outlined"
-                        type="number"
-                        InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
-                        value={diamondMinCarat}
-                        onChange={(e) => setDiamondMinCarat(e.target.value)}
-                      />
-                    </SliderLabelColumn>
-                    <SliderLabelColumn>
-                      <CaratLabel variant="h6">To</CaratLabel>
-                      <CaratTextField
-                        id="maxCarat"
-                        name="maxCarat"
-                        label="Maximum"
-                        variant="outlined"
-                        type="number"
-                        InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
-                        value={diamondMaxCarat}
-                        onChange={(e) => setDiamondMaxCarat(e.target.value)}
-                      />
-                    </SliderLabelColumn>
-                  </SliderTextfieldsRow>
-                </Container>
+                    <SliderTextfieldsRow>
+                      <SliderLabelColumn>
+                        <CaratLabel variant="h6">From</CaratLabel>
+                        <CaratTextField
+                          id="minCarat"
+                          name="minCarat"
+                          label="Minimum"
+                          variant="outlined"
+                          type="number"
+                          InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                          value={diamondMinCarat}
+                          onChange={(e) => setDiamondMinCarat(e.target.value)}
+                        />
+                      </SliderLabelColumn>
+                      <SliderLabelColumn>
+                        <CaratLabel variant="h6">To</CaratLabel>
+                        <CaratTextField
+                          id="maxCarat"
+                          name="maxCarat"
+                          label="Maximum"
+                          variant="outlined"
+                          type="number"
+                          InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                          value={diamondMaxCarat}
+                          onChange={(e) => setDiamondMaxCarat(e.target.value)}
+                        />
+                      </SliderLabelColumn>
+                    </SliderTextfieldsRow>
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 5: Color */}
 
               {activeStep === 4 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 4}
-                    {...(activeStep === 4 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">Please select a range of color</Title>
-                  </Fade>
-                  <CustomRangeSlider
-                    sx={{ width: "75%" }}
-                    min={0}
-                    max={7}
-                    value={[diamondMinColor, diamondMaxColor]}
-                    valueLabelDisplay="off"
-                    step={1}
-                    marks={color_slider_marks}
-                    onChange={(event, newValue) => {
-                      setDiamondMinColor(newValue[0]);
-                      setDiamondMaxColor(newValue[1]);
-                    }}
-                  />
-                </Container>
+                <Slide
+                  direction="up"
+                  in={activeStep === 4}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 4}
+                      {...(activeStep === 4 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">Please select a range of color</Title>
+                    </Fade>
+
+                    <CustomRangeSlider
+                      sx={{ width: "75%" }}
+                      min={0}
+                      max={7}
+                      value={[diamondMinColor, diamondMaxColor]}
+                      valueLabelDisplay="off"
+                      step={1}
+                      marks={color_slider_marks}
+                      onChange={(event, newValue) => {
+                        setDiamondMinColor(newValue[0]);
+                        setDiamondMaxColor(newValue[1]);
+                      }}
+                    />
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 6: Clarity */}
 
               {activeStep === 5 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 5}
-                    {...(activeStep === 5 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">Select your diamond clarity</Title>
-                  </Fade>
-                  <ClarityContainer>
-                    {clarity_types.map((clarity, key) => (
-                      <Grow
-                        key={key}
-                        in={activeStep === 5}
-                        style={{ transformOrigin: "0 0 0" }}
-                        {...(activeStep === 5 ? { timeout: 600 } : {})}
-                      >
+                <Slide
+                  direction="up"
+                  in={activeStep === 5}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 5}
+                      {...(activeStep === 5 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">Select your diamond clarity</Title>
+                    </Fade>
+
+                    <ClarityContainer>
+                      {clarity_types.map((clarity, index) => (
                         <StyledClarity
+                          key={index}
                           onClick={() => onClickClarity(clarity.label)}
                           selected={diamondClarities.includes(clarity.label)}
                         >
@@ -1681,10 +1814,9 @@ export default function Form() {
                             {clarity.label}
                           </Typography>
                         </StyledClarity>
-                      </Grow>
-                    ))}
-                  </ClarityContainer>
-                  {/* <CustomRangeSlider
+                      ))}
+                    </ClarityContainer>
+                    {/* <CustomRangeSlider
                     sx={{ width: "75%" }}
                     min={0}
                     max={7}
@@ -1697,84 +1829,109 @@ export default function Form() {
                       setDiamondMaxClarity(newValue[1]);
                     }}
                   /> */}
-                </Container>
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 7: Cut */}
 
               {activeStep === 6 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 6}
-                    {...(activeStep === 6 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">Please select a range of cut</Title>
-                  </Fade>
+                <Slide
+                  direction="up"
+                  in={activeStep === 6}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 6}
+                      {...(activeStep === 6 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">Please select a range of cut</Title>
+                    </Fade>
 
-                  <CustomRangeSlider
-                    sx={{ width: "75%" }}
-                    min={0}
-                    max={3}
-                    value={[diamondMinCut, diamondMaxCut]}
-                    valueLabelDisplay="off"
-                    step={1}
-                    marks={cut_slider_marks}
-                    onChange={(event, newValue) => {
-                      setDiamondMinCut(newValue[0]);
-                      setDiamondMaxCut(newValue[1]);
-                    }}
-                  />
-                </Container>
+                    <CustomRangeSlider
+                      sx={{ width: "75%" }}
+                      min={0}
+                      max={3}
+                      value={[diamondMinCut, diamondMaxCut]}
+                      valueLabelDisplay="off"
+                      step={1}
+                      marks={cut_slider_marks}
+                      onChange={(event, newValue) => {
+                        setDiamondMinCut(newValue[0]);
+                        setDiamondMaxCut(newValue[1]);
+                      }}
+                    />
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 8: Fluorescence */}
 
               {activeStep === 7 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 7}
-                    {...(activeStep === 7 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">
-                      Please select a range of fluorescence
-                    </Title>
-                  </Fade>
+                <Slide
+                  direction="up"
+                  in={activeStep === 7}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 7}
+                      {...(activeStep === 7 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">
+                        Please select a range of fluorescence
+                      </Title>
+                    </Fade>
 
-                  <CustomRangeSlider
-                    sx={{ width: "75%" }}
-                    min={0}
-                    max={4}
-                    value={[diamondMinFluorescence, diamondMaxFluorescence]}
-                    valueLabelDisplay="off"
-                    step={1}
-                    marks={fluorescence_slider_marks}
-                    onChange={(event, newValue) => {
-                      setDiamondMinFluorescence(newValue[0]);
-                      setDiamondMaxFluorescence(newValue[1]);
-                    }}
-                  />
-                </Container>
+                    <CustomRangeSlider
+                      sx={{ width: "75%" }}
+                      min={0}
+                      max={4}
+                      value={[diamondMinFluorescence, diamondMaxFluorescence]}
+                      valueLabelDisplay="off"
+                      step={1}
+                      marks={fluorescence_slider_marks}
+                      onChange={(event, newValue) => {
+                        setDiamondMinFluorescence(newValue[0]);
+                        setDiamondMaxFluorescence(newValue[1]);
+                      }}
+                    />
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 9: Certification */}
 
               {activeStep === 8 && (
-                <Container>
-                  <Fade
-                    in={activeStep == 8}
-                    {...(activeStep === 8 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">What certifications do you want?</Title>
-                  </Fade>
-                  <CertificationsContainer>
-                    {diamond_certifications.map((certification, key) => (
-                      <Grow
-                        key={key}
-                        in={activeStep === 8}
-                        style={{ transformOrigin: "0 0 0" }}
-                        {...(activeStep === 8 ? { timeout: 600 } : {})}
-                      >
+                <Slide
+                  direction="up"
+                  in={activeStep === 8}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep == 8}
+                      {...(activeStep === 8 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">
+                        What certifications do you want?
+                      </Title>
+                    </Fade>
+
+                    <CertificationsContainer>
+                      {diamond_certifications.map((certification, index) => (
                         <StyledCertification
+                          key={index}
                           onClick={() =>
                             onClickCertification(certification.label)
                           }
@@ -1789,30 +1946,33 @@ export default function Form() {
                             {certification.label}
                           </Typography>
                         </StyledCertification>
-                      </Grow>
-                    ))}
-                  </CertificationsContainer>
-                </Container>
+                      ))}
+                    </CertificationsContainer>
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 10: "Any more requests?" */}
 
               {activeStep === 9 && (
-                <Container>
-                  <Fade
-                    in={activeStep === 9}
-                    {...(activeStep === 9 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">
-                      Do mention any specific requests that you have for us
-                    </Title>
-                  </Fade>
+                <Slide
+                  direction="up"
+                  in={activeStep === 9}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container>
+                    <Fade
+                      in={activeStep === 9}
+                      {...(activeStep === 9 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">
+                        Do mention any specific requests that you have for us
+                      </Title>
+                    </Fade>
 
-                  <Grow
-                    in={activeStep === 9}
-                    style={{ transformOrigin: "0 0 0" }}
-                    {...(activeStep === 9 ? { timeout: 600 } : {})}
-                  >
                     <TextField
                       sx={{
                         width: "75%",
@@ -1828,26 +1988,29 @@ export default function Form() {
                       value={additionalNotes}
                       onChange={(e) => setAdditionalNotes(e.target.value)}
                     />
-                  </Grow>
-                </Container>
+                  </Container>
+                </Slide>
               )}
 
               {/* Step 11: Contact Details */}
 
               {activeStep === 10 && (
-                <Container sx={{ gap: "2rem" }}>
-                  <Fade
-                    in={activeStep === 10}
-                    {...(activeStep === 10 ? { timeout: 600 } : {})}
-                  >
-                    <Title variant="h3">How can we reach you?</Title>
-                  </Fade>
+                <Slide
+                  direction="up"
+                  in={activeStep === 10}
+                  easing={theme.transitions.easing.easeInOut}
+                  container={containerRef.current}
+                  timeout={400}
+                  unmountOnExit
+                >
+                  <Container sx={{ gap: "2rem" }}>
+                    <Fade
+                      in={activeStep === 10}
+                      {...(activeStep === 10 ? { timeout: 600 } : {})}
+                    >
+                      <Title variant="h3">How can we reach you?</Title>
+                    </Fade>
 
-                  <Grow
-                    in={activeStep === 10}
-                    style={{ transformOrigin: "0 0 0" }}
-                    {...(activeStep === 10 ? { timeout: 400 } : {})}
-                  >
                     <ContactTextField
                       required
                       id="name"
@@ -1857,13 +2020,7 @@ export default function Form() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
-                  </Grow>
 
-                  <Grow
-                    in={activeStep === 10}
-                    style={{ transformOrigin: "0 0 0" }}
-                    {...(activeStep === 10 ? { timeout: 600 } : {})}
-                  >
                     <ContactTextField
                       id="email"
                       name="email"
@@ -1872,13 +2029,7 @@ export default function Form() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                  </Grow>
 
-                  <Grow
-                    in={activeStep === 10}
-                    style={{ transformOrigin: "0 0 0" }}
-                    {...(activeStep === 10 ? { timeout: 800 } : {})}
-                  >
                     <ContactTextField
                       id="phone"
                       name="phone"
@@ -1887,13 +2038,7 @@ export default function Form() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
-                  </Grow>
 
-                  <Grow
-                    in={activeStep === 10}
-                    style={{ transformOrigin: "0 0 0" }}
-                    {...(activeStep === 10 ? { timeout: 1000 } : {})}
-                  >
                     <FormControlLabel
                       sx={{
                         width: "50%",
@@ -1915,8 +2060,8 @@ export default function Form() {
                       }
                       label="I agree to share my details with Mahala Almas."
                     />
-                  </Grow>
-                </Container>
+                  </Container>
+                </Slide>
               )}
 
               {/* Buttons */}
@@ -1973,22 +2118,11 @@ export default function Form() {
                       mt: 3,
                       ml: 1,
                       visibility:
-                        activeStep === 1 ||
-                        (activeStep === 0 &&
-                          (location === "india" ||
-                            location === "uae" ||
-                            location === ""))
+                        activeStep === 0 || activeStep === 1
                           ? "hidden"
                           : "visible",
                     }}
-                    disabled={
-                      activeStep === 0
-                        ? location === "" ||
-                          (location === "other" && otherLocation === "")
-                        : activeStep === 1
-                        ? diamondType === ""
-                        : false
-                    }
+                    disabled={activeStep === 1 ? diamondType === "" : false}
                   >
                     {"Next"}
                   </Button>
@@ -2004,6 +2138,9 @@ export default function Form() {
               variant="text"
               steps={phone_steps.length}
               sx={{
+                // background: "transparent",
+                // backdropFilter: "blur(1rem)",
+                boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.25)",
                 [theme.breakpoints.up("md")]: {
                   display: "none",
                 },
@@ -2038,22 +2175,11 @@ export default function Form() {
                     sx={{
                       mr: 1,
                       visibility:
-                        activeStep === 1 ||
-                        (activeStep === 0 &&
-                          (location === "india" ||
-                            location === "uae" ||
-                            location === ""))
+                        activeStep === 0 || activeStep === 1
                           ? "hidden"
                           : "visible",
                     }}
-                    disabled={
-                      activeStep === 0
-                        ? location === "" ||
-                          (location === "other" && otherLocation === "")
-                        : activeStep === 1
-                        ? diamondType === ""
-                        : false
-                    }
+                    disabled={activeStep === 1 ? diamondType === "" : false}
                   >
                     {"Next"}
                   </Button>

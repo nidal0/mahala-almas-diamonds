@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import {
   Button,
   Typography,
-  Fade,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -36,11 +35,11 @@ const RootDiv = styled("div")(({ theme }) => ({
 const Container = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
+  justifyContent: "space-around",
   alignItems: "center",
   width: "100%",
   height: "100%",
-  gap: "3rem",
+  // gap: "15rem",
 }));
 
 const ButtonContainer = styled("div")(({ theme }) => ({
@@ -104,30 +103,47 @@ export default function Welcome() {
           onClose={handleModalClose}
           aria-labelledby="customized-dialog-title"
           open={modalOpen}
+          disableScrollLock
+          sx={{
+            background: theme.palette.primary.background,
+          }}
         >
-          <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-            Modal title
-          </DialogTitle>
-          <IconButton
-            aria-label="close"
-            onClick={handleModalClose}
+          <DialogTitle
             sx={{
-              position: "absolute",
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
+              padding: "1rem 1.5rem 1rem 1.5rem",
+              background: theme.palette.background.default,
             }}
+            id="customized-dialog-title"
           >
-            <Close />
-          </IconButton>
-          <DialogContent dividers>
-            <Typography gutterBottom>
+            {"How it works ?"}
+            <IconButton
+              aria-label="close"
+              onClick={handleModalClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <Close />
+            </IconButton>
+          </DialogTitle>
+
+          <DialogContent sx={{ background: theme.palette.background.default }}>
+            <Typography>
               Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
               dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
               ac consectetur ac, vestibulum at eros.
             </Typography>
           </DialogContent>
-          <DialogActions>
+
+          <DialogActions
+            sx={{
+              padding: "0rem 1rem 1rem 0rem",
+              background: theme.palette.background.default,
+            }}
+          >
             <Button
               variant="outlined"
               color="primary"
@@ -147,7 +163,7 @@ export default function Welcome() {
             Mahala Almas
           </Title>
           <ButtonContainer>
-            {/* <Button
+            <Button
               disableElevation
               disableFocusRipple
               disableRipple
@@ -161,7 +177,8 @@ export default function Welcome() {
               }}
             >
               How it works?
-            </Button> */}
+            </Button>
+
             <Button
               disableElevation
               disableFocusRipple

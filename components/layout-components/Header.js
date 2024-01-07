@@ -3,12 +3,13 @@ import Head from "next/head";
 import React from "react";
 
 const Header = (props) => {
-  const { router } = props.router;
+  // const { router } = props.router;
   const keywords = props.keywords;
   const description = props.description;
   const title = props.title;
-  const canonicalUrl = props.canonicalUrl;
-  const ogImageParams = props.ogImageParams;
+  // const canonicalUrl = props.canonicalUrl;
+  // const ogImageParams = props.ogImageParams;
+
   return (
     <React.Fragment>
       <Head>
@@ -86,7 +87,7 @@ const Header = (props) => {
               : "Mahala Almas helps you find the diamond that ou want."
           }
         />
-        <meta
+        {/* <meta
           property="og:url"
           content={
             canonicalUrl
@@ -143,8 +144,8 @@ const Header = (props) => {
         <link
           rel="apple-touch-icon"
           href={process.env.CDN_URL + "images/icons/logo/favicon_192.png"}
-        />
-        <link rel="manifest" href={process.env.CDN_URL + "manifest.json"} />
+        /> */}
+        {/* <link rel="manifest" href={process.env.CDN_URL + "manifest.json"} /> */}
         <title>{title ? title : "Mahala Almas"}</title>
       </Head>
     </React.Fragment>
