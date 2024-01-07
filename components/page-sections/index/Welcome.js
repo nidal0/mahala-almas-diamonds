@@ -128,9 +128,11 @@ export default function Welcome() {
 
           <DialogContent sx={{ background: theme.palette.background.default }}>
             <Typography>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros.
+              We gather essential details such as your preferred diamond shape,
+              carat weight, cut, color, clarity, and any specific preferences
+              you may have along with your contact details. This information
+              helps us understand your preferences, ensuring we provide you with
+              the perfect diamond that meets your expectations.
             </Typography>
           </DialogContent>
 
