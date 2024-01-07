@@ -44,15 +44,11 @@ const Container = styled("div")(({ theme }) => ({
 
 const ButtonContainer = styled("div")(({ theme }) => ({
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
   width: "100%",
-  gap: "1rem",
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    gap: "1.5rem",
-  },
+  gap: "0.5rem",
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -169,22 +165,6 @@ export default function Welcome() {
               disableRipple
               variant="outlined"
               color="primary"
-              onClick={handleClickModalOpen}
-              sx={{
-                [theme.breakpoints.down("sm")]: {
-                  width: "80%",
-                },
-              }}
-            >
-              How it works?
-            </Button>
-
-            <Button
-              disableElevation
-              disableFocusRipple
-              disableRipple
-              variant="outlined"
-              color="primary"
               onClick={(event) => {
                 Router.push("/form");
               }}
@@ -195,6 +175,17 @@ export default function Welcome() {
               }}
             >
               Find your perfect diamond
+            </Button>
+
+            <Button
+              disableElevation
+              disableFocusRipple
+              disableRipple
+              variant="text"
+              color="primary"
+              onClick={handleClickModalOpen}
+            >
+              How it works?
             </Button>
           </ButtonContainer>
         </Container>
