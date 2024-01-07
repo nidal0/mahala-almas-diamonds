@@ -5,7 +5,7 @@ import Welcome from "../components/page-sections/index/Welcome";
 
 export default function Home() {
   return (
-    <Layout>
+    <Layout noLayoutHeader>
       <Welcome />
     </Layout>
   );
