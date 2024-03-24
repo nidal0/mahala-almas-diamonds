@@ -7,14 +7,14 @@ const Styles = {
   light: {
     // palette values for light mode
     primary: {
-      main: "#283593",
-      light: "#CCDCF3",
-      dark: "#5B7BB6",
+      main: "#2E3180",
+      light: "#D0DDFF",
+      dark: "#DDDCE3",
     },
     secondary: {
-      main: "#FFFFFF",
-      light: "#FFFFFF",
-      dark: "#FFFFFF",
+      main: "#FFDD67",
+      light: "#FFF0BD",
+      dark: "#FFEAAC",
     },
     error: {
       main: "#FBF7F5",
@@ -22,10 +22,11 @@ const Styles = {
       dark: "#FBF7F5",
     },
     background: {
-      default: "#FFFEF2",
+      default: "#FFFDF7",
     },
     text: {
       primary: "#000000",
+      disabled: "#C1C1D3",
     },
   },
   dark: {
@@ -94,10 +95,74 @@ const GetDesignTokens = (mode) => ({
       styleOverrides: {
         root: {
           textTransform: "none",
+          borderRadius: 8,
+          fontWeight: 600,
+          "&.MuiButton-contained": {
+            background: "#FFDD67",
+            border: "1px solid #FFDD67",
+            color: "#2E3180",
+            boxShadow: "none",
+            "&.Mui-disabled": {
+              background: "#DDDCE3",
+              border: "1px solid #DDDCE3",
+              color: "#9E9E9E",
+            },
+            "&:hover": {
+              background: "#FFE483",
+              boxShadow: "none",
+            },
+          },
+          "&.MuiButton-outlined": {
+            background: "transparent",
+            border: "1px solid #2E3180",
+            color: "#2E3180",
+            boxShadow: "none",
+            "&.Mui-disabled": {
+              background: "#DDDCE3",
+              border: "1px solid #DDDCE3",
+              color: "#9E9E9E",
+            },
+            "&:hover": {
+              background: "#FFFAEB",
+              boxShadow: "none",
+            },
+          },
         },
-        "&.MuiButton-containedPrimary:hover": {
-          background: "#1A1F25",
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          background: "white",
+          "& label.Mui-focused": {
+            color: "#FFDD67",
+          },
+          "& .MuiInput-underline:after": {
+            borderBottomColor: "#FFDD67",
+          },
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: "#FFDD67",
+            },
+            "&:hover fieldset": {
+              borderColor: "#FFDD67",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "#FFDD67",
+            },
+          },
         },
+        // root: {
+        //   "&.Mui-focused": {
+        //     borderColor: "#FFDD67",
+        //     "& .MuiOutlinedInput-notchedOutline": {
+        //       borderColor: "#FFDD67",
+        //     },
+        //   },
+        //   "& .MuiOutlinedInput-notchedOutline": {
+        //     borderColor: "#FFDD67",
+        //   },
+        // },
       },
     },
   },

@@ -19,7 +19,7 @@ import {
 
 /* Icon Imports */
 
-import { Close } from "@mui/icons-material";
+import { Close, DiamondOutlined } from "@mui/icons-material";
 
 /* Styled Components */
 
@@ -101,13 +101,15 @@ export default function Welcome() {
           open={modalOpen}
           disableScrollLock
           sx={{
-            background: theme.palette.primary.background,
+            background: theme.palette.background.default,
           }}
         >
           <DialogTitle
             sx={{
               padding: "1rem 1.5rem 1rem 1.5rem",
               background: theme.palette.background.default,
+              color: theme.palette.primary.main,
+              fontWeight: "bold",
             }}
             id="customized-dialog-title"
           >
@@ -127,7 +129,7 @@ export default function Welcome() {
           </DialogTitle>
 
           <DialogContent sx={{ background: theme.palette.background.default }}>
-            <Typography>
+            <Typography variant="body1" fontWeight="bold">
               We gather essential details such as your preferred diamond shape,
               carat weight, cut, color, clarity, and any specific preferences
               you may have along with your contact details. This information
@@ -143,7 +145,7 @@ export default function Welcome() {
             }}
           >
             <Button
-              variant="outlined"
+              variant="contained"
               color="primary"
               onClick={(event) => {
                 Router.push("/form");
@@ -165,11 +167,12 @@ export default function Welcome() {
               disableElevation
               disableFocusRipple
               disableRipple
-              variant="outlined"
+              variant="contained"
               color="primary"
               onClick={(event) => {
                 Router.push("/form");
               }}
+              endIcon={<DiamondOutlined />}
               sx={{
                 [theme.breakpoints.down("sm")]: {
                   width: "80%",

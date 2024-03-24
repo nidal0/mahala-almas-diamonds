@@ -22,13 +22,16 @@ import {
   RadioGroup,
   FormControl,
   Fade,
-  Grow,
   Slide,
   Slider,
   Snackbar,
   CircularProgress,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
+
+/* Icon Imports */
+
+import { Done, LocationOn } from "@mui/icons-material";
 
 /* Firebase Imports */
 
@@ -95,9 +98,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   width: "80%",
   minHeight: "93vh",
   gap: "4rem",
-  // backdropFilter: "blur(6px)",
-  // backgroundColor: "rgba(0,0,30,0.3)",
-  background: "#FFFEF2",
+  background: theme.palette.background.default,
   boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
@@ -177,14 +178,14 @@ const Container = styled("div")(({ theme }) => ({
 
 const Title = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
-  fontWeight: "400",
+  fontWeight: "600",
   textAlign: "center",
-  fontSize: "3rem",
+  fontSize: "2.5rem",
   margin: "0rem 0rem 2rem 0rem",
   [theme.breakpoints.down("sm")]: {
     margin: "0rem 0rem 1rem 0rem",
-    fontWeight: "400",
-    fontSize: "1.5rem",
+    fontWeight: "600",
+    fontSize: "1.625rem",
   },
 }));
 
@@ -199,26 +200,60 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
   },
 }));
 
+const RadioGroupContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+  rowGap: "1.5rem",
+  columnGap: "2rem",
+  flexWrap: "wrap",
+  [theme.breakpoints.only("xxs")]: {
+    width: "100%",
+    rowGap: "1rem",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    columnGap: "1.5rem",
+  },
+}));
+
+const CustomFormControlLabel = styled(FormControlLabel, {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  width: "48%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "0.75rem 1rem",
+  margin: "0rem 0rem 0rem 0rem",
+  cursor: "pointer",
+  WebkitTapHighlightColor: "transparent",
+  borderRadius: "0.5rem",
+  background: selected
+    ? theme.palette.secondary.main
+    : theme.palette.secondary.light,
+  "@media (pointer: fine)": {
+    "&:hover": {
+      background: "#FFE483",
+    },
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
+}));
+
 const StyledLocation = styled("div", {
   shouldForwardProp: (prop) => prop !== "selected",
 })(({ theme, selected }) => ({
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  flexDirection: "row",
+  justifyContent: "space-between",
   alignItems: "center",
-  borderRadius: "0.25rem",
-  padding: "0.5rem 1rem",
-  width: "10rem",
-  cursor: "pointer",
-  WebkitTapHighlightColor: "transparent",
-  border: selected ? "2px solid" : "2px solid",
-  borderColor: selected
-    ? theme.palette.primary.main
-    : theme.palette.primary.light,
-  background: "#FFFEF2",
-  "&:hover": {
-    background: "#FFFEF2",
-  },
+  width: "100%",
+  gap: "0.5rem",
 }));
 
 // const StyledLocationContainer = styled("div")(({ theme }) => ({
@@ -268,71 +303,9 @@ const DiamondTypeButtonRow = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   gap: "2rem",
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "row",
-    gap: "1.5em",
-  },
-}));
-
-const SliderTextfieldsRow = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "60%",
-  margin: "2rem 0rem 0rem 0rem",
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     flexDirection: "column",
-    width: "100%",
-    gap: "1.5rem",
-    margin: "2rem 0rem 0rem 0rem",
-  },
-}));
-
-const SliderLabelColumn = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  alignItems: "flex-start",
-  gap: "1rem",
-  width: "auto",
-  [theme.breakpoints.down("sm")]: {
-    alignItems: "center",
-    width: "100%",
-  },
-}));
-
-const CaratLabel = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontWeight: "400",
-  textAlign: "center",
-  fontSize: "1rem",
-  [theme.breakpoints.down("sm")]: {
-    fontWeight: "400",
-    fontSize: "1.1rem",
-  },
-}));
-
-const CaratTextField = styled(TextField)(({ theme }) => ({
-  width: "10rem",
-  [theme.breakpoints.down("sm")]: {
-    width: "90%",
-  },
-  [theme.breakpoints.up("lg")]: { width: "12rem" },
-}));
-
-const CustomRangeSlider = styled(Slider)(({ theme }) => ({
-  width: "30%",
-  "& .MuiSlider-markLabel": {
-    background: theme.palette.background.default,
-    color: theme.palette.primary.main,
-  },
-
-  [theme.breakpoints.down("sm")]: {
-    width: "80%",
-    "& .MuiSlider-markLabel": {
-      fontSize: "0.65rem",
-    },
+    gap: "1.5em",
   },
 }));
 
@@ -340,29 +313,47 @@ const StyledDiamondType = styled("div", {
   shouldForwardProp: (prop) => prop !== "selected",
 })(({ theme, selected }) => ({
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "row",
   justifyContent: "space-between",
-  alignItems: "center",
+  alignItems: "flex-start",
   WebkitTapHighlightColor: "transparent",
-  border: selected ? "2px solid" : "2px solid",
+  border: selected ? "2px solid" : "none",
   borderColor: selected
-    ? theme.palette.primary.main
+    ? theme.palette.primary.light
     : theme.palette.primary.light,
-  borderRadius: "0.25rem",
+  borderRadius: "1rem",
   padding: "1rem",
-  height: "150px",
-  width: "140px",
+  height: "15rem",
+  width: "25rem",
   cursor: "pointer",
-  background: "#FFFEF2",
-  "&:hover": {
-    background: "#FFFEF2",
+  [theme.breakpoints.up("lg")]: {
+    "&:hover": {
+      transform: "scale(1.05)",
+      transition: "0.4s",
+    },
+  },
+  [theme.breakpoints.down("sm")]: { height: "12rem", width: "18rem" },
+}));
+
+const DiamondTypeLabel = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  fontWeight: "600",
+  fontSize: "1.5rem",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "1rem",
   },
 }));
 
 const CustomDiamondTypeImg = styled("img")(({ theme }) => ({
-  height: "70px",
-  width: "70px",
-  // filter: "invert(100%)",
+  height: "13rem",
+  width: "9rem",
+  margin: "0rem 3rem 0rem 0rem",
+  [theme.breakpoints.down("sm")]: {
+    height: "10rem",
+    width: "6.5rem",
+    margin: "0rem 2rem 0rem 0rem",
+  },
 }));
 
 const DiamondShapesContainer = styled("div")(({ theme }) => ({
@@ -443,234 +434,164 @@ const StyledDiamondShape = styled("div", {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  WebkitTapHighlightColor: "transparent",
-  border: selected ? "2px solid" : "2px solid",
-  borderColor: selected
-    ? theme.palette.primary.main
-    : theme.palette.primary.light,
-  // boxShadow: selected
-  //   ? "none"
-  //   : " 0 4px  4px  rgba(0, 0, 0, .1), 0 1px  6px  rgba(0, 0, 0, .05), 0 8px  8px  rgba(0, 0, 0, .1),  0 16px 16px rgba(0, 0, 0, .1), 8px 32px 32px rgba(0, 0, 0, .15), 8px 64px 64px rgba(0, 0, 0, .15)",
-  // transform: selected ? "scale(-1.05) translateY(-0.5rem)" : "scale(1)",
-  // transition: "all 1s ease-in-out",
-  borderRadius: "0.25rem",
+  borderRadius: "1rem",
   padding: "1rem",
-  height: "110px",
-  width: "110px",
+  height: "8rem",
+  width: "8rem",
+  WebkitTapHighlightColor: "transparent",
+  background: selected
+    ? theme.palette.secondary.main
+    : theme.palette.secondary.light,
   cursor: "pointer",
-  background: "#FFFEF2",
-  "&:hover": {
-    background: "#FFFEF2",
+  "@media (pointer: fine)": {
+    "&:hover": {
+      background: "#FFE483",
+    },
   },
 }));
 
 const CustomDiamondShapeImg = styled("img")(({ theme }) => ({
-  height: "50px",
-  width: "50px",
-  // filter: "invert(100%)",
+  height: "4rem",
+  width: "4rem",
 }));
 
 const DiamondShapeLabel = styled(Typography, {
   shouldForwardProp: (prop) => prop !== "selected",
 })(({ theme, selected }) => ({
   margin: "0.5rem 0rem 0rem 0rem",
-  fontWeight: "400",
+  fontWeight: selected ? 600 : 400,
   textAlign: "center",
   fontSize: "1rem",
-  color: "#030303",
+}));
+
+const SliderContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "flex-end",
+  alignItems: "flex-start",
+  gap: "2.5rem",
+  width: "45%",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column-reverse",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "2.5rem",
+    width: "100%",
+  },
+}));
+
+const SliderTextfieldsRow = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  gap: "1rem",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+}));
+
+const CaratTextField = styled(TextField)(({ theme }) => ({
+  width: "8rem",
+  [theme.breakpoints.down("sm")]: {
+    width: "90%",
+  },
+}));
+
+const CustomRangeSlider = styled(Slider)(({ theme }) => ({
+  width: "0.5rem",
+  height: "22rem",
+  "& .MuiSlider-markLabel": {
+    background: theme.palette.background.default,
+    color: theme.palette.text.disabled,
+    fontWeight: "400",
+    margin: "0rem 0rem 0rem 1rem",
+    "&.MuiSlider-markLabelActive": {
+      fontWeight: "600",
+      color: theme.palette.primary.main,
+    },
+  },
+  "& .MuiSlider-thumb": {
+    width: "2rem",
+    height: "2rem",
+  },
+  [theme.breakpoints.down("sm")]: {
+    height: "22rem",
+  },
 }));
 
 const ClarityContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "center",
+  justifyContent: "space-between",
   alignItems: "center",
   width: "80%",
   rowGap: "1.5rem",
   columnGap: "2rem",
   flexWrap: "wrap",
-  /* XXS breakpoint */
   [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
   [theme.breakpoints.down("sm")]: { width: "100%", columnGap: "1.5rem" },
-  // /* iphone 5 */
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
-  //   columnGap: "0.5rem",
-  //   rowGap: "2.5rem",
-  // },
-  // /*galaxy S8+ - 360*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
-  //   columnGap: "0.6rem",
-  // },
-  // /*iphone se - 375*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
-  //   columnGap: "1.5rem",
-  // },
-  // /* iphone 12 pro and pixel - 390 */
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
-  //   columnGap: "2rem",
-  // },
-  // /*iphone XR - 414*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
-  //   width: "90%",
-  //   columnGap: "1.8rem",
-  // },
-  // [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
-  // [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
-  // /*ipad Mini */
-  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
-  //   width: "100%",
-  //   columnGap: "5.5rem",
-  //   rowGap: "2.5rem",
-  // },
-  // /* ipad Air*/
-  // [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
-  //   columnGap: "2rem",
-  //   rowGap: "2.5rem",
-  // },
-  // [theme.breakpoints.up("md")]: { columnGap: "2rem" },
-  // /* MDLG Breakpoint iPadPro*/
-  // [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
-  //   columnGap: "4.3rem",
-  // },
-  // /*720p and 768p breakpoint */
-  // [theme.breakpoints.up("lg")]: {
-  //   width: "80%",
-  //   columnGap: "2rem",
-  // },
-  // /* 1080p 125% breakpoint*/
-  // [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
-  //   columnGap: "4.5rem",
-  // },
-  // /* 1080p breakpoint*/
-  // [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
-  // /* XXL breakpoint  2560p*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
-  //   columnGap: "2rem",
-  // },
-  // /*4k breakpoint 3840p*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
-  //   columnGap: "3rem",
-  // },
 }));
 
 const StyledClarity = styled("div", {
   shouldForwardProp: (prop) => prop !== "selected",
 })(({ theme, selected }) => ({
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  flexDirection: "row",
+  justifyContent: "space-between",
   alignItems: "center",
-  borderRadius: "0.25rem",
-  padding: "0.5rem 1rem",
-  width: "140px",
+  borderRadius: "0.5rem",
+  padding: "0.75rem 1rem",
+  width: "48%",
   cursor: "pointer",
   WebkitTapHighlightColor: "transparent",
-  border: selected ? "2px solid" : "2px solid",
-  borderColor: selected
-    ? theme.palette.primary.main
-    : theme.palette.primary.light,
-  background: "#FFFEF2",
-  "&:hover": {
-    background: "#FFFEF2",
+  background: selected
+    ? theme.palette.secondary.main
+    : theme.palette.secondary.light,
+  "@media (pointer: fine)": {
+    "&:hover": {
+      background: "#FFE483",
+    },
   },
-  [theme.breakpoints.only("xxs")]: { width: "100%" },
-  [theme.breakpoints.down("sm")]: { width: "120px" },
+  [theme.breakpoints.down("sm")]: { width: "100%" },
 }));
 
 const CertificationsContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "center",
+  justifyContent: "space-between",
   alignItems: "center",
   width: "80%",
   rowGap: "1.5rem",
   columnGap: "2rem",
   flexWrap: "wrap",
-  /* XXS breakpoint */
   [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
   [theme.breakpoints.down("sm")]: { width: "100%", columnGap: "1.5rem" },
-  // /* iphone 5 */
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
-  //   columnGap: "0.5rem",
-  //   rowGap: "2.5rem",
-  // },
-  // /*galaxy S8+ - 360*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
-  //   columnGap: "0.6rem",
-  // },
-  // /*iphone se - 375*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
-  //   columnGap: "1.5rem",
-  // },
-  // /* iphone 12 pro and pixel - 390 */
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
-  //   columnGap: "2rem",
-  // },
-  // /*iphone XR - 414*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
-  //   width: "90%",
-  //   columnGap: "1.8rem",
-  // },
-  // [theme.breakpoints.up("xsPlus")]: { columnGap: "1.8rem" },
-  // [theme.breakpoints.up("sm")]: { columnGap: "1.8rem" },
-  // /*ipad Mini */
-  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
-  //   width: "100%",
-  //   columnGap: "5.5rem",
-  //   rowGap: "2.5rem",
-  // },
-  // /* ipad Air*/
-  // [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
-  //   columnGap: "2rem",
-  //   rowGap: "2.5rem",
-  // },
-  // [theme.breakpoints.up("md")]: { columnGap: "2rem" },
-  // /* MDLG Breakpoint iPadPro*/
-  // [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
-  //   columnGap: "4.3rem",
-  // },
-  // /*720p and 768p breakpoint */
-  // [theme.breakpoints.up("lg")]: {
-  //   width: "80%",
-  //   columnGap: "2rem",
-  // },
-  // /* 1080p 125% breakpoint*/
-  // [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
-  //   columnGap: "4.5rem",
-  // },
-  // /* 1080p breakpoint*/
-  // [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
-  // /* XXL breakpoint  2560p*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
-  //   columnGap: "2rem",
-  // },
-  // /*4k breakpoint 3840p*/
-  // [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
-  //   columnGap: "3rem",
-  // },
 }));
 
 const StyledCertification = styled("div", {
   shouldForwardProp: (prop) => prop !== "selected",
 })(({ theme, selected }) => ({
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
+  flexDirection: "row",
+  justifyContent: "space-between",
   alignItems: "center",
-  borderRadius: "0.25rem",
-  padding: "0.5rem 1rem",
-  width: "140px",
+  borderRadius: "0.5rem",
+  padding: "0.75rem 1rem",
+  width: "48%",
   cursor: "pointer",
   WebkitTapHighlightColor: "transparent",
-  border: selected ? "2px solid" : "2px solid",
-  borderColor: selected
-    ? theme.palette.primary.main
-    : theme.palette.primary.light,
-  background: "#FFFEF2",
-  "&:hover": {
-    background: "#FFFEF2",
+  background: selected
+    ? theme.palette.secondary.main
+    : theme.palette.secondary.light,
+  "@media (pointer: fine)": {
+    "&:hover": {
+      background: "#FFE483",
+    },
   },
-  [theme.breakpoints.only("xxs")]: { width: "100%" },
+  [theme.breakpoints.down("sm")]: { width: "100%" },
 }));
 
 const ContactTextField = styled(TextField)(({ theme }) => ({
@@ -1267,16 +1188,12 @@ export default function Form() {
                     <CustomFormControl>
                       <RadioGroup
                         row
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "1.5rem",
-                        }}
                         aria-labelledby="select-location"
                         name="select-location"
                         value={location}
+                        sx={{
+                          width: "100%",
+                        }}
                         onChange={(e) => {
                           setLocation(e.target.value);
                           setTimeout(() => {
@@ -1284,121 +1201,165 @@ export default function Form() {
                           }, 200);
                         }}
                       >
-                        <FormControlLabel
-                          value="abu_dhabi"
-                          labelPlacement="top"
-                          control={<Radio sx={{ display: "none" }} />}
-                          label={
-                            <StyledLocation selected={location === "abu_dhabi"}>
-                              <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center" }}
+                        <RadioGroupContainer>
+                          <CustomFormControlLabel
+                            value="abu_dhabi"
+                            labelPlacement="top"
+                            selected={location === "abu_dhabi"}
+                            control={<Radio sx={{ display: "none" }} />}
+                            label={
+                              <StyledLocation
+                                selected={location === "abu_dhabi"}
                               >
-                                Abu Dhabi
-                              </Typography>
-                            </StyledLocation>
-                          }
-                        />
+                                {location === "abu_dhabi" && (
+                                  <LocationOn color="primary" />
+                                )}
+                                <Typography
+                                  variant="body1"
+                                  fontWeight={
+                                    location === "abu_dhabi" ? 600 : 400
+                                  }
+                                  sx={{ textAlign: "center" }}
+                                >
+                                  Abu Dhabi
+                                </Typography>
+                              </StyledLocation>
+                            }
+                          />
 
-                        <FormControlLabel
-                          value="dubai"
-                          labelPlacement="top"
-                          control={<Radio sx={{ display: "none" }} />}
-                          label={
-                            <StyledLocation selected={location === "dubai"}>
-                              <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center" }}
-                              >
-                                Dubai
-                              </Typography>
-                            </StyledLocation>
-                          }
-                        />
+                          <CustomFormControlLabel
+                            value="dubai"
+                            labelPlacement="top"
+                            selected={location === "dubai"}
+                            control={<Radio sx={{ display: "none" }} />}
+                            label={
+                              <StyledLocation selected={location === "dubai"}>
+                                {location === "dubai" && (
+                                  <LocationOn color="primary" />
+                                )}
+                                <Typography
+                                  variant="body1"
+                                  fontWeight={location === "dubai" ? 600 : 400}
+                                  sx={{ textAlign: "center" }}
+                                >
+                                  Dubai
+                                </Typography>
+                              </StyledLocation>
+                            }
+                          />
 
-                        <FormControlLabel
-                          value="sharjah"
-                          labelPlacement="top"
-                          control={<Radio sx={{ display: "none" }} />}
-                          label={
-                            <StyledLocation selected={location === "sharjah"}>
-                              <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center" }}
-                              >
-                                Sharjah
-                              </Typography>
-                            </StyledLocation>
-                          }
-                        />
+                          <CustomFormControlLabel
+                            value="sharjah"
+                            labelPlacement="top"
+                            selected={location === "sharjah"}
+                            control={<Radio sx={{ display: "none" }} />}
+                            label={
+                              <StyledLocation selected={location === "sharjah"}>
+                                {location === "sharjah" && (
+                                  <LocationOn color="primary" />
+                                )}{" "}
+                                <Typography
+                                  variant="body1"
+                                  fontWeight={
+                                    location === "sharjah" ? 600 : 400
+                                  }
+                                  sx={{ textAlign: "center" }}
+                                >
+                                  Sharjah
+                                </Typography>
+                              </StyledLocation>
+                            }
+                          />
 
-                        <FormControlLabel
-                          value="ajman"
-                          labelPlacement="top"
-                          control={<Radio sx={{ display: "none" }} />}
-                          label={
-                            <StyledLocation selected={location === "ajman"}>
-                              <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center" }}
-                              >
-                                Ajman
-                              </Typography>
-                            </StyledLocation>
-                          }
-                        />
+                          <CustomFormControlLabel
+                            value="ajman"
+                            labelPlacement="top"
+                            selected={location === "ajman"}
+                            control={<Radio sx={{ display: "none" }} />}
+                            label={
+                              <StyledLocation selected={location === "ajman"}>
+                                {location === "ajman" && (
+                                  <LocationOn color="primary" />
+                                )}
+                                <Typography
+                                  variant="body1"
+                                  fontWeight={location === "ajman" ? 600 : 400}
+                                  sx={{ textAlign: "center" }}
+                                >
+                                  Ajman
+                                </Typography>
+                              </StyledLocation>
+                            }
+                          />
 
-                        <FormControlLabel
-                          value="umm_al_quwain"
-                          labelPlacement="top"
-                          control={<Radio sx={{ display: "none" }} />}
-                          label={
-                            <StyledLocation
-                              selected={location === "umm_al_quwain"}
-                            >
-                              <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center" }}
+                          <CustomFormControlLabel
+                            value="umm_al_quwain"
+                            labelPlacement="top"
+                            control={<Radio sx={{ display: "none" }} />}
+                            label={
+                              <StyledLocation
+                                selected={location === "umm_al_quwain"}
                               >
-                                Umm Al Quwain
-                              </Typography>
-                            </StyledLocation>
-                          }
-                        />
+                                <Typography
+                                  variant="body1"
+                                  sx={{ textAlign: "center" }}
+                                >
+                                  Umm Al Quwain
+                                </Typography>
+                              </StyledLocation>
+                            }
+                          />
 
-                        <FormControlLabel
-                          value="ras_al_khaimah"
-                          labelPlacement="top"
-                          control={<Radio sx={{ display: "none" }} />}
-                          label={
-                            <StyledLocation
-                              selected={location === "ras_al_khaimah"}
-                            >
-                              <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center" }}
+                          <CustomFormControlLabel
+                            value="ras_al_khaimah"
+                            labelPlacement="top"
+                            selected={location === "ras_al_khaimah"}
+                            control={<Radio sx={{ display: "none" }} />}
+                            label={
+                              <StyledLocation
+                                selected={location === "ras_al_khaimah"}
                               >
-                                Ras Al Khaimah
-                              </Typography>
-                            </StyledLocation>
-                          }
-                        />
+                                {location === "ras_al_khaimah" && (
+                                  <LocationOn color="primary" />
+                                )}
+                                <Typography
+                                  variant="body1"
+                                  fontWeight={
+                                    location === "ras_al_khaimah" ? 600 : 400
+                                  }
+                                  sx={{ textAlign: "center" }}
+                                >
+                                  Ras Al Khaimah
+                                </Typography>
+                              </StyledLocation>
+                            }
+                          />
 
-                        <FormControlLabel
-                          value="fujairah"
-                          labelPlacement="top"
-                          control={<Radio sx={{ display: "none" }} />}
-                          label={
-                            <StyledLocation selected={location === "fujairah"}>
-                              <Typography
-                                variant="body1"
-                                sx={{ textAlign: "center" }}
+                          <CustomFormControlLabel
+                            value="fujairah"
+                            labelPlacement="top"
+                            selected={location === "fujairah"}
+                            control={<Radio sx={{ display: "none" }} />}
+                            label={
+                              <StyledLocation
+                                selected={location === "fujairah"}
                               >
-                                Fujairah
-                              </Typography>
-                            </StyledLocation>
-                          }
-                        />
+                                {location === "fujairah" && (
+                                  <LocationOn color="primary" />
+                                )}
+                                <Typography
+                                  variant="body1"
+                                  fontWeight={
+                                    location === "fujairah" ? 600 : 400
+                                  }
+                                  sx={{ textAlign: "center" }}
+                                >
+                                  Fujairah
+                                </Typography>
+                              </StyledLocation>
+                            }
+                          />
+                        </RadioGroupContainer>
 
                         {/* <Grow
                         in={activeStep === 0}
@@ -1571,6 +1532,8 @@ export default function Form() {
                     </Fade>
 
                     <DiamondTypeButtonRow>
+                      {/* Natural */}
+
                       <StyledDiamondType
                         onClick={() => {
                           setDiamondType("natural");
@@ -1578,26 +1541,34 @@ export default function Form() {
                             handleNext();
                           }, 200);
                         }}
+                        sx={{ background: theme.palette.secondary.main }}
                         selected={diamondType === "natural"}
                       >
+                        <DiamondTypeLabel
+                          variant="body1"
+                          selected={diamondType === "natural"}
+                        >
+                          Natural
+                        </DiamondTypeLabel>
                         <CustomDiamondTypeImg
                           src="/images/diamond-types/natural.png"
                           height={100}
                           width={100}
                           alt="Natural"
-                        />
-                        <DiamondShapeLabel
                           sx={{
+                            height: "12rem",
+                            width: "14rem",
+                            margin: "1rem 0rem 0rem 0rem",
                             [theme.breakpoints.down("sm")]: {
-                              fontSize: "0.875rem",
+                              height: "9rem",
+                              width: "11rem",
+                              margin: "1rem 0rem 0rem 0rem",
                             },
                           }}
-                          variant="h6"
-                          selected={diamondType === "natural"}
-                        >
-                          Natural
-                        </DiamondShapeLabel>
+                        />
                       </StyledDiamondType>
+
+                      {/* Lab Grown */}
 
                       <StyledDiamondType
                         onClick={() => {
@@ -1606,25 +1577,23 @@ export default function Form() {
                             handleNext();
                           }, 200);
                         }}
+                        sx={{ background: theme.palette.primary.main }}
                         selected={diamondType === "lab_grown"}
                       >
+                        <DiamondTypeLabel
+                          color="white"
+                          variant="body1"
+                          selected={diamondType === "lab_grown"}
+                        >
+                          Lab Grown
+                        </DiamondTypeLabel>
+
                         <CustomDiamondTypeImg
                           src="/images/diamond-types/lab_grown.png"
                           height={100}
                           width={100}
                           alt="Lab Grown"
                         />
-                        <DiamondShapeLabel
-                          sx={{
-                            [theme.breakpoints.down("sm")]: {
-                              fontSize: "0.875rem",
-                            },
-                          }}
-                          variant="h6"
-                          selected={diamondType === "lab_grown"}
-                        >
-                          Lab Grown
-                        </DiamondShapeLabel>
                       </StyledDiamondType>
                     </DiamondTypeButtonRow>
                   </Container>
@@ -1698,24 +1667,32 @@ export default function Form() {
                       <Title variant="h3">Please select a range of carat</Title>
                     </Fade>
 
-                    <CustomRangeSlider
-                      sx={{ width: "60%" }}
-                      min={0.1}
-                      max={30.0}
-                      precision={0.1}
-                      value={[diamondMinCarat, diamondMaxCarat]}
-                      valueLabelDisplay="auto"
-                      step={0.1}
-                      marks={carat_slider_marks}
-                      onChange={(event, newValue) => {
-                        setDiamondMinCarat(newValue[0]);
-                        setDiamondMaxCarat(newValue[1]);
-                      }}
-                    />
+                    <SliderContainer>
+                      <CustomRangeSlider
+                        min={0.1}
+                        max={30.0}
+                        precision={0.1}
+                        sx={{
+                          "& .MuiSlider-rail": {
+                            color: theme.palette.primary.dark,
+                          },
+                          color: theme.palette.secondary.dark,
+                          [theme.breakpoints.down("sm")]: {
+                            margin: "0rem 0rem 0rem 0rem",
+                          },
+                        }}
+                        orientation="vertical"
+                        value={[diamondMinCarat, diamondMaxCarat]}
+                        valueLabelDisplay="auto"
+                        step={0.1}
+                        marks={carat_slider_marks}
+                        onChange={(event, newValue) => {
+                          setDiamondMinCarat(newValue[0]);
+                          setDiamondMaxCarat(newValue[1]);
+                        }}
+                      />
 
-                    <SliderTextfieldsRow>
-                      <SliderLabelColumn>
-                        <CaratLabel variant="h6">From</CaratLabel>
+                      <SliderTextfieldsRow>
                         <CaratTextField
                           id="minCarat"
                           name="minCarat"
@@ -1726,9 +1703,10 @@ export default function Form() {
                           value={diamondMinCarat}
                           onChange={(e) => setDiamondMinCarat(e.target.value)}
                         />
-                      </SliderLabelColumn>
-                      <SliderLabelColumn>
-                        <CaratLabel variant="h6">To</CaratLabel>
+
+                        <Typography variant="h6" fontWeight={600}>
+                          To
+                        </Typography>
                         <CaratTextField
                           id="maxCarat"
                           name="maxCarat"
@@ -1739,8 +1717,8 @@ export default function Form() {
                           value={diamondMaxCarat}
                           onChange={(e) => setDiamondMaxCarat(e.target.value)}
                         />
-                      </SliderLabelColumn>
-                    </SliderTextfieldsRow>
+                      </SliderTextfieldsRow>
+                    </SliderContainer>
                   </Container>
                 </Slide>
               )}
@@ -1765,9 +1743,15 @@ export default function Form() {
                     </Fade>
 
                     <CustomRangeSlider
-                      sx={{ width: "75%" }}
                       min={0}
                       max={7}
+                      sx={{
+                        "& .MuiSlider-rail": {
+                          color: theme.palette.primary.dark,
+                        },
+                        color: theme.palette.secondary.dark,
+                      }}
+                      orientation="vertical"
                       value={[diamondMinColor, diamondMaxColor]}
                       valueLabelDisplay="off"
                       step={1}
@@ -1809,26 +1793,18 @@ export default function Form() {
                         >
                           <Typography
                             variant="body1"
-                            sx={{ textAlign: "center" }}
+                            fontWeight={
+                              diamondClarities.includes(clarity.label)
+                                ? 600
+                                : 400
+                            }
                           >
                             {clarity.label}
                           </Typography>
+                          {diamondClarities.includes(clarity.label) && <Done />}
                         </StyledClarity>
                       ))}
                     </ClarityContainer>
-                    {/* <CustomRangeSlider
-                    sx={{ width: "75%" }}
-                    min={0}
-                    max={7}
-                    value={[diamondMinClarity, diamondMaxClarity]}
-                    valueLabelDisplay="off"
-                    step={1}
-                    marks={clarity_slider_marks}
-                    onChange={(event, newValue) => {
-                      setDiamondMinClarity(newValue[0]);
-                      setDiamondMaxClarity(newValue[1]);
-                    }}
-                  /> */}
                   </Container>
                 </Slide>
               )}
@@ -1853,9 +1829,15 @@ export default function Form() {
                     </Fade>
 
                     <CustomRangeSlider
-                      sx={{ width: "75%" }}
                       min={0}
                       max={3}
+                      sx={{
+                        "& .MuiSlider-rail": {
+                          color: theme.palette.primary.dark,
+                        },
+                        color: theme.palette.primary.main,
+                      }}
+                      orientation="vertical"
                       value={[diamondMinCut, diamondMaxCut]}
                       valueLabelDisplay="off"
                       step={1}
@@ -1891,9 +1873,15 @@ export default function Form() {
                     </Fade>
 
                     <CustomRangeSlider
-                      sx={{ width: "75%" }}
                       min={0}
                       max={4}
+                      sx={{
+                        "& .MuiSlider-rail": {
+                          color: theme.palette.primary.dark,
+                        },
+                        color: theme.palette.primary.light,
+                      }}
+                      orientation="vertical"
                       value={[diamondMinFluorescence, diamondMaxFluorescence]}
                       valueLabelDisplay="off"
                       step={1}
@@ -1941,10 +1929,19 @@ export default function Form() {
                         >
                           <Typography
                             variant="body1"
-                            sx={{ textAlign: "center" }}
+                            fontWeight={
+                              diamondCertifications.includes(
+                                certification.label
+                              )
+                                ? 600
+                                : 400
+                            }
                           >
                             {certification.label}
                           </Typography>
+                          {diamondCertifications.includes(
+                            certification.label
+                          ) && <Done />}
                         </StyledCertification>
                       ))}
                     </CertificationsContainer>
@@ -1968,9 +1965,7 @@ export default function Form() {
                       in={activeStep === 9}
                       {...(activeStep === 9 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">
-                        Do mention any specific requests that you have for us
-                      </Title>
+                      <Title variant="h3">Any requests?</Title>
                     </Fade>
 
                     <TextField
@@ -1980,8 +1975,7 @@ export default function Form() {
                           width: "90%",
                         },
                       }}
-                      id="notes"
-                      name="notes"
+                      placeholder="Do mention any specific requests that you have for us"
                       variant="outlined"
                       multiline
                       rows={6}
@@ -2081,10 +2075,11 @@ export default function Form() {
                     <Button
                       disableFocusRipple
                       disableRipple
+                      variant="outlined"
                       onClick={handleBack}
                       sx={{ mt: 3, ml: 1 }}
                     >
-                      Back
+                      Previous
                     </Button>
                   ) : null)}
 
@@ -2093,7 +2088,7 @@ export default function Form() {
                     <Button
                       disableFocusRipple
                       disableRipple
-                      variant="outlined"
+                      variant="contained"
                       onClick={handleSubmit}
                       sx={{ mt: 3, ml: 1 }}
                       disabled={
@@ -2112,7 +2107,7 @@ export default function Form() {
                   <Button
                     disableFocusRipple
                     disableRipple
-                    variant="outlined"
+                    variant="contained"
                     onClick={handleNext}
                     sx={{
                       mt: 3,

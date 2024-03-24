@@ -66,7 +66,7 @@ const Layout = ({
         open={modalOpen}
         disableScrollLock
         sx={{
-          background: theme.palette.primary.background,
+          background: theme.palette.background.default,
         }}
       >
         <DialogTitle
@@ -96,7 +96,7 @@ const Layout = ({
           </Button>
 
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
             onClick={(event) => {
               Router.push("/");
@@ -136,7 +136,11 @@ const Layout = ({
         </Helmet>
 
         {noLayoutHeader ? null : (
-          <AppBar position="fixed" sx={{ background: "#FFFEF2" }} elevation={2}>
+          <AppBar
+            position="fixed"
+            sx={{ background: theme.palette.background.default }}
+            elevation={1}
+          >
             <Toolbar
               sx={{
                 display: "flex",
