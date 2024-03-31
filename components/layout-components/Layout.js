@@ -138,7 +138,9 @@ const Layout = ({
         {noLayoutHeader ? null : (
           <AppBar
             position="fixed"
-            sx={{ background: theme.palette.background.default }}
+            sx={{
+              background: theme.palette.background.default,
+            }}
             elevation={1}
           >
             <Toolbar

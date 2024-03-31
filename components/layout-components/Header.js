@@ -84,7 +84,7 @@ const Header = (props) => {
           content={
             description
               ? description
-              : "Mahala Almas helps you find the diamond that ou want."
+              : "Mahala Almas helps you find the diamond that you want."
           }
         />
         {/* <meta

@@ -31,7 +31,7 @@ import MuiAlert from "@mui/material/Alert";
 
 /* Icon Imports */
 
-import { Done, LocationOn } from "@mui/icons-material";
+import { Done, LocationOn, Person, Email, Phone } from "@mui/icons-material";
 
 /* Firebase Imports */
 
@@ -42,13 +42,14 @@ import { collection, addDoc } from "firebase/firestore";
 
 const RootDiv = styled("div")(({ theme }) => ({
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "flex-start",
   width: "100%",
   height: "auto",
-  margin: "4rem 0rem 0rem 0rem",
+  margin: "0rem 0rem 2rem 0rem",
   [theme.breakpoints.down("sm")]: {
+    margin: "4rem 0rem 0rem 0rem",
     width: "100%",
     height: "100%",
     flexDirection: "column",
@@ -92,17 +93,16 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  alignItems: "center",
-  margin: "1rem 2rem 2rem 2rem",
-  padding: "2rem 2rem 2rem 2rem",
-  width: "80%",
-  minHeight: "93vh",
-  gap: "4rem",
+  alignItems: "space-between",
+  margin: "1rem 0rem 0rem 0rem",
+  padding: "0rem 1rem 0rem 1rem",
+  width: "100%",
+  minHeight: "90vh",
   background: theme.palette.background.default,
   boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
-    minHeight: "91vh",
+    minHeight: "90vh",
     margin: "0rem 0rem 0rem 0rem",
     padding: "1rem 1.1rem 4rem 1.1rem",
   },
@@ -131,36 +131,47 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   // [theme.breakpoints.up("xsPlus")]: { minHeight: "65rem" },
   // [theme.breakpoints.up("sm")]: { minHeight: "65rem" },
   /*ipad Mini */
-  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
-    width: "100%",
-    minHeight: "93vh",
-    margin: "1rem 0rem 2rem 0rem",
-  },
-  // /* ipad Air*/
-  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
-    minHeight: "93vh",
-  },
-  [theme.breakpoints.up("md")]: { width: "100%", minHeight: "93vh" },
-  /* MDLG Breakpoint iPadPro*/
-  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
-    width: "70%",
-    minHeight: "93vh",
-  },
-  /*720p and 768p breakpoint */
-  [theme.breakpoints.up("lg")]: { width: "80%", margin: "1rem 2rem 2rem 2rem" },
-  /* 1080p 125% breakpoint*/
-  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
-    minHeight: "93vh",
-  },
-  /* 1080p breakpoint*/
-  [theme.breakpoints.up("xl")]: { minHeight: "93vh" },
-  /* XXL breakpoint  2560p*/
-  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
-    minHeight: "85rem",
-  },
-  /*4k breakpoint 3840p*/
-  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
-    minHeight: "50vh",
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+  //   width: "100%",
+  //   minHeight: "93vh",
+  //   margin: "1rem 0rem 2rem 0rem",
+  // },
+  // // /* ipad Air*/
+  // [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+  //   minHeight: "93vh",
+  // },
+  // [theme.breakpoints.up("md")]: { width: "100%", minHeight: "93vh" },
+  // /* MDLG Breakpoint iPadPro*/
+  // [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+  //   width: "70%",
+  //   minHeight: "93vh",
+  // },
+  // /*720p and 768p breakpoint */
+  // [theme.breakpoints.up("lg")]: { width: "80%", margin: "1rem 2rem 2rem 2rem" },
+  // /* 1080p 125% breakpoint*/
+  // [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+  //   minHeight: "93vh",
+  // },
+  // /* 1080p breakpoint*/
+  // [theme.breakpoints.up("xl")]: { minHeight: "93vh" },
+  // /* XXL breakpoint  2560p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+  //   minHeight: "85rem",
+  // },
+  // /*4k breakpoint 3840p*/
+  // [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+  //   minHeight: "50vh",
+  // },
+}));
+
+const CustomStepper = styled(Stepper)(({ theme }) => ({
+  width: "100%",
+  "& .MuiStepLabel-root .Mui-active": {
+    "& .MuiStepIcon-text": {
+      fill: theme.palette.primary.main,
+      fontSize: "0.875rem",
+      fontWeight: 600,
+    },
   },
 }));
 
@@ -171,6 +182,7 @@ const Container = styled("div")(({ theme }) => ({
   alignItems: "center",
   width: "100%",
   height: "100%",
+  gap: "1rem",
   [theme.breakpoints.down("sm")]: {
     gap: "1rem",
   },
@@ -470,7 +482,7 @@ const SliderContainer = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
   alignItems: "flex-start",
   gap: "2.5rem",
-  width: "45%",
+  width: "40%",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column-reverse",
     justifyContent: "center",
@@ -516,6 +528,16 @@ const CustomRangeSlider = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-thumb": {
     width: "2rem",
     height: "2rem",
+    "&[data-index='0']": {
+      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
+        "#2E3180"
+      )}" d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>')`,
+    },
+    "&[data-index='1']": {
+      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
+        "#2E3180"
+      )}" d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>')`,
+    },
   },
   [theme.breakpoints.down("sm")]: {
     height: "22rem",
@@ -594,7 +616,11 @@ const StyledCertification = styled("div", {
   [theme.breakpoints.down("sm")]: { width: "100%" },
 }));
 
-const ContactTextField = styled(TextField)(({ theme }) => ({
+const TextfieldContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "flex-start",
+  alignItems: "center",
   width: "50%",
   [theme.breakpoints.down("md")]: {
     width: "75%",
@@ -602,6 +628,22 @@ const ContactTextField = styled(TextField)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "85%",
   },
+  background: theme.palette.background.textfield,
+  borderRadius: "0.5rem",
+  padding: "0rem 0rem 0rem 0.5rem",
+}));
+
+const ContactTextField = styled(TextField)(({ theme }) => ({
+  width: "100%",
+}));
+
+const BottomContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+  gap: "5rem",
 }));
 
 /* Copyright */
@@ -1114,33 +1156,64 @@ export default function Form() {
       <RootDiv>
         {/* Desktop Stepper */}
 
-        <Stepper
-          nonLinear
-          activeStep={activeStep}
-          orientation="vertical"
-          sx={{
-            padding: "1rem 0rem 0rem 0rem",
-            minHeight: "95vh",
-            [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
-              minHeight: "50vh",
-            },
-            [theme.breakpoints.down("md")]: {
-              display: "none",
-            },
-          }}
-        >
+        {/* <CustomStepper nonLinear activeStep={activeStep} orientation="vertical">
           {steps.map((step, index) => (
             <Step key={index} completed={completed[index]}>
               <StepButton
-                color="inherit"
                 onClick={handleStep(index)}
                 disabled={submitted}
+                icon={completed[index] ? <Done color="primary" /> : null}
+                sx={{
+                  background:
+                    index === activeStep
+                      ? theme.palette.secondary.main
+                      : "none",
+                  borderRadius: "1rem",
+                  width: "auto",
+                  padding:
+                    index === activeStep ? "0rem 0.5rem 0rem 0.5rem" : "0rem",
+                  "& .MuiSvgIcon-root": {
+                    fill:
+                      index === activeStep
+                        ? theme.palette.secondary.main
+                        : completed[index]
+                        ? theme.palette.primary.main
+                        : theme.palette.secondary.light,
+                    background: completed[index]
+                      ? theme.palette.secondary.main
+                      : "none",
+                    borderRadius: "50%",
+                    padding: completed[index] ? "0.25rem" : "0rem",
+                  },
+                  "& .MuiStepLabel-root": {
+                    padding: "0.25rem 0rem 0.25rem 0rem",
+                  },
+                  "& .MuiStepLabel-iconContainer": {
+                    paddingRight: "0rem",
+                  },
+                  "& .MuiStepLabel-labelContainer": {
+                    display: index === activeStep ? "block" : "none",
+                  },
+                }}
               >
-                {step}
+                {index === activeStep && (
+                  <Typography
+                    variant="body2"
+                    color="primary"
+                    sx={{
+                      lineHeight: "1.5rem",
+                      fontWeight:
+                        index === activeStep || completed[index] ? 600 : 400,
+                      padding: "0rem 0.5rem 0rem 0rem",
+                    }}
+                  >
+                    {step}
+                  </Typography>
+                )}
               </StepButton>
             </Step>
           ))}
-        </Stepper>
+        </CustomStepper> */}
 
         {/* Form Paper */}
 
@@ -1676,9 +1749,21 @@ export default function Form() {
                           "& .MuiSlider-rail": {
                             color: theme.palette.primary.dark,
                           },
-                          color: theme.palette.secondary.dark,
+                          color: theme.palette.primary.main,
                           [theme.breakpoints.down("sm")]: {
                             margin: "0rem 0rem 0rem 0rem",
+                          },
+                          "& .MuiSlider-thumb": {
+                            "&[data-index='0']": {
+                              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
+                                "#FFDD67"
+                              )}" d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>')`,
+                            },
+                            "&[data-index='1']": {
+                              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
+                                "#FFDD67"
+                              )}" d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>')`,
+                            },
                           },
                         }}
                         orientation="vertical"
@@ -1697,9 +1782,17 @@ export default function Form() {
                           id="minCarat"
                           name="minCarat"
                           label="Minimum"
-                          variant="outlined"
+                          variant="filled"
+                          disableUnderline
+                          size="small"
                           type="number"
-                          InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                          InputProps={{
+                            inputProps: {
+                              min: 0.1,
+                              max: 30.0,
+                            },
+                            disableUnderline: true,
+                          }}
                           value={diamondMinCarat}
                           onChange={(e) => setDiamondMinCarat(e.target.value)}
                         />
@@ -1711,9 +1804,16 @@ export default function Form() {
                           id="maxCarat"
                           name="maxCarat"
                           label="Maximum"
-                          variant="outlined"
+                          variant="filled"
+                          size="small"
                           type="number"
-                          InputProps={{ inputProps: { min: 0.1, max: 30.0 } }}
+                          InputProps={{
+                            inputProps: {
+                              min: 0.1,
+                              max: 30.0,
+                            },
+                            disableUnderline: true,
+                          }}
                           value={diamondMaxCarat}
                           onChange={(e) => setDiamondMaxCarat(e.target.value)}
                         />
@@ -1836,6 +1936,18 @@ export default function Form() {
                           color: theme.palette.primary.dark,
                         },
                         color: theme.palette.primary.main,
+                        "& .MuiSlider-thumb": {
+                          "&[data-index='0']": {
+                            backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
+                              "#FFDD67"
+                            )}" d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>')`,
+                          },
+                          "&[data-index='1']": {
+                            backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
+                              "#FFDD67"
+                            )}" d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>')`,
+                          },
+                        },
                       }}
                       orientation="vertical"
                       value={[diamondMinCut, diamondMaxCut]}
@@ -1974,6 +2086,24 @@ export default function Form() {
                         [theme.breakpoints.down("sm")]: {
                           width: "90%",
                         },
+                        background: "white",
+                        "& label.Mui-focused": {
+                          color: "#FFDD67",
+                        },
+                        "& .MuiInput-underline:after": {
+                          borderBottomColor: "#FFDD67",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "#FFDD67",
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "#FFDD67",
+                          },
+                          "&.Mui-focused fieldset": {
+                            borderColor: "#FFDD67",
+                          },
+                        },
                       }}
                       placeholder="Do mention any specific requests that you have for us"
                       variant="outlined"
@@ -2005,33 +2135,57 @@ export default function Form() {
                       <Title variant="h3">How can we reach you?</Title>
                     </Fade>
 
-                    <ContactTextField
-                      required
-                      id="name"
-                      name="name"
-                      label="Name*"
-                      variant="standard"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
+                    <TextfieldContainer>
+                      <Person color="primary" />
+                      <ContactTextField
+                        required
+                        id="name"
+                        name="name"
+                        label="Name*"
+                        placeholder="Enter your name"
+                        variant="filled"
+                        size="small"
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </TextfieldContainer>
 
-                    <ContactTextField
-                      id="email"
-                      name="email"
-                      label="Email"
-                      variant="standard"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <TextfieldContainer>
+                      <Email color="primary" />
+                      <ContactTextField
+                        id="email"
+                        name="email"
+                        label="Email"
+                        placeholder="Enter your email address"
+                        variant="filled"
+                        size="small"
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </TextfieldContainer>
 
-                    <ContactTextField
-                      id="phone"
-                      name="phone"
-                      label="Phone"
-                      variant="standard"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                    <TextfieldContainer>
+                      <Phone color="primary" />
+                      <ContactTextField
+                        id="phone"
+                        name="phone"
+                        label="Phone"
+                        placeholder="Enter your phone number"
+                        variant="filled"
+                        size="small"
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </TextfieldContainer>
 
                     <FormControlLabel
                       sx={{
@@ -2057,40 +2211,34 @@ export default function Form() {
                   </Container>
                 </Slide>
               )}
+            </React.Fragment>
+          )}
 
-              {/* Buttons */}
+          {/* Phone Stepper */}
 
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  margin: "0rem 0rem 2rem 0rem",
-                  [theme.breakpoints.down("md")]: {
-                    display: "none",
-                  },
-                }}
-              >
-                {activeStep !== 0 &&
-                  (!submitting ? (
-                    <Button
-                      disableFocusRipple
-                      disableRipple
-                      variant="outlined"
-                      onClick={handleBack}
-                      sx={{ mt: 3, ml: 1 }}
-                    >
-                      Previous
-                    </Button>
-                  ) : null)}
-
-                {activeStep === steps.length - 1 ? (
+          {!submitted && (
+            <MobileStepper
+              variant="text"
+              steps={phone_steps.length}
+              sx={{
+                [theme.breakpoints.up("md")]: {
+                  display: "none",
+                },
+                color: theme.palette.primary.main,
+                fontWeight: 600,
+                "& .MuiMobileStepper-root": {
+                  background: theme.palette.primary.main,
+                },
+              }}
+              position="bottom"
+              activeStep={activeStep}
+              nextButton={
+                activeStep === phone_steps.length - 1 || submitted ? (
                   !submitting ? (
                     <Button
-                      disableFocusRipple
-                      disableRipple
                       variant="contained"
                       onClick={handleSubmit}
-                      sx={{ mt: 3, ml: 1 }}
+                      sx={{ mr: 1 }}
                       disabled={
                         name === "" ||
                         !agree ||
@@ -2110,64 +2258,6 @@ export default function Form() {
                     variant="contained"
                     onClick={handleNext}
                     sx={{
-                      mt: 3,
-                      ml: 1,
-                      visibility:
-                        activeStep === 0 || activeStep === 1
-                          ? "hidden"
-                          : "visible",
-                    }}
-                    disabled={activeStep === 1 ? diamondType === "" : false}
-                  >
-                    {"Next"}
-                  </Button>
-                )}
-              </Box>
-            </React.Fragment>
-          )}
-
-          {/* Phone Stepper */}
-
-          {!submitted && (
-            <MobileStepper
-              variant="text"
-              steps={phone_steps.length}
-              sx={{
-                // background: "transparent",
-                // backdropFilter: "blur(1rem)",
-                boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.25)",
-                [theme.breakpoints.up("md")]: {
-                  display: "none",
-                },
-              }}
-              position="bottom"
-              activeStep={activeStep}
-              nextButton={
-                activeStep === phone_steps.length - 1 || submitted ? (
-                  !submitting ? (
-                    <Button
-                      variant="outlined"
-                      onClick={handleSubmit}
-                      sx={{ mr: 1 }}
-                      disabled={
-                        name === "" ||
-                        !agree ||
-                        submitted ||
-                        allStepsCompleted() === false
-                      }
-                    >
-                      {"Submit"}
-                    </Button>
-                  ) : (
-                    <CircularProgress />
-                  )
-                ) : (
-                  <Button
-                    disableFocusRipple
-                    disableRipple
-                    variant="outlined"
-                    onClick={handleNext}
-                    sx={{
                       mr: 1,
                       visibility:
                         activeStep === 0 || activeStep === 1
@@ -2184,7 +2274,7 @@ export default function Form() {
                 <Button
                   disableFocusRipple
                   disableRipple
-                  variant="text"
+                  variant="outlined"
                   onClick={handleBack}
                   disabled={submitting}
                   sx={{
@@ -2192,12 +2282,166 @@ export default function Form() {
                     visibility: activeStep !== 0 ? "visible" : "hidden",
                   }}
                 >
-                  Back
+                  Previous
                 </Button>
               }
             />
           )}
         </CustomPaper>
+
+        {/* Desktop Stepper */}
+
+        <BottomContainer>
+          {/* Desktop Stepper */}
+
+          <CustomStepper
+            nonLinear
+            activeStep={activeStep}
+            orientation="horizontal"
+          >
+            {steps.map((step, index) => (
+              <Step key={index} completed={completed[index]}>
+                <StepButton
+                  onClick={handleStep(index)}
+                  disabled={submitted}
+                  icon={
+                    completed[index] ? (
+                      <Done color="primary" />
+                    ) : (
+                      <Typography
+                        color="primary"
+                        variant="body2"
+                        fontWeight={index === activeStep ? 600 : 400}
+                        sx={{
+                          borderRadius: "50%",
+                          padding: "0.25rem 0.5rem 0.25rem 0.5rem",
+                          background:
+                            index === activeStep
+                              ? theme.palette.secondary.main
+                              : completed[index]
+                              ? theme.palette.primary.main
+                              : theme.palette.secondary.light,
+                        }}
+                      >
+                        {index + 1}
+                      </Typography>
+                    )
+                  }
+                  sx={{
+                    background:
+                      index === activeStep
+                        ? theme.palette.secondary.main
+                        : "none",
+                    borderRadius: "1rem",
+                    width: "auto",
+                    padding:
+                      index === activeStep ? "0rem 0.5rem 0rem 0.5rem" : "0rem",
+                    "& .MuiSvgIcon-root": {
+                      // fill:
+                      //   index === activeStep
+                      //     ? theme.palette.secondary.main
+                      //     : completed[index]
+                      //     ? theme.palette.primary.main
+                      //     : theme.palette.secondary.light,
+                      background: completed[index]
+                        ? theme.palette.secondary.main
+                        : "none",
+                      borderRadius: "50%",
+                      padding: completed[index] ? "0.25rem" : "0rem",
+                    },
+                    "& .MuiStepLabel-root": {
+                      padding: "0.25rem 0rem 0.25rem 0rem",
+                    },
+                    "& .MuiStepLabel-iconContainer": {
+                      paddingRight: "0rem",
+                    },
+                    "& .MuiStepLabel-labelContainer": {
+                      display: index === activeStep ? "block" : "none",
+                    },
+                  }}
+                >
+                  {index === activeStep && (
+                    <Typography
+                      variant="body2"
+                      color="primary"
+                      sx={{
+                        lineHeight: "1.5rem",
+                        fontWeight:
+                          index === activeStep || completed[index] ? 600 : 400,
+                        padding: "0rem 0.5rem 0rem 0rem",
+                      }}
+                    >
+                      {step}
+                    </Typography>
+                  )}
+                </StepButton>
+              </Step>
+            ))}
+          </CustomStepper>
+
+          {/* Buttons */}
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "1rem",
+              margin: "0rem 0rem 0rem 0rem",
+              [theme.breakpoints.down("md")]: {
+                display: "none",
+              },
+            }}
+          >
+            {activeStep !== 0 &&
+              (!submitting ? (
+                <Button
+                  disableFocusRipple
+                  disableRipple
+                  variant="outlined"
+                  onClick={handleBack}
+                >
+                  Previous
+                </Button>
+              ) : null)}
+
+            {activeStep === steps.length - 1 ? (
+              !submitting ? (
+                <Button
+                  disableFocusRipple
+                  disableRipple
+                  variant="contained"
+                  onClick={handleSubmit}
+                  disabled={
+                    name === "" ||
+                    !agree ||
+                    submitted ||
+                    allStepsCompleted() === false
+                  }
+                >
+                  {"Submit"}
+                </Button>
+              ) : (
+                <CircularProgress />
+              )
+            ) : (
+              <Button
+                disableFocusRipple
+                disableRipple
+                variant="contained"
+                onClick={handleNext}
+                sx={{
+                  visibility:
+                    activeStep === 0 || activeStep === 1 ? "hidden" : "visible",
+                }}
+                disabled={activeStep === 1 ? diamondType === "" : false}
+              >
+                {"Next"}
+              </Button>
+            )}
+          </Box>
+        </BottomContainer>
       </RootDiv>
       {/* <Copyright /> */}
     </React.Fragment>

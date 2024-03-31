@@ -23,6 +23,7 @@ const Styles = {
     },
     background: {
       default: "#FFFDF7",
+      textfield: "#FFF0BB",
     },
     text: {
       primary: "#000000",
@@ -133,36 +134,22 @@ const GetDesignTokens = (mode) => ({
     MuiTextField: {
       styleOverrides: {
         root: {
-          background: "white",
-          "& label.Mui-focused": {
-            color: "#FFDD67",
-          },
-          "& .MuiInput-underline:after": {
-            borderBottomColor: "#FFDD67",
-          },
-          "& .MuiOutlinedInput-root": {
+          background: "#FFF0BB",
+          borderRadius: "0.5rem",
+          "& .MuiFilledInput-root": {
+            background: "#FFF0BB",
+            borderRadius: "0.5rem",
             "& fieldset": {
-              borderColor: "#FFDD67",
+              background: "#FFF0BB",
             },
-            "&:hover fieldset": {
-              borderColor: "#FFDD67",
+            "&:hover": {
+              background: "#FFF0BB",
             },
-            "&.Mui-focused fieldset": {
-              borderColor: "#FFDD67",
+            "&.Mui-focused": {
+              background: "#FFF0BB",
             },
           },
         },
-        // root: {
-        //   "&.Mui-focused": {
-        //     borderColor: "#FFDD67",
-        //     "& .MuiOutlinedInput-notchedOutline": {
-        //       borderColor: "#FFDD67",
-        //     },
-        //   },
-        //   "& .MuiOutlinedInput-notchedOutline": {
-        //     borderColor: "#FFDD67",
-        //   },
-        // },
       },
     },
   },
