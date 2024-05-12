@@ -7,13 +7,13 @@ const Styles = {
   light: {
     // palette values for light mode
     primary: {
-      main: "#2E3180",
-      light: "#D0DDFF",
+      main: "#282119",
+      light: "#E9D6C1",
       dark: "#DDDCE3",
     },
     secondary: {
-      main: "#FFDD67",
-      light: "#FFF0BD",
+      main: "#D4AD82",
+      light: "#E9D6C1",
       dark: "#FFEAAC",
     },
     error: {
@@ -22,7 +22,7 @@ const Styles = {
       dark: "#FBF7F5",
     },
     background: {
-      default: "#FFFDF7",
+      default: "#FFFFFF",
       textfield: "#FFF0BB",
     },
     text: {
@@ -99,33 +99,38 @@ const GetDesignTokens = (mode) => ({
           borderRadius: 8,
           fontWeight: 600,
           "&.MuiButton-contained": {
-            background: "#FFDD67",
-            border: "1px solid #FFDD67",
-            color: "#2E3180",
+            background: "#D4AD82",
+            border: "1px solid #D4AD82",
+            color: "#FFFFFF",
             boxShadow: "none",
             "&.Mui-disabled": {
               background: "#DDDCE3",
               border: "1px solid #DDDCE3",
               color: "#9E9E9E",
             },
-            "&:hover": {
-              background: "#FFE483",
-              boxShadow: "none",
+            "@media (pointer: fine)": {
+              "&:hover": {
+                background: "#E9D6C1",
+                border: "1px solid #E9D6C1",
+                boxShadow: "none",
+              },
             },
           },
           "&.MuiButton-outlined": {
             background: "transparent",
-            border: "1px solid #2E3180",
-            color: "#2E3180",
+            border: "1px solid #282119",
+            color: "#282119",
             boxShadow: "none",
             "&.Mui-disabled": {
               background: "#DDDCE3",
               border: "1px solid #DDDCE3",
               color: "#9E9E9E",
             },
-            "&:hover": {
-              background: "#FFFAEB",
-              boxShadow: "none",
+            "@media (pointer: fine)": {
+              "&:hover": {
+                background: "#E9D6C1",
+                boxShadow: "none",
+              },
             },
           },
         },
@@ -134,19 +139,19 @@ const GetDesignTokens = (mode) => ({
     MuiTextField: {
       styleOverrides: {
         root: {
-          background: "#FFF0BB",
+          background: "#E9D6C1",
           borderRadius: "0.5rem",
           "& .MuiFilledInput-root": {
-            background: "#FFF0BB",
+            background: "#E9D6C1",
             borderRadius: "0.5rem",
             "& fieldset": {
-              background: "#FFF0BB",
+              background: "#E9D6C1",
             },
             "&:hover": {
-              background: "#FFF0BB",
+              background: "#E9D6C1",
             },
             "&.Mui-focused": {
-              background: "#FFF0BB",
+              background: "#E9D6C1",
             },
           },
         },

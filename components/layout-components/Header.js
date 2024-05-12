@@ -55,7 +55,7 @@ const Header = (props) => {
         <meta httpEquiv="cache-control" content="Private" />
         <meta httpEquiv="Expires" content="31536000" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#FFFEF2" />
+        <meta name="theme-color" content="#C99964" />
         <meta
           name="Description"
           content={
@@ -87,6 +87,7 @@ const Header = (props) => {
               : "Mahala Almas helps you find the diamond that you want."
           }
         />
+        <link rel="icon" href={"/images/logo.ico"} />
         {/* <meta
           property="og:url"
           content={

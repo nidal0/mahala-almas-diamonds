@@ -1,6 +1,7 @@
 /* React Imports */
 
 import React from "react";
+import { styled } from "@mui/system";
 import { Helmet } from "react-helmet";
 import { withRouter, useRouter } from "next/router";
 
@@ -9,7 +10,6 @@ import { withRouter, useRouter } from "next/router";
 import {
   AppBar,
   Toolbar,
-  Typography,
   useTheme,
   Dialog,
   DialogTitle,
@@ -18,6 +18,18 @@ import {
 } from "@mui/material";
 import Header from "./Header";
 import Container from "./Container";
+
+/* Styled Components */
+
+const CustomImg = styled("img")(({ theme }) => ({
+  width: "8rem",
+  height: "2.5rem",
+  cursor: "pointer",
+  [theme.breakpoints.down("sm")]: {
+    width: "8rem",
+    height: "2.5rem",
+  },
+}));
 
 const Layout = ({
   keywords,
@@ -155,15 +167,13 @@ const Layout = ({
                 },
               }}
             >
-              <Typography
-                variant="h5"
-                sx={{ color: theme.palette.primary.main, cursor: "pointer" }}
+              <CustomImg
+                src="/images/logo.png"
+                alt="diamond"
                 onClick={(event) => {
                   setModalOpen(true);
                 }}
-              >
-                Mahala Almas
-              </Typography>
+              />
             </Toolbar>
           </AppBar>
         )}

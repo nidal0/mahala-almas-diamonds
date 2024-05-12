@@ -249,7 +249,7 @@ const CustomFormControlLabel = styled(FormControlLabel, {
     : theme.palette.secondary.light,
   "@media (pointer: fine)": {
     "&:hover": {
-      background: "#FFE483",
+      background: theme.palette.secondary.main,
     },
   },
   [theme.breakpoints.down("sm")]: {
@@ -329,10 +329,14 @@ const StyledDiamondType = styled("div", {
   justifyContent: "space-between",
   alignItems: "flex-start",
   WebkitTapHighlightColor: "transparent",
+  background: selected
+    ? theme.palette.secondary.main
+    : theme.palette.secondary.light,
   border: selected ? "2px solid" : "none",
   borderColor: selected
-    ? theme.palette.primary.light
-    : theme.palette.primary.light,
+    ? theme.palette.secondary.main
+    : theme.palette.secondary.light,
+
   borderRadius: "1rem",
   padding: "1rem",
   height: "15rem",
@@ -457,7 +461,7 @@ const StyledDiamondShape = styled("div", {
   cursor: "pointer",
   "@media (pointer: fine)": {
     "&:hover": {
-      background: "#FFE483",
+      background: theme.palette.secondary.main,
     },
   },
 }));
@@ -530,12 +534,12 @@ const CustomRangeSlider = styled(Slider)(({ theme }) => ({
     height: "2rem",
     "&[data-index='0']": {
       backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
-        "#2E3180"
+        "#FFFFFF"
       )}" d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>')`,
     },
     "&[data-index='1']": {
       backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
-        "#2E3180"
+        "#FFFFFF"
       )}" d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>')`,
     },
   },
@@ -574,7 +578,7 @@ const StyledClarity = styled("div", {
     : theme.palette.secondary.light,
   "@media (pointer: fine)": {
     "&:hover": {
-      background: "#FFE483",
+      background: theme.palette.secondary.main,
     },
   },
   [theme.breakpoints.down("sm")]: { width: "100%" },
@@ -610,7 +614,7 @@ const StyledCertification = styled("div", {
     : theme.palette.secondary.light,
   "@media (pointer: fine)": {
     "&:hover": {
-      background: "#FFE483",
+      background: theme.palette.secondary.main,
     },
   },
   [theme.breakpoints.down("sm")]: { width: "100%" },
@@ -628,7 +632,7 @@ const TextfieldContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "85%",
   },
-  background: theme.palette.background.textfield,
+  background: theme.palette.secondary.light,
   borderRadius: "0.5rem",
   padding: "0rem 0rem 0rem 0.5rem",
 }));
@@ -1154,87 +1158,28 @@ export default function Form() {
       {/* Main Component */}
 
       <RootDiv>
-        {/* Desktop Stepper */}
-
-        {/* <CustomStepper nonLinear activeStep={activeStep} orientation="vertical">
-          {steps.map((step, index) => (
-            <Step key={index} completed={completed[index]}>
-              <StepButton
-                onClick={handleStep(index)}
-                disabled={submitted}
-                icon={completed[index] ? <Done color="primary" /> : null}
-                sx={{
-                  background:
-                    index === activeStep
-                      ? theme.palette.secondary.main
-                      : "none",
-                  borderRadius: "1rem",
-                  width: "auto",
-                  padding:
-                    index === activeStep ? "0rem 0.5rem 0rem 0.5rem" : "0rem",
-                  "& .MuiSvgIcon-root": {
-                    fill:
-                      index === activeStep
-                        ? theme.palette.secondary.main
-                        : completed[index]
-                        ? theme.palette.primary.main
-                        : theme.palette.secondary.light,
-                    background: completed[index]
-                      ? theme.palette.secondary.main
-                      : "none",
-                    borderRadius: "50%",
-                    padding: completed[index] ? "0.25rem" : "0rem",
-                  },
-                  "& .MuiStepLabel-root": {
-                    padding: "0.25rem 0rem 0.25rem 0rem",
-                  },
-                  "& .MuiStepLabel-iconContainer": {
-                    paddingRight: "0rem",
-                  },
-                  "& .MuiStepLabel-labelContainer": {
-                    display: index === activeStep ? "block" : "none",
-                  },
-                }}
-              >
-                {index === activeStep && (
-                  <Typography
-                    variant="body2"
-                    color="primary"
-                    sx={{
-                      lineHeight: "1.5rem",
-                      fontWeight:
-                        index === activeStep || completed[index] ? 600 : 400,
-                      padding: "0rem 0.5rem 0rem 0rem",
-                    }}
-                  >
-                    {step}
-                  </Typography>
-                )}
-              </StepButton>
-            </Step>
-          ))}
-        </CustomStepper> */}
-
         {/* Form Paper */}
 
         <CustomPaper ref={containerRef}>
+          {/* Thank you page */}
+
           {activeStep === steps.length ? (
             <React.Fragment>
               <Container ref={containerRef}>
-                <Slide
+                {/* <Slide
                   direction="up"
                   in={activeStep === steps.length}
                   easing={theme.transitions.easing.easeInOut}
                   container={containerRef.current}
                   timeout={400}
                   unmountOnExit
-                >
-                  <Title variant="h3">Thank you for your time</Title>
-                  <Typography variant="subtitle1" align="center">
-                    Now just sit back and relax while we find your perfect
-                    diamond.
-                  </Typography>{" "}
-                </Slide>
+                > */}
+                <Title variant="h3">Thank you for your time!</Title>
+                <Typography variant="body1" align="center" fontWeight={600}>
+                  Now just sit back and relax while we find your perfect
+                  diamond.
+                </Typography>
+                {/* </Slide> */}
               </Container>
             </React.Fragment>
           ) : (
@@ -1614,7 +1559,6 @@ export default function Form() {
                             handleNext();
                           }, 200);
                         }}
-                        sx={{ background: theme.palette.secondary.main }}
                         selected={diamondType === "natural"}
                       >
                         <DiamondTypeLabel
@@ -1650,11 +1594,9 @@ export default function Form() {
                             handleNext();
                           }, 200);
                         }}
-                        sx={{ background: theme.palette.primary.main }}
                         selected={diamondType === "lab_grown"}
                       >
                         <DiamondTypeLabel
-                          color="white"
                           variant="body1"
                           selected={diamondType === "lab_grown"}
                         >
@@ -1753,18 +1695,6 @@ export default function Form() {
                           [theme.breakpoints.down("sm")]: {
                             margin: "0rem 0rem 0rem 0rem",
                           },
-                          "& .MuiSlider-thumb": {
-                            "&[data-index='0']": {
-                              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
-                                "#FFDD67"
-                              )}" d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>')`,
-                            },
-                            "&[data-index='1']": {
-                              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
-                                "#FFDD67"
-                              )}" d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>')`,
-                            },
-                          },
                         }}
                         orientation="vertical"
                         value={[diamondMinCarat, diamondMaxCarat]}
@@ -1847,9 +1777,9 @@ export default function Form() {
                       max={7}
                       sx={{
                         "& .MuiSlider-rail": {
-                          color: theme.palette.primary.dark,
+                          color: theme.palette.secondary.light,
                         },
-                        color: theme.palette.secondary.dark,
+                        color: theme.palette.secondary.main,
                       }}
                       orientation="vertical"
                       value={[diamondMinColor, diamondMaxColor]}
@@ -1936,18 +1866,6 @@ export default function Form() {
                           color: theme.palette.primary.dark,
                         },
                         color: theme.palette.primary.main,
-                        "& .MuiSlider-thumb": {
-                          "&[data-index='0']": {
-                            backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
-                              "#FFDD67"
-                            )}" d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>')`,
-                          },
-                          "&[data-index='1']": {
-                            backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 18 18"><path fill="${encodeURIComponent(
-                              "#FFDD67"
-                            )}" d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>')`,
-                          },
-                        },
                       }}
                       orientation="vertical"
                       value={[diamondMinCut, diamondMaxCut]}
@@ -1989,9 +1907,9 @@ export default function Form() {
                       max={4}
                       sx={{
                         "& .MuiSlider-rail": {
-                          color: theme.palette.primary.dark,
+                          color: theme.palette.secondary.light,
                         },
-                        color: theme.palette.primary.light,
+                        color: theme.palette.secondary.main,
                       }}
                       orientation="vertical"
                       value={[diamondMinFluorescence, diamondMaxFluorescence]}
@@ -2088,20 +2006,20 @@ export default function Form() {
                         },
                         background: "white",
                         "& label.Mui-focused": {
-                          color: "#FFDD67",
+                          color: "#C99863",
                         },
                         "& .MuiInput-underline:after": {
-                          borderBottomColor: "#FFDD67",
+                          borderBottomColor: "#C99863",
                         },
                         "& .MuiOutlinedInput-root": {
                           "& fieldset": {
-                            borderColor: "#FFDD67",
+                            borderColor: "#C99863",
                           },
                           "&:hover fieldset": {
-                            borderColor: "#FFDD67",
+                            borderColor: "#C99863",
                           },
                           "&.Mui-focused fieldset": {
-                            borderColor: "#FFDD67",
+                            borderColor: "#C99863",
                           },
                         },
                       }}
@@ -2238,7 +2156,20 @@ export default function Form() {
                     <Button
                       variant="contained"
                       onClick={handleSubmit}
-                      sx={{ mr: 1 }}
+                      sx={{
+                        mr: 1,
+                        "&.MuiButton-contained": {
+                          background: "#282119",
+                          border: "1px solid #282119",
+                          "@media (pointer: fine)": {
+                            "&:hover": {
+                              background: "#515B60",
+                              border: "1px solid #515B60",
+                              boxShadow: "none",
+                            },
+                          },
+                        },
+                      }}
                       disabled={
                         name === "" ||
                         !agree ||
@@ -2251,7 +2182,7 @@ export default function Form() {
                   ) : (
                     <CircularProgress />
                   )
-                ) : (
+                ) : activeStep === steps.length ? null : (
                   <Button
                     disableFocusRipple
                     disableRipple
@@ -2291,159 +2222,173 @@ export default function Form() {
 
         {/* Desktop Stepper */}
 
-        <BottomContainer>
-          {/* Desktop Stepper */}
+        {!submitted && (
+          <BottomContainer>
+            {/* Desktop Stepper */}
 
-          <CustomStepper
-            nonLinear
-            activeStep={activeStep}
-            orientation="horizontal"
-          >
-            {steps.map((step, index) => (
-              <Step key={index} completed={completed[index]}>
-                <StepButton
-                  onClick={handleStep(index)}
-                  disabled={submitted}
-                  icon={
-                    completed[index] ? (
-                      <Done color="primary" />
-                    ) : (
+            <CustomStepper
+              nonLinear
+              activeStep={activeStep}
+              orientation="horizontal"
+            >
+              {steps.map((step, index) => (
+                <Step key={index} completed={completed[index]}>
+                  <StepButton
+                    onClick={handleStep(index)}
+                    disabled={submitted}
+                    icon={
+                      completed[index] ? (
+                        <Done color="white" />
+                      ) : (
+                        <Typography
+                          color="white"
+                          variant="body2"
+                          fontWeight={index === activeStep ? 600 : 400}
+                          sx={{
+                            borderRadius: "50%",
+                            padding: "0.25rem 0.5rem 0.25rem 0.5rem",
+                            background:
+                              index === activeStep
+                                ? theme.palette.secondary.main
+                                : completed[index]
+                                ? theme.palette.primary.main
+                                : theme.palette.secondary.light,
+                          }}
+                        >
+                          {index + 1}
+                        </Typography>
+                      )
+                    }
+                    sx={{
+                      background:
+                        index === activeStep
+                          ? theme.palette.secondary.main
+                          : "none",
+                      borderRadius: "1rem",
+                      width: "auto",
+                      padding:
+                        index === activeStep
+                          ? "0rem 0.5rem 0rem 0.5rem"
+                          : "0rem",
+                      "& .MuiSvgIcon-root": {
+                        background: completed[index]
+                          ? theme.palette.secondary.main
+                          : "none",
+                        borderRadius: "50%",
+                        padding: completed[index] ? "0.25rem" : "0rem",
+                      },
+                      "& .MuiStepLabel-root": {
+                        padding: "0.25rem 0rem 0.25rem 0rem",
+                      },
+                      "& .MuiStepLabel-iconContainer": {
+                        paddingRight: "0rem",
+                      },
+                      "& .MuiStepLabel-labelContainer": {
+                        display: index === activeStep ? "block" : "none",
+                      },
+                    }}
+                  >
+                    {index === activeStep && (
                       <Typography
-                        color="primary"
                         variant="body2"
-                        fontWeight={index === activeStep ? 600 : 400}
+                        color="white"
                         sx={{
-                          borderRadius: "50%",
-                          padding: "0.25rem 0.5rem 0.25rem 0.5rem",
-                          background:
-                            index === activeStep
-                              ? theme.palette.secondary.main
-                              : completed[index]
-                              ? theme.palette.primary.main
-                              : theme.palette.secondary.light,
+                          lineHeight: "1.5rem",
+                          fontWeight:
+                            index === activeStep || completed[index]
+                              ? 600
+                              : 400,
+                          padding: "0rem 0.5rem 0rem 0rem",
                         }}
                       >
-                        {index + 1}
+                        {step}
                       </Typography>
-                    )
-                  }
-                  sx={{
-                    background:
-                      index === activeStep
-                        ? theme.palette.secondary.main
-                        : "none",
-                    borderRadius: "1rem",
-                    width: "auto",
-                    padding:
-                      index === activeStep ? "0rem 0.5rem 0rem 0.5rem" : "0rem",
-                    "& .MuiSvgIcon-root": {
-                      // fill:
-                      //   index === activeStep
-                      //     ? theme.palette.secondary.main
-                      //     : completed[index]
-                      //     ? theme.palette.primary.main
-                      //     : theme.palette.secondary.light,
-                      background: completed[index]
-                        ? theme.palette.secondary.main
-                        : "none",
-                      borderRadius: "50%",
-                      padding: completed[index] ? "0.25rem" : "0rem",
-                    },
-                    "& .MuiStepLabel-root": {
-                      padding: "0.25rem 0rem 0.25rem 0rem",
-                    },
-                    "& .MuiStepLabel-iconContainer": {
-                      paddingRight: "0rem",
-                    },
-                    "& .MuiStepLabel-labelContainer": {
-                      display: index === activeStep ? "block" : "none",
-                    },
-                  }}
-                >
-                  {index === activeStep && (
-                    <Typography
-                      variant="body2"
-                      color="primary"
-                      sx={{
-                        lineHeight: "1.5rem",
-                        fontWeight:
-                          index === activeStep || completed[index] ? 600 : 400,
-                        padding: "0rem 0.5rem 0rem 0rem",
-                      }}
-                    >
-                      {step}
-                    </Typography>
-                  )}
-                </StepButton>
-              </Step>
-            ))}
-          </CustomStepper>
+                    )}
+                  </StepButton>
+                </Step>
+              ))}
+            </CustomStepper>
 
-          {/* Buttons */}
+            {/* Buttons */}
 
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "1rem",
-              margin: "0rem 0rem 0rem 0rem",
-              [theme.breakpoints.down("md")]: {
-                display: "none",
-              },
-            }}
-          >
-            {activeStep !== 0 &&
-              (!submitting ? (
-                <Button
-                  disableFocusRipple
-                  disableRipple
-                  variant="outlined"
-                  onClick={handleBack}
-                >
-                  Previous
-                </Button>
-              ) : null)}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "1rem",
+                margin: "0rem 0rem 0rem 0rem",
+                [theme.breakpoints.down("md")]: {
+                  display: "none",
+                },
+              }}
+            >
+              {activeStep !== 0 &&
+                (!submitting ? (
+                  <Button
+                    disableFocusRipple
+                    disableRipple
+                    variant="outlined"
+                    onClick={handleBack}
+                  >
+                    Previous
+                  </Button>
+                ) : null)}
 
-            {activeStep === steps.length - 1 ? (
-              !submitting ? (
+              {activeStep === steps.length - 1 ? (
+                !submitting ? (
+                  <Button
+                    disableFocusRipple
+                    disableRipple
+                    variant="contained"
+                    onClick={handleSubmit}
+                    disabled={
+                      name === "" ||
+                      !agree ||
+                      submitted ||
+                      allStepsCompleted() === false
+                    }
+                    sx={{
+                      "&.MuiButton-contained": {
+                        background: "#282119",
+                        border: "1px solid #282119",
+                        "@media (pointer: fine)": {
+                          "&:hover": {
+                            background: "#515B60",
+                            border: "1px solid #515B60",
+                            boxShadow: "none",
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    {"Submit"}
+                  </Button>
+                ) : (
+                  <CircularProgress />
+                )
+              ) : activeStep === steps.length ? null : (
                 <Button
                   disableFocusRipple
                   disableRipple
                   variant="contained"
-                  onClick={handleSubmit}
-                  disabled={
-                    name === "" ||
-                    !agree ||
-                    submitted ||
-                    allStepsCompleted() === false
-                  }
+                  onClick={handleNext}
+                  sx={{
+                    visibility:
+                      activeStep === 0 || activeStep === 1
+                        ? "hidden"
+                        : "visible",
+                  }}
+                  disabled={activeStep === 1 ? diamondType === "" : false}
                 >
-                  {"Submit"}
+                  {"Next"}
                 </Button>
-              ) : (
-                <CircularProgress />
-              )
-            ) : (
-              <Button
-                disableFocusRipple
-                disableRipple
-                variant="contained"
-                onClick={handleNext}
-                sx={{
-                  visibility:
-                    activeStep === 0 || activeStep === 1 ? "hidden" : "visible",
-                }}
-                disabled={activeStep === 1 ? diamondType === "" : false}
-              >
-                {"Next"}
-              </Button>
-            )}
-          </Box>
-        </BottomContainer>
+              )}
+            </Box>
+          </BottomContainer>
+        )}
       </RootDiv>
-      {/* <Copyright /> */}
     </React.Fragment>
   );
 }

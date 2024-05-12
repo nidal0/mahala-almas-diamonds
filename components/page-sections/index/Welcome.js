@@ -35,7 +35,7 @@ const RootDiv = styled("div")(({ theme }) => ({
 const Container = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-around",
+  justifyContent: "center",
   alignItems: "center",
   width: "100%",
   height: "100%",
@@ -51,11 +51,12 @@ const ButtonContainer = styled("div")(({ theme }) => ({
   gap: "0.5rem",
 }));
 
-const Title = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
+const CustomImg = styled("img")(({ theme }) => ({
+  width: "25rem",
+  height: "24rem",
   [theme.breakpoints.down("sm")]: {
-    fontSize: "3rem",
-    padding: "0rem 0.5rem 0rem 0.5rem",
+    width: "19rem",
+    height: "19rem",
   },
 }));
 
@@ -159,21 +160,27 @@ export default function Welcome() {
         {/* Welcome Page */}
 
         <Container>
-          <Title variant="h1" align="center">
-            Mahala Almas
-          </Title>
+          <CustomImg src="/images/logo.svg" alt="diamond" />
           <ButtonContainer>
             <Button
               disableElevation
               disableFocusRipple
               disableRipple
               variant="contained"
-              color="primary"
-              onClick={(event) => {
-                Router.push("/form");
-              }}
+              href="/form"
               endIcon={<DiamondOutlined />}
               sx={{
+                "&.MuiButton-contained": {
+                  background: "#282119",
+                  border: "1px solid #282119",
+                  "@media (pointer: fine)": {
+                    "&:hover": {
+                      background: "#515B60",
+                      border: "1px solid #515B60",
+                      boxShadow: "none",
+                    },
+                  },
+                },
                 [theme.breakpoints.down("sm")]: {
                   width: "80%",
                 },
@@ -187,8 +194,8 @@ export default function Welcome() {
               disableFocusRipple
               disableRipple
               variant="text"
-              color="primary"
               onClick={handleClickModalOpen}
+              sx={{ color: "#C99964" }}
             >
               How it works?
             </Button>
