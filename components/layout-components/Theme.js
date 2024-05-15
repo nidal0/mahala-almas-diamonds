@@ -62,7 +62,9 @@ const GetDesignTokens = (mode) => ({
     ...(mode === "dark" ? Styles.dark : Styles.light),
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: "Montserrat",
+    // fontFamily:
+    //   '."Montserrat", "Roboto", "Albra", "Helvetica", "Arial", sans-serif',
   },
   breakpoints: {
     values: {

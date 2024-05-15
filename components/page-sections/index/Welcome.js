@@ -1,6 +1,6 @@
 /* Common Imports */
 
-import * as React from "react";
+import React from "react";
 import { styled } from "@mui/system";
 import { useRouter } from "next/router";
 
@@ -15,6 +15,7 @@ import {
   DialogActions,
   IconButton,
   useTheme,
+  Link,
 } from "@mui/material";
 
 /* Icon Imports */
@@ -112,6 +113,7 @@ export default function Welcome() {
               background: theme.palette.background.default,
               color: theme.palette.primary.main,
               fontWeight: "bold",
+              fontFamily: "Albra",
             }}
             id="customized-dialog-title"
           >
@@ -132,11 +134,26 @@ export default function Welcome() {
 
           <DialogContent sx={{ background: theme.palette.background.default }}>
             <Typography variant="body1" fontWeight="bold">
-              We gather essential details such as your preferred diamond shape,
-              carat weight, cut, color, clarity, and any specific preferences
-              you may have along with your contact details. This information
-              helps us understand your preferences, ensuring we provide you with
-              the perfect diamond that meets your expectations.
+              Looking for the diamond of your dreams? Look no further! Our
+              diamond search is here to make your search a breeze. Start by
+              picking your location, then decide between natural or lab-grown
+              diamonds. Get creative and choose the shape, carat weight, color
+              range, clarity level, cut style, and even fluorescence that suits
+              your style. Want that extra peace of mind? Pick your preferred
+              grading certificate! And hey, if you have any special requests,
+              just drop them in the special request box. Mahala Almas is your
+              go-to for finding that perfect sparkler, tailored just for you!
+            </Typography>
+            <Typography
+              variant="body1"
+              fontWeight="bold"
+              sx={{
+                margin: "1rem 0rem 0rem 0rem",
+              }}
+            >
+              Once all details are provided, our team will respond to you within
+              12 hours with a curated list of diamonds that meet your
+              specifications.
             </Typography>
           </DialogContent>
 
@@ -200,6 +217,26 @@ export default function Welcome() {
             >
               How It Works?
             </Button>
+
+            <Link
+              href="mailto:mahalaalmas@gmail.com"
+              target="_blank"
+              referrer="_self"
+              sx={{
+                textDecoration: "none",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                margin: "2rem 0rem 0rem 0rem",
+                "@media (pointer: fine)": {
+                  "&:hover": {
+                    // color: "#C99964",
+                    textDecoration: "underline",
+                  },
+                },
+              }}
+            >
+              Work With Us
+            </Link>
           </ButtonContainer>
         </Container>
       </RootDiv>

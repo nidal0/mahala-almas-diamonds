@@ -193,10 +193,11 @@ const Container = styled("div")(({ theme }) => ({
 
 const Title = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
-  fontWeight: "600",
+  fontWeight: "500",
   textAlign: "center",
   fontSize: "2.5rem",
   margin: "0rem 0rem 2rem 0rem",
+  fontFamily: "Albra",
   [theme.breakpoints.down("sm")]: {
     margin: "0rem 0rem 1rem 0rem",
     fontWeight: "600",
@@ -567,7 +568,7 @@ const SliderContainer = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
   alignItems: "flex-start",
   gap: "2.5rem",
-  width: "40%",
+  width: "30%",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column-reverse",
     justifyContent: "center",
@@ -1792,7 +1793,7 @@ export default function Form() {
                       {...(activeStep === 1 ? { timeout: 600 } : {})}
                     >
                       <Title variant="h3">
-                        What Type Of Diamond Are You Looking For?
+                        What Type Of Diamonds Are You Looking For?
                       </Title>
                     </Fade>
 
@@ -1878,7 +1879,16 @@ export default function Form() {
                       in={activeStep === 2}
                       {...(activeStep === 2 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">What Shapes Would You Prefer?</Title>
+                      <Title
+                        variant="h3"
+                        sx={{
+                          [theme.breakpoints.up("md")]: {
+                            margin: "3rem 0rem 0rem 0rem",
+                          },
+                        }}
+                      >
+                        What Shapes Would You Prefer?
+                      </Title>
                     </Fade>
                     <DiamondShapesContainer>
                       {diamond_shapes.map((diamond_shape, index) => (
@@ -2189,7 +2199,7 @@ export default function Form() {
                       {...(activeStep === 8 ? { timeout: 600 } : {})}
                     >
                       <Title variant="h3">
-                        What Certifications Do You Want?
+                        What Certification Do You Prefer?
                       </Title>
                     </Fade>
 
@@ -2243,7 +2253,7 @@ export default function Form() {
                       in={activeStep === 9}
                       {...(activeStep === 9 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">Any Requests?</Title>
+                      <Title variant="h3">Any Special Requests?</Title>
                     </Fade>
 
                     <TextField
