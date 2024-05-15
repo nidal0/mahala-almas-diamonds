@@ -173,6 +173,9 @@ const CustomStepper = styled(Stepper)(({ theme }) => ({
       fontWeight: 600,
     },
   },
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
 }));
 
 const Container = styled("div")(({ theme }) => ({
@@ -212,38 +215,114 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
   },
 }));
 
+// const RadioGroupContainer = styled("div")(({ theme }) => ({
+//   display: "flex",
+//   flexDirection: "row",
+//   justifyContent: "space-between",
+//   alignItems: "center",
+//   width: "100%",
+//   rowGap: "1.5rem",
+//   columnGap: "2rem",
+//   flexWrap: "wrap",
+//   [theme.breakpoints.only("xxs")]: {
+//     width: "100%",
+//     rowGap: "1rem",
+//   },
+//   [theme.breakpoints.down("sm")]: {
+//     width: "100%",
+//     columnGap: "1.5rem",
+//   },
+// }));
+
 const RadioGroupContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  width: "100%",
+  width: "95%",
   rowGap: "1.5rem",
-  columnGap: "2rem",
+  columnGap: "1rem",
   flexWrap: "wrap",
-  [theme.breakpoints.only("xxs")]: {
-    width: "100%",
-    rowGap: "1rem",
+  /* XXS breakpoint */
+  [theme.breakpoints.up("xxs")]: { width: "100%", columnGap: "0.5rem" },
+  /* iphone 5 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+    columnGap: "2rem",
   },
-  [theme.breakpoints.down("sm")]: {
+  /*galaxy S8+ - 360*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+    columnGap: "2rem",
+  },
+  /*iphone se - 375*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+    columnGap: "2.5rem",
+  },
+  /* iphone 12 pro and pixel - 390 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+    columnGap: "3rem",
+  },
+  /*iphone XR - 414*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+    width: "90%",
+    columnGap: "4rem",
+  },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "4rem" },
+  [theme.breakpoints.up("sm")]: {
+    columnGap: "4rem",
+  },
+  /*ipad Mini */
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
     width: "100%",
-    columnGap: "1.5rem",
+    columnGap: "5.5rem",
+    rowGap: "2.5rem",
+  },
+  /* ipad Air*/
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+    columnGap: "2rem",
+    rowGap: "2.5rem",
+  },
+  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
+  /* MDLG Breakpoint iPadPro*/
+  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    columnGap: "4.3rem",
+  },
+  /*720p and 768p breakpoint */
+  [theme.breakpoints.up("lg")]: {
+    width: "80%",
+    columnGap: "2rem",
+  },
+  /* 1080p 125% breakpoint*/
+  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+    columnGap: "4.5rem",
+  },
+  /* 1080p breakpoint*/
+  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  /* XXL breakpoint  2560p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+    columnGap: "2rem",
+  },
+  /*4k breakpoint 3840p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+    columnGap: "3rem",
   },
 }));
 
 const CustomFormControlLabel = styled(FormControlLabel, {
   shouldForwardProp: (prop) => prop !== "selected",
 })(({ theme, selected }) => ({
-  width: "48%",
+  height: "8rem",
+  width: "8rem",
+  // width: "48%",
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  padding: "0.75rem 1rem",
+  // padding: "0.75rem 1rem",
+  padding: "1rem",
   margin: "0rem 0rem 0rem 0rem",
   cursor: "pointer",
   WebkitTapHighlightColor: "transparent",
-  borderRadius: "0.5rem",
+  borderRadius: "1rem",
   background: selected
     ? theme.palette.secondary.main
     : theme.palette.secondary.light,
@@ -252,9 +331,9 @@ const CustomFormControlLabel = styled(FormControlLabel, {
       background: theme.palette.secondary.main,
     },
   },
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
-  },
+  // [theme.breakpoints.down("sm")]: {
+  //   width: "100%",
+  // },
 }));
 
 const StyledLocation = styled("div", {
@@ -405,7 +484,9 @@ const DiamondShapesContainer = styled("div")(({ theme }) => ({
     columnGap: "4rem",
   },
   [theme.breakpoints.up("xsPlus")]: { columnGap: "4rem" },
-  [theme.breakpoints.up("sm")]: { columnGap: "4rem" },
+  [theme.breakpoints.up("sm")]: {
+    columnGap: "4rem",
+  },
   /*ipad Mini */
   [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
     width: "100%",
@@ -548,17 +629,90 @@ const CustomRangeSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
+// const ClarityContainer = styled("div")(({ theme }) => ({
+//   display: "flex",
+//   flexDirection: "row",
+//   justifyContent: "center",
+//   alignItems: "center",
+//   width: "80%",
+//   rowGap: "1.5rem",
+//   columnGap: "2rem",
+//   flexWrap: "wrap",
+//   [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
+//   [theme.breakpoints.down("sm")]: { width: "100%", columnGap: "1.5rem" },
+// }));
+
 const ClarityContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  width: "80%",
+  width: "95%",
   rowGap: "1.5rem",
-  columnGap: "2rem",
+  columnGap: "1rem",
   flexWrap: "wrap",
-  [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
-  [theme.breakpoints.down("sm")]: { width: "100%", columnGap: "1.5rem" },
+  /* XXS breakpoint */
+  [theme.breakpoints.up("xxs")]: { width: "100%", columnGap: "0.5rem" },
+  /* iphone 5 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+    columnGap: "2rem",
+  },
+  /*galaxy S8+ - 360*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+    columnGap: "2rem",
+  },
+  /*iphone se - 375*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+    columnGap: "2.5rem",
+  },
+  /* iphone 12 pro and pixel - 390 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+    columnGap: "3rem",
+  },
+  /*iphone XR - 414*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+    width: "90%",
+    columnGap: "4rem",
+  },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "4rem" },
+  [theme.breakpoints.up("sm")]: {
+    columnGap: "4rem",
+  },
+  /*ipad Mini */
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+    width: "100%",
+    columnGap: "5.5rem",
+    rowGap: "2.5rem",
+  },
+  /* ipad Air*/
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+    columnGap: "2rem",
+    rowGap: "2.5rem",
+  },
+  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
+  /* MDLG Breakpoint iPadPro*/
+  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    columnGap: "4.3rem",
+  },
+  /*720p and 768p breakpoint */
+  [theme.breakpoints.up("lg")]: {
+    width: "80%",
+    columnGap: "2rem",
+  },
+  /* 1080p 125% breakpoint*/
+  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+    columnGap: "4.5rem",
+  },
+  /* 1080p breakpoint*/
+  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  /* XXL breakpoint  2560p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+    columnGap: "2rem",
+  },
+  /*4k breakpoint 3840p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+    columnGap: "3rem",
+  },
 }));
 
 const StyledClarity = styled("div", {
@@ -566,11 +720,15 @@ const StyledClarity = styled("div", {
 })(({ theme, selected }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  borderRadius: "0.5rem",
-  padding: "0.75rem 1rem",
-  width: "48%",
+  borderRadius: "1rem",
+  // padding: "0.75rem 1rem",
+  padding: "1rem",
+
+  // width: "48%",
+  height: "8rem",
+  width: "8rem",
   cursor: "pointer",
   WebkitTapHighlightColor: "transparent",
   background: selected
@@ -581,20 +739,96 @@ const StyledClarity = styled("div", {
       background: theme.palette.secondary.main,
     },
   },
-  [theme.breakpoints.down("sm")]: { width: "100%" },
+  // [theme.breakpoints.down("sm")]: { width: "100%" },
 }));
+
+// const CertificationsContainer = styled("div")(({ theme }) => ({
+//   display: "flex",
+//   flexDirection: "row",
+//   justifyContent: "center",
+//   alignItems: "center",
+//   width: "80%",
+//   rowGap: "1.5rem",
+//   columnGap: "2rem",
+//   flexWrap: "wrap",
+//   [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
+//   [theme.breakpoints.down("sm")]: {
+//     width: "100%",
+//     columnGap: "1.5rem",
+//   },
+// }));
 
 const CertificationsContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  width: "80%",
+  width: "95%",
   rowGap: "1.5rem",
-  columnGap: "2rem",
+  columnGap: "1rem",
   flexWrap: "wrap",
-  [theme.breakpoints.only("xxs")]: { width: "100%", rowGap: "1rem" },
-  [theme.breakpoints.down("sm")]: { width: "100%", columnGap: "1.5rem" },
+  /* XXS breakpoint */
+  [theme.breakpoints.up("xxs")]: { width: "100%", columnGap: "0.5rem" },
+  /* iphone 5 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 39)]: {
+    columnGap: "2rem",
+  },
+  /*galaxy S8+ - 360*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 78)]: {
+    columnGap: "2rem",
+  },
+  /*iphone se - 375*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 94)]: {
+    columnGap: "2.5rem",
+  },
+  /* iphone 12 pro and pixel - 390 */
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 108.95)]: {
+    columnGap: "3rem",
+  },
+  /*iphone XR - 414*/
+  [theme.breakpoints.up(theme.breakpoints.values.xs + 130)]: {
+    width: "90%",
+    columnGap: "4rem",
+  },
+  [theme.breakpoints.up("xsPlus")]: { columnGap: "4rem" },
+  [theme.breakpoints.up("sm")]: {
+    columnGap: "4rem",
+  },
+  /*ipad Mini */
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 167)]: {
+    width: "100%",
+    columnGap: "5.5rem",
+    rowGap: "2.5rem",
+  },
+  /* ipad Air*/
+  [theme.breakpoints.up(theme.breakpoints.values.sm + 219)]: {
+    columnGap: "2rem",
+    rowGap: "2.5rem",
+  },
+  [theme.breakpoints.up("md")]: { columnGap: "2rem" },
+  /* MDLG Breakpoint iPadPro*/
+  [theme.breakpoints.up(theme.breakpoints.values.md + 64)]: {
+    columnGap: "4.3rem",
+  },
+  /*720p and 768p breakpoint */
+  [theme.breakpoints.up("lg")]: {
+    width: "80%",
+    columnGap: "2rem",
+  },
+  /* 1080p 125% breakpoint*/
+  [theme.breakpoints.up(theme.breakpoints.values.lg + 150)]: {
+    columnGap: "4.5rem",
+  },
+  /* 1080p breakpoint*/
+  [theme.breakpoints.up("xl")]: { columnGap: "2.5rem" },
+  /* XXL breakpoint  2560p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 640)]: {
+    columnGap: "2rem",
+  },
+  /*4k breakpoint 3840p*/
+  [theme.breakpoints.up(theme.breakpoints.values.xl + 1920)]: {
+    columnGap: "3rem",
+  },
 }));
 
 const StyledCertification = styled("div", {
@@ -602,11 +836,14 @@ const StyledCertification = styled("div", {
 })(({ theme, selected }) => ({
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  borderRadius: "0.5rem",
-  padding: "0.75rem 1rem",
-  width: "48%",
+  borderRadius: "1rem",
+  // padding: "0.75rem 1rem",
+  padding: "1rem",
+  // width: "48%",
+  height: "8rem",
+  width: "8rem",
   cursor: "pointer",
   WebkitTapHighlightColor: "transparent",
   background: selected
@@ -617,7 +854,7 @@ const StyledCertification = styled("div", {
       background: theme.palette.secondary.main,
     },
   },
-  [theme.breakpoints.down("sm")]: { width: "100%" },
+  // [theme.breakpoints.down("sm")]: { width: "100%" },
 }));
 
 const TextfieldContainer = styled("div")(({ theme }) => ({
@@ -648,6 +885,9 @@ const BottomContainer = styled("div")(({ theme }) => ({
   alignItems: "center",
   width: "100%",
   gap: "5rem",
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
 }));
 
 /* Copyright */
@@ -677,7 +917,7 @@ const steps = [
   "Cut",
   "Fluorescence",
   "Certification",
-  "Any more requests?",
+  "Any More Requests?",
   "Contact Details",
 ];
 
@@ -1200,7 +1440,7 @@ export default function Form() {
                       in={activeStep === 0}
                       {...(activeStep === 0 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">Please specify your location</Title>
+                      <Title variant="h3">Please Specify Your Location</Title>
                     </Fade>
 
                     <CustomFormControl>
@@ -1211,6 +1451,10 @@ export default function Form() {
                         value={location}
                         sx={{
                           width: "100%",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
                         onChange={(e) => {
                           setLocation(e.target.value);
@@ -1229,9 +1473,9 @@ export default function Form() {
                               <StyledLocation
                                 selected={location === "abu_dhabi"}
                               >
-                                {location === "abu_dhabi" && (
+                                {/* {location === "abu_dhabi" && (
                                   <LocationOn color="primary" />
-                                )}
+                                )} */}
                                 <Typography
                                   variant="body1"
                                   fontWeight={
@@ -1252,9 +1496,9 @@ export default function Form() {
                             control={<Radio sx={{ display: "none" }} />}
                             label={
                               <StyledLocation selected={location === "dubai"}>
-                                {location === "dubai" && (
+                                {/* {location === "dubai" && (
                                   <LocationOn color="primary" />
-                                )}
+                                )} */}
                                 <Typography
                                   variant="body1"
                                   fontWeight={location === "dubai" ? 600 : 400}
@@ -1273,9 +1517,9 @@ export default function Form() {
                             control={<Radio sx={{ display: "none" }} />}
                             label={
                               <StyledLocation selected={location === "sharjah"}>
-                                {location === "sharjah" && (
+                                {/* {location === "sharjah" && (
                                   <LocationOn color="primary" />
-                                )}{" "}
+                                )} */}
                                 <Typography
                                   variant="body1"
                                   fontWeight={
@@ -1296,9 +1540,9 @@ export default function Form() {
                             control={<Radio sx={{ display: "none" }} />}
                             label={
                               <StyledLocation selected={location === "ajman"}>
-                                {location === "ajman" && (
+                                {/* {location === "ajman" && (
                                   <LocationOn color="primary" />
-                                )}
+                                )} */}
                                 <Typography
                                   variant="body1"
                                   fontWeight={location === "ajman" ? 600 : 400}
@@ -1318,6 +1562,9 @@ export default function Form() {
                               <StyledLocation
                                 selected={location === "umm_al_quwain"}
                               >
+                                {/* {location === "umm_al_quwain" && (
+                                  <LocationOn color="primary" />
+                                )} */}
                                 <Typography
                                   variant="body1"
                                   sx={{ textAlign: "center" }}
@@ -1337,9 +1584,9 @@ export default function Form() {
                               <StyledLocation
                                 selected={location === "ras_al_khaimah"}
                               >
-                                {location === "ras_al_khaimah" && (
+                                {/* {location === "ras_al_khaimah" && (
                                   <LocationOn color="primary" />
-                                )}
+                                )} */}
                                 <Typography
                                   variant="body1"
                                   fontWeight={
@@ -1362,9 +1609,9 @@ export default function Form() {
                               <StyledLocation
                                 selected={location === "fujairah"}
                               >
-                                {location === "fujairah" && (
+                                {/* {location === "fujairah" && (
                                   <LocationOn color="primary" />
-                                )}
+                                )} */}
                                 <Typography
                                   variant="body1"
                                   fontWeight={
@@ -1545,7 +1792,7 @@ export default function Form() {
                       {...(activeStep === 1 ? { timeout: 600 } : {})}
                     >
                       <Title variant="h3">
-                        What type of diamond are you looking for?
+                        What Type Of Diamond Are You Looking For?
                       </Title>
                     </Fade>
 
@@ -1631,7 +1878,7 @@ export default function Form() {
                       in={activeStep === 2}
                       {...(activeStep === 2 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">What shapes would you prefer?</Title>
+                      <Title variant="h3">What Shapes Would You Prefer?</Title>
                     </Fade>
                     <DiamondShapesContainer>
                       {diamond_shapes.map((diamond_shape, index) => (
@@ -1679,7 +1926,7 @@ export default function Form() {
                       in={activeStep === 3}
                       {...(activeStep === 3 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">Please select a range of carat</Title>
+                      <Title variant="h3">Please Select A Range Of Carat</Title>
                     </Fade>
 
                     <SliderContainer>
@@ -1769,7 +2016,7 @@ export default function Form() {
                       in={activeStep === 4}
                       {...(activeStep === 4 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">Please select a range of color</Title>
+                      <Title variant="h3">Please Select A Range Of Color</Title>
                     </Fade>
 
                     <CustomRangeSlider
@@ -1811,7 +2058,7 @@ export default function Form() {
                       in={activeStep === 5}
                       {...(activeStep === 5 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">Select your diamond clarity</Title>
+                      <Title variant="h3">Select Your Diamond Clarity</Title>
                     </Fade>
 
                     <ClarityContainer>
@@ -1831,7 +2078,7 @@ export default function Form() {
                           >
                             {clarity.label}
                           </Typography>
-                          {diamondClarities.includes(clarity.label) && <Done />}
+                          {/* {diamondClarities.includes(clarity.label) && <Done />} */}
                         </StyledClarity>
                       ))}
                     </ClarityContainer>
@@ -1855,7 +2102,7 @@ export default function Form() {
                       in={activeStep === 6}
                       {...(activeStep === 6 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">Please select a range of cut</Title>
+                      <Title variant="h3">Please Select A Range Of Cut</Title>
                     </Fade>
 
                     <CustomRangeSlider
@@ -1898,7 +2145,7 @@ export default function Form() {
                       {...(activeStep === 7 ? { timeout: 600 } : {})}
                     >
                       <Title variant="h3">
-                        Please select a range of fluorescence
+                        Please Select A Range Of Fluorescence
                       </Title>
                     </Fade>
 
@@ -1907,9 +2154,9 @@ export default function Form() {
                       max={4}
                       sx={{
                         "& .MuiSlider-rail": {
-                          color: theme.palette.secondary.light,
+                          color: theme.palette.primary.dark,
                         },
-                        color: theme.palette.secondary.main,
+                        color: "#9BB7FF",
                       }}
                       orientation="vertical"
                       value={[diamondMinFluorescence, diamondMaxFluorescence]}
@@ -1942,7 +2189,7 @@ export default function Form() {
                       {...(activeStep === 8 ? { timeout: 600 } : {})}
                     >
                       <Title variant="h3">
-                        What certifications do you want?
+                        What Certifications Do You Want?
                       </Title>
                     </Fade>
 
@@ -1958,6 +2205,7 @@ export default function Form() {
                           )}
                         >
                           <Typography
+                            align="center"
                             variant="body1"
                             fontWeight={
                               diamondCertifications.includes(
@@ -1969,9 +2217,9 @@ export default function Form() {
                           >
                             {certification.label}
                           </Typography>
-                          {diamondCertifications.includes(
+                          {/* {diamondCertifications.includes(
                             certification.label
-                          ) && <Done />}
+                          ) && <Done />} */}
                         </StyledCertification>
                       ))}
                     </CertificationsContainer>
@@ -1995,7 +2243,7 @@ export default function Form() {
                       in={activeStep === 9}
                       {...(activeStep === 9 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">Any requests?</Title>
+                      <Title variant="h3">Any Requests?</Title>
                     </Fade>
 
                     <TextField
@@ -2050,7 +2298,7 @@ export default function Form() {
                       in={activeStep === 10}
                       {...(activeStep === 10 ? { timeout: 600 } : {})}
                     >
-                      <Title variant="h3">How can we reach you?</Title>
+                      <Title variant="h3">How Can We Reach You?</Title>
                     </Fade>
 
                     <TextfieldContainer>

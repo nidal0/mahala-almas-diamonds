@@ -22,13 +22,9 @@ import Container from "./Container";
 /* Styled Components */
 
 const CustomImg = styled("img")(({ theme }) => ({
-  width: "8rem",
+  width: "7rem",
   height: "2.5rem",
   cursor: "pointer",
-  [theme.breakpoints.down("sm")]: {
-    width: "8rem",
-    height: "2.5rem",
-  },
 }));
 
 const Layout = ({

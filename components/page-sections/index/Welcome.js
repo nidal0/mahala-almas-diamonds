@@ -52,12 +52,13 @@ const ButtonContainer = styled("div")(({ theme }) => ({
 }));
 
 const CustomImg = styled("img")(({ theme }) => ({
-  width: "25rem",
-  height: "24rem",
-  [theme.breakpoints.down("sm")]: {
-    width: "19rem",
-    height: "19rem",
-  },
+  width: "20rem",
+  height: "7rem",
+  margin: "0rem 0rem 4rem 0rem",
+  // [theme.breakpoints.down("sm")]: {
+  //   width: "19rem",
+  //   height: "7rem",
+  // },
 }));
 
 /* Copyright */
@@ -152,7 +153,7 @@ export default function Welcome() {
                 Router.push("/form");
               }}
             >
-              Get started
+              Get Started
             </Button>
           </DialogActions>
         </Dialog>
@@ -160,7 +161,7 @@ export default function Welcome() {
         {/* Welcome Page */}
 
         <Container>
-          <CustomImg src="/images/logo.svg" alt="diamond" />
+          <CustomImg src="/images/logo.png" alt="diamond" />
           <ButtonContainer>
             <Button
               disableElevation
@@ -186,7 +187,7 @@ export default function Welcome() {
                 },
               }}
             >
-              Find your perfect diamond
+              Find Your Perfect Diamond
             </Button>
 
             <Button
@@ -197,7 +198,7 @@ export default function Welcome() {
               onClick={handleClickModalOpen}
               sx={{ color: "#C99964" }}
             >
-              How it works?
+              How It Works?
             </Button>
           </ButtonContainer>
         </Container>
