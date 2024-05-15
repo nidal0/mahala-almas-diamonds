@@ -2024,9 +2024,9 @@ export default function Form() {
                       max={7}
                       sx={{
                         "& .MuiSlider-rail": {
-                          color: theme.palette.secondary.light,
+                          color: theme.palette.primary.dark,
                         },
-                        color: theme.palette.secondary.main,
+                        color: theme.palette.primary.main,
                       }}
                       orientation="vertical"
                       value={[diamondMinColor, diamondMaxColor]}
@@ -2156,7 +2156,7 @@ export default function Form() {
                         "& .MuiSlider-rail": {
                           color: theme.palette.primary.dark,
                         },
-                        color: "#9BB7FF",
+                        color: theme.palette.primary.main,
                       }}
                       orientation="vertical"
                       value={[diamondMinFluorescence, diamondMaxFluorescence]}
@@ -2486,7 +2486,7 @@ export default function Form() {
                     disabled={submitted}
                     icon={
                       completed[index] ? (
-                        <Done color="white" />
+                        <Done color="#FFFFFF" />
                       ) : (
                         <Typography
                           color="white"
