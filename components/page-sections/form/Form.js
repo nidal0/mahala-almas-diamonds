@@ -21,6 +21,7 @@ import {
   Radio,
   RadioGroup,
   FormControl,
+  Link,
   Fade,
   Slide,
   Slider,
@@ -46,7 +47,7 @@ const RootDiv = styled("div")(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "flex-start",
   width: "100%",
-  height: "auto",
+  height: "100%",
   margin: "0rem 0rem 2rem 0rem",
   [theme.breakpoints.down("sm")]: {
     margin: "4rem 0rem 0rem 0rem",
@@ -97,7 +98,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   margin: "1rem 0rem 0rem 0rem",
   padding: "0rem 1rem 0rem 1rem",
   width: "100%",
-  minHeight: "90vh",
+  minHeight: "87vh",
   background: theme.palette.background.default,
   boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
@@ -186,9 +187,6 @@ const Container = styled("div")(({ theme }) => ({
   width: "100%",
   height: "100%",
   gap: "1rem",
-  [theme.breakpoints.down("sm")]: {
-    gap: "1rem",
-  },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -858,18 +856,81 @@ const StyledCertification = styled("div", {
   // [theme.breakpoints.down("sm")]: { width: "100%" },
 }));
 
+const ContactPageContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+  gap: "5rem",
+  [theme.breakpoints.down("md")]: {
+    gap: "2rem",
+  },
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    gap: "1rem",
+  },
+}));
+
+const ContactInfoContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  width: "100%",
+  gap: "8rem",
+  [theme.breakpoints.down("sm")]: {
+    alignItems: "center",
+  },
+}));
+
+const ContactDetailsContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
+}));
+
+const ContactFormContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "70vh",
+  gap: "1rem",
+  background: "url('/images/contact_form_bg.png')",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  borderRadius: 8,
+  padding: "6rem 1.5rem 2rem 1.5rem",
+  [theme.breakpoints.down("sm")]: {
+    padding: "2rem 1.5rem 2rem 1.5rem",
+  },
+}));
+
+const ContactFieldsContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "70vh",
+  gap: "2rem",
+}));
+
 const TextfieldContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   justifyContent: "flex-start",
   alignItems: "center",
-  width: "50%",
-  [theme.breakpoints.down("md")]: {
-    width: "75%",
-  },
-  [theme.breakpoints.down("sm")]: {
-    width: "85%",
-  },
+  width: "100%",
   background: theme.palette.secondary.light,
   borderRadius: "0.5rem",
   padding: "0rem 0rem 0rem 0.5rem",
@@ -2303,8 +2364,214 @@ export default function Form() {
                   timeout={400}
                   unmountOnExit
                 >
-                  <Container sx={{ gap: "2rem" }}>
-                    <Fade
+                  <Container
+                    sx={{
+                      height: "87vh",
+                      [theme.breakpoints.down("sm")]: {
+                        height: "80vh",
+                      },
+                    }}
+                  >
+                    <ContactPageContainer>
+                      {/* Contact Info */}
+
+                      <ContactInfoContainer>
+                        <Fade
+                          in={activeStep === 10}
+                          {...(activeStep === 10 ? { timeout: 600 } : {})}
+                        >
+                          <Title
+                            variant="h3"
+                            sx={{
+                              textAlign: "left",
+                              margin: "0rem 0rem 0rem 0rem",
+                              [theme.breakpoints.down("sm")]: {
+                                textAlign: "center",
+                              },
+                            }}
+                          >
+                            How Can We Reach You?
+                          </Title>
+                        </Fade>
+                        <ContactDetailsContainer>
+                          <Typography variant="h6" fontWeight={600}>
+                            <img
+                              src="/images/logo_black.png"
+                              alt="diamond"
+                              height={17}
+                              weight={17}
+                              style={{
+                                margin: "0rem 0.5rem 0rem 0rem",
+                              }}
+                            />
+                            Contact Us
+                          </Typography>
+                          <Link
+                            href="mailto:mahalaalmas@gmail.com"
+                            target="_blank"
+                            referrer="_self"
+                            sx={{
+                              textDecoration: "none",
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                              margin: "1rem 0rem 0rem 0rem",
+                              "@media (pointer: fine)": {
+                                "&:hover": {
+                                  // color: "#C99964",
+                                  textDecoration: "underline",
+                                },
+                              },
+                            }}
+                          >
+                            mahalaalmas@gmail.com
+                          </Link>
+                        </ContactDetailsContainer>
+                      </ContactInfoContainer>
+
+                      {/* Contact Form */}
+
+                      <ContactFormContainer>
+                        <ContactFieldsContainer>
+                          <TextfieldContainer>
+                            <Person color="primary" />
+                            <ContactTextField
+                              required
+                              id="name"
+                              name="name"
+                              label="Name*"
+                              placeholder="Enter your name"
+                              variant="filled"
+                              size="small"
+                              InputProps={{
+                                disableUnderline: true,
+                              }}
+                              disabled={submitting}
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                          </TextfieldContainer>
+
+                          <TextfieldContainer>
+                            <Email color="primary" />
+                            <ContactTextField
+                              id="email"
+                              name="email"
+                              label="Email"
+                              placeholder="Enter your email address"
+                              variant="filled"
+                              size="small"
+                              InputProps={{
+                                disableUnderline: true,
+                              }}
+                              disabled={submitting}
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                          </TextfieldContainer>
+
+                          <TextfieldContainer>
+                            <Phone color="primary" />
+                            <ContactTextField
+                              id="phone"
+                              name="phone"
+                              label="Phone"
+                              placeholder="Enter your phone number"
+                              variant="filled"
+                              size="small"
+                              InputProps={{
+                                disableUnderline: true,
+                              }}
+                              disabled={submitting}
+                              value={phone}
+                              onChange={(e) => setPhone(e.target.value)}
+                            />
+                          </TextfieldContainer>
+
+                          <FormControlLabel
+                            sx={{
+                              width: "100%",
+                              fontSize: "0.5rem",
+                            }}
+                            control={
+                              <Checkbox
+                                name="agree"
+                                checked={agree}
+                                disabled={submitting}
+                                sx={{
+                                  margin: "0rem 0rem 0rem 0.35rem",
+                                }}
+                                onChange={() => {
+                                  setAgree(!agree);
+                                }}
+                              />
+                            }
+                            label={
+                              <Typography variant="caption">
+                                I agree to share my details with Mahala Almas.
+                              </Typography>
+                            }
+                          />
+                        </ContactFieldsContainer>
+
+                        {!submitting ? (
+                          <Button
+                            variant="contained"
+                            onClick={handleSubmit}
+                            sx={{
+                              width: "100%",
+                              height: "3rem",
+                              "&.MuiButton-contained": {
+                                background: "#282119",
+                                border: "1px solid #282119",
+                                "@media (pointer: fine)": {
+                                  "&:hover": {
+                                    background: "#515B60",
+                                    border: "1px solid #515B60",
+                                    boxShadow: "none",
+                                  },
+                                },
+                              },
+                            }}
+                            disabled={
+                              name === "" ||
+                              !agree ||
+                              submitted ||
+                              allStepsCompleted() === false
+                            }
+                          >
+                            {"Submit"}
+                          </Button>
+                        ) : (
+                          <CircularProgress />
+                        )}
+                        <Link
+                          href="mailto:mahalaalmas@gmail.com"
+                          target="_blank"
+                          referrer="_self"
+                          sx={{
+                            textDecoration: "none",
+                            fontSize: "1rem",
+                            // width: "100%",
+                            color: theme.palette.secondary.light,
+                            fontWeight: "bold",
+                            margin: "0rem 0rem 0rem 0rem",
+                            "@media (pointer: fine)": {
+                              "&:hover": {
+                                // color: "#C99964",
+                                textDecoration: "underline",
+                              },
+                            },
+                            [theme.breakpoints.up("sm")]: {
+                              display: "none",
+                            },
+                          }}
+                        >
+                          mahalaalmas@gmail.com
+                        </Link>
+                      </ContactFormContainer>
+                    </ContactPageContainer>
+
+                    {/* <Fade
                       in={activeStep === 10}
                       {...(activeStep === 10 ? { timeout: 600 } : {})}
                     >
@@ -2383,7 +2650,7 @@ export default function Form() {
                         />
                       }
                       label="I agree to share my details with Mahala Almas."
-                    />
+                    /> */}
                   </Container>
                 </Slide>
               )}
@@ -2411,36 +2678,51 @@ export default function Form() {
               nextButton={
                 activeStep === phone_steps.length - 1 || submitted ? (
                   !submitting ? (
-                    <Button
-                      variant="contained"
-                      onClick={handleSubmit}
-                      sx={{
-                        mr: 1,
-                        "&.MuiButton-contained": {
-                          background: "#282119",
-                          border: "1px solid #282119",
-                          "@media (pointer: fine)": {
-                            "&:hover": {
-                              background: "#515B60",
-                              border: "1px solid #515B60",
-                              boxShadow: "none",
-                            },
-                          },
-                        },
+                    <div
+                      style={{
+                        visibility: "hidden",
+                        width: "5.5rem",
                       }}
-                      disabled={
-                        name === "" ||
-                        !agree ||
-                        submitted ||
-                        allStepsCompleted() === false
-                      }
-                    >
-                      {"Submit"}
-                    </Button>
+                    />
                   ) : (
-                    <CircularProgress />
+                    <div
+                      style={{
+                        visibility: "hidden",
+                        width: "5.5rem",
+                      }}
+                    />
                   )
-                ) : activeStep === steps.length ? null : (
+                ) : /*  //   (
+                  //   <Button
+                  //     variant="contained"
+                  //     onClick={handleSubmit}
+                  //     sx={{
+                  //       mr: 1,
+                  //       "&.MuiButton-contained": {
+                  //         background: "#282119",
+                  //         border: "1px solid #282119",
+                  //         "@media (pointer: fine)": {
+                  //           "&:hover": {
+                  //             background: "#515B60",
+                  //             border: "1px solid #515B60",
+                  //             boxShadow: "none",
+                  //           },
+                  //         },
+                  //       },
+                  //     }}
+                  //     disabled={
+                  //       name === "" ||
+                  //       !agree ||
+                  //       submitted ||
+                  //       allStepsCompleted() === false
+                  //     }
+                  //   >
+                  //     {"Submit"}
+                  //   </Button>
+                  // ) : (
+                  //   <CircularProgress />
+                  // ) */
+                activeStep === steps.length ? null : (
                   <Button
                     disableFocusRipple
                     disableRipple
@@ -2595,37 +2877,37 @@ export default function Form() {
                 ) : null)}
 
               {activeStep === steps.length - 1 ? (
-                !submitting ? (
-                  <Button
-                    disableFocusRipple
-                    disableRipple
-                    variant="contained"
-                    onClick={handleSubmit}
-                    disabled={
-                      name === "" ||
-                      !agree ||
-                      submitted ||
-                      allStepsCompleted() === false
-                    }
-                    sx={{
-                      "&.MuiButton-contained": {
-                        background: "#282119",
-                        border: "1px solid #282119",
-                        "@media (pointer: fine)": {
-                          "&:hover": {
-                            background: "#515B60",
-                            border: "1px solid #515B60",
-                            boxShadow: "none",
-                          },
-                        },
-                      },
-                    }}
-                  >
-                    {"Submit"}
-                  </Button>
-                ) : (
-                  <CircularProgress />
-                )
+                !submitting ? null /*  // (
+                  // <Button
+                  //   disableFocusRipple
+                  //   disableRipple
+                  //   variant="contained"
+                  //   onClick={handleSubmit}
+                  //   disabled={
+                  //     name === "" ||
+                  //     !agree ||
+                  //     submitted ||
+                  //     allStepsCompleted() === false
+                  //   }
+                  //   sx={{
+                  //     "&.MuiButton-contained": {
+                  //       background: "#282119",
+                  //       border: "1px solid #282119",
+                  //       "@media (pointer: fine)": {
+                  //         "&:hover": {
+                  //           background: "#515B60",
+                  //           border: "1px solid #515B60",
+                  //           boxShadow: "none",
+                  //         },
+                  //       },
+                  //     },
+                  //   }}
+                  // >
+                  //   {"Submit"}
+                  // </Button>
+                  // ): (
+                //   <CircularProgress />
+                // ) */ : null
               ) : activeStep === steps.length ? null : (
                 <Button
                   disableFocusRipple

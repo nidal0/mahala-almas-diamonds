@@ -112,8 +112,8 @@ const GetDesignTokens = (mode) => ({
             },
             "@media (pointer: fine)": {
               "&:hover": {
-                background: "#E9D6C1",
-                border: "1px solid #E9D6C1",
+                background: "#B97F43",
+                border: "1px solid #B97F43",
                 boxShadow: "none",
               },
             },

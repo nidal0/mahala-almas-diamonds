@@ -56,10 +56,6 @@ const CustomImg = styled("img")(({ theme }) => ({
   width: "20rem",
   height: "7rem",
   margin: "0rem 0rem 4rem 0rem",
-  // [theme.breakpoints.down("sm")]: {
-  //   width: "19rem",
-  //   height: "7rem",
-  // },
 }));
 
 /* Copyright */
@@ -223,10 +219,11 @@ export default function Welcome() {
               target="_blank"
               referrer="_self"
               sx={{
+                position: "absolute",
+                bottom: 20,
                 textDecoration: "none",
                 fontWeight: "bold",
-                fontSize: "1rem",
-                margin: "2rem 0rem 0rem 0rem",
+                fontSize: "0.875rem",
                 "@media (pointer: fine)": {
                   "&:hover": {
                     // color: "#C99964",
