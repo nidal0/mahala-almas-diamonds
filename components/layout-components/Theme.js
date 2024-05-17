@@ -146,6 +146,12 @@ const GetDesignTokens = (mode) => ({
           "& .MuiFilledInput-root": {
             background: "#E9D6C1",
             borderRadius: "0.5rem",
+            // "& .Mui-error": {
+            //   color: "red",
+            // },
+            // "& .MuiFormHelperText-root": {
+            //   color: "red",
+            // },
             "& fieldset": {
               background: "#E9D6C1",
             },

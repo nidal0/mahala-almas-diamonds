@@ -321,6 +321,7 @@ const CustomFormControlLabel = styled(FormControlLabel, {
   margin: "0rem 0rem 0rem 0rem",
   cursor: "pointer",
   WebkitTapHighlightColor: "transparent",
+  border: "1px solid #282119",
   borderRadius: "1rem",
   background: selected
     ? theme.palette.secondary.main
@@ -534,6 +535,7 @@ const StyledDiamondShape = styled("div", {
   padding: "1rem",
   height: "8rem",
   width: "8rem",
+  border: "1px solid #282119",
   WebkitTapHighlightColor: "transparent",
   background: selected
     ? theme.palette.secondary.main
@@ -724,7 +726,7 @@ const StyledClarity = styled("div", {
   borderRadius: "1rem",
   // padding: "0.75rem 1rem",
   padding: "1rem",
-
+  border: "1px solid #282119",
   // width: "48%",
   height: "8rem",
   width: "8rem",
@@ -841,6 +843,7 @@ const StyledCertification = styled("div", {
   // padding: "0.75rem 1rem",
   padding: "1rem",
   // width: "48%",
+  border: "1px solid #282119",
   height: "8rem",
   width: "8rem",
   cursor: "pointer",
@@ -1027,6 +1030,9 @@ export default function Form() {
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [agree, setAgree] = React.useState(true);
+
+  const [emailError, setEmailError] = React.useState(false);
+  const [phoneError, setPhoneError] = React.useState(false);
 
   /* Shapes Data */
 
@@ -2457,15 +2463,33 @@ export default function Form() {
                               id="email"
                               name="email"
                               label="Email"
+                              type="email"
                               placeholder="Enter your email address"
                               variant="filled"
                               size="small"
                               InputProps={{
                                 disableUnderline: true,
+                                // pattern:
+                                //   "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",
                               }}
                               disabled={submitting}
                               value={email}
-                              onChange={(e) => setEmail(e.target.value)}
+                              onChange={(e) => {
+                                if (
+                                  e.target.value.match(
+                                    "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+                                  )
+                                ) {
+                                  setEmailError(false);
+                                } else {
+                                  setEmailError(true);
+                                }
+                                setEmail(e.target.value);
+                              }}
+                              // error={emailError}
+                              // helperText={
+                              //   emailError ? "Please enter a valid email" : ""
+                              // }
                             />
                           </TextfieldContainer>
 
@@ -2480,10 +2504,25 @@ export default function Form() {
                               size="small"
                               InputProps={{
                                 disableUnderline: true,
+                                // pattern:
+                                //   "+(9[976]d|8[987530]d|6[987]d|5[90]d|42d|3[875]d|2[98654321]d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)d{1,14}$",
                               }}
                               disabled={submitting}
                               value={phone}
-                              onChange={(e) => setPhone(e.target.value)}
+                              onChange={(e) => {
+                                if (e.target.value.match("^[0-9]{10}$")) {
+                                  setPhoneError(false);
+                                } else {
+                                  setPhoneError(true);
+                                }
+                                setPhone(e.target.value);
+                              }}
+                              // error={phoneError}
+                              // helperText={
+                              //   phoneError
+                              //     ? "Please enter a valid phone number"
+                              //     : ""
+                              // }
                             />
                           </TextfieldContainer>
 
