@@ -32,7 +32,7 @@ import MuiAlert from "@mui/material/Alert";
 
 /* Icon Imports */
 
-import { Done, LocationOn, Person, Email, Phone } from "@mui/icons-material";
+import { Done, Person, Email, Phone } from "@mui/icons-material";
 
 /* Firebase Imports */
 
@@ -2469,15 +2469,13 @@ export default function Form() {
                               size="small"
                               InputProps={{
                                 disableUnderline: true,
-                                // pattern:
-                                //   "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",
                               }}
                               disabled={submitting}
                               value={email}
                               onChange={(e) => {
                                 if (
                                   e.target.value.match(
-                                    "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+                                    /^(?:[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4})?$/
                                   )
                                 ) {
                                   setEmailError(false);
@@ -2486,10 +2484,10 @@ export default function Form() {
                                 }
                                 setEmail(e.target.value);
                               }}
-                              // error={emailError}
-                              // helperText={
-                              //   emailError ? "Please enter a valid email" : ""
-                              // }
+                              error={emailError}
+                              helperText={
+                                emailError ? "Please enter a valid email" : ""
+                              }
                             />
                           </TextfieldContainer>
 
@@ -2499,30 +2497,33 @@ export default function Form() {
                               id="phone"
                               name="phone"
                               label="Phone"
+                              type="phone"
                               placeholder="Enter your phone number"
                               variant="filled"
                               size="small"
                               InputProps={{
                                 disableUnderline: true,
-                                // pattern:
-                                //   "+(9[976]d|8[987530]d|6[987]d|5[90]d|42d|3[875]d|2[98654321]d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)d{1,14}$",
                               }}
                               disabled={submitting}
                               value={phone}
                               onChange={(e) => {
-                                if (e.target.value.match("^[0-9]{10}$")) {
+                                if (
+                                  e.target.value.match(
+                                    /^(?:(?:\+\d{1,3})?\s?\d{5,15})?$/
+                                  )
+                                ) {
                                   setPhoneError(false);
                                 } else {
                                   setPhoneError(true);
                                 }
                                 setPhone(e.target.value);
                               }}
-                              // error={phoneError}
-                              // helperText={
-                              //   phoneError
-                              //     ? "Please enter a valid phone number"
-                              //     : ""
-                              // }
+                              error={phoneError}
+                              helperText={
+                                phoneError
+                                  ? "Please enter a valid phone number"
+                                  : ""
+                              }
                             />
                           </TextfieldContainer>
 
@@ -2575,6 +2576,8 @@ export default function Form() {
                               name === "" ||
                               !agree ||
                               submitted ||
+                              emailError ||
+                              phoneError ||
                               allStepsCompleted() === false
                             }
                           >
@@ -2820,12 +2823,16 @@ export default function Form() {
                         <Done color="#FFFFFF" />
                       ) : (
                         <Typography
-                          color="white"
+                          color="#FFFFFF"
                           variant="body2"
                           fontWeight={index === activeStep ? 600 : 400}
                           sx={{
                             borderRadius: "50%",
-                            padding: "0.25rem 0.5rem 0.25rem 0.5rem",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "1.5rem",
+                            height: "1.5rem",
                             background:
                               index === activeStep
                                 ? theme.palette.secondary.main
@@ -2870,7 +2877,7 @@ export default function Form() {
                     {index === activeStep && (
                       <Typography
                         variant="body2"
-                        color="white"
+                        color="#FFFFFF"
                         sx={{
                           lineHeight: "1.5rem",
                           fontWeight:
